@@ -127,7 +127,10 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = False
 
-AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
+AUTHENTICATION_BACKENDS = (
+    "social.backends.steam.SteamOpenId",
+    "mezzanine.core.auth_backends.MezzanineBackend",
+)
 
 # The numeric mode to set newly-uploaded files to. The value should be
 # a mode you'd pass directly to os.chmod.
@@ -221,11 +224,13 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    # "mezzanine.accounts",
+    "mezzanine.accounts",
     # "mezzanine.mobile",
     "game_info",
     "rest_framework",
     "djangobb_forum",
+    "sourcemod_admins",
+    "social.apps.django_app.default",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -242,6 +247,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
     "mezzanine.pages.context_processors.page",
+    "social.apps.django_app.context_processors.backends",
+    "social.apps.django_app.context_processors.login_redirect",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,

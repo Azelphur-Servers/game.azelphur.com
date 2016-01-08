@@ -8,8 +8,8 @@
 DEBUG = True
 
 # Make these unique, and don't share it with anybody.
-SECRET_KEY = "xlhqlem651uqmy-k8+%b$0)4$6p+6h=atf=sqoftt&v)imd4p)"
-NEVERCACHE_KEY = "r^2$_=osuf+9*qq)9$d&k&#5&g4z$ux$!d4l(&+5ds4dg23f1h"
+SECRET_KEY = "Lorem Ipsum"
+NEVERCACHE_KEY = "Lorem Ipsum"
 
 DATABASES = {
     "default": {
@@ -27,6 +27,9 @@ DATABASES = {
         "PORT": "",
     }
 }
+
+# Social Auth API keys
+SOCIAL_AUTH_STEAM_API_KEY = "Fill this in or steam login won't work."
 
 ###################
 # DEPLOY SETTINGS #

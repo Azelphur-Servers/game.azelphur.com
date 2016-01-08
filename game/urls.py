@@ -20,6 +20,7 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
     url(r'^game_info/', include('game_info.urls')),
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
+    url('', include('social.apps.django_app.urls', namespace='social'))
 )
 
 if settings.USE_MODELTRANSLATION:
