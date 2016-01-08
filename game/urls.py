@@ -19,7 +19,9 @@ urlpatterns = i18n_patterns("",
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
     url(r'^game_info/', include('game_info.urls')),
+    url(r'^donate/', include('donations.urls')),
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
 

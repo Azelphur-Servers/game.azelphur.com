@@ -1,0 +1,7 @@
+{% if steam %}
+{{ form.render }}
+{% elif user.is_authenticated %}
+Associate your steam account to donate, <h1><a href="{% url 'social:begin' 'steam' %}">Login with Steam</a></h1>
+{% elif user.is_anonymous %}
+Register to donate, <h1><a href="{% url 'social:begin' 'steam' %}">Login with Steam</a></h1>
+{% endif %}

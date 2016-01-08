@@ -229,8 +229,9 @@ INSTALLED_APPS = (
     "game_info",
     "rest_framework",
     "djangobb_forum",
-    "sourcemod_admins",
     "social.apps.django_app.default",
+    "donations",
+    "paypal.standard.ipn",
 )
 
 # List of processors used by RequestContext to populate the context.
