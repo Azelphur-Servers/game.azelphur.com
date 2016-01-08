@@ -24,3 +24,4 @@ six==1.10.0
 tzlocal==1.2
 wsgiref==0.1.2
 -e git://github.com/slav0nic/DjangoBB.git#egg=djangobb_forum
+python-valve==0.1.1
