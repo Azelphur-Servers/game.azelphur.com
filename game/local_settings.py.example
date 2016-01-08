@@ -31,6 +31,8 @@ DATABASES = {
 # Social Auth API keys
 SOCIAL_AUTH_STEAM_API_KEY = "Fill this in or steam login won't work."
 
+PAYPAL_RECEIVER_EMAIL="Paypal address for donations"
+
 ###################
 # DEPLOY SETTINGS #
 ###################
