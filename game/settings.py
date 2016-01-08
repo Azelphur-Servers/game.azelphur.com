@@ -250,6 +250,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mezzanine.pages.context_processors.page",
     "social.apps.django_app.context_processors.backends",
     "social.apps.django_app.context_processors.login_redirect",
+    "donations.processors.donations",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -257,7 +258,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.UpdateCacheMiddleware",
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     # Uncomment if using internationalisation or localisation
     # 'django.middleware.locale.LocaleMiddleware',

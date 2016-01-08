@@ -31,6 +31,17 @@ DATABASES = {
 # Social Auth API keys
 SOCIAL_AUTH_STEAM_API_KEY = "Fill this in or steam login won't work."
 
+DONATION_AMOUNTS = (
+    # Amount, Days of premium
+    (2, 7),
+    (5, 30),
+    (10, 90),
+    (17, 180),
+)
+
+# Target donation amount for sidebar
+MONTHLY_DONATION_AMOUNT = 180
+
 PAYPAL_RECEIVER_EMAIL="Paypal address for donations"
 
 ###################
