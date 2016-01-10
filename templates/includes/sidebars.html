@@ -1,0 +1,62 @@
+<section class="content-container">
+    <h3>Servers</h3>
+    <ul class="side-server-list">
+        <li data-serverid="1" class="server-block">
+            <div class="server-status online">Online</div>
+            <div class="server-info">
+                <div class="server-info-name"><a href="#steamconnect" rel="nofollow" data-tooltip="Connect to this server">Surf</a></div>
+                <div class="server-info-map">surf_tensile_the_longest_map_name_ever_1234</div>
+                <div class="server-info-players">15 / 32</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        <li data-serverid="2" class="server-block">
+            <div class="server-status online">Online</div>
+            <div class="server-info">
+                <div class="server-info-name"><a href="#steamconnect" rel="nofollow" data-tooltip="Connect to this server">Fun</a></div>
+                <div class="server-info-map">murderball_2011_rc2</div>
+                <div class="server-info-players">0 / 32</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        <li data-serverid="3" class="server-block">
+            <div class="server-status offline">Offline</div>
+            <div class="server-info">
+                <div class="server-info-name"><a href="#steamconnect" rel="nofollow" data-tooltip="Connect to this server">FortWars</a></div>
+                <div class="server-info-map">N/A</div>
+                <div class="server-info-players">0 / 0</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        <li data-serverid="4" class="server-block">
+            <div class="server-status online">Online</div>
+            <div class="server-info">
+                <div class="server-info-name"><a href="#steamconnect" rel="nofollow" data-tooltip="Connect to this server">2Fort</a></div>
+                <div class="server-info-map">ctf_2fort</div>
+                <div class="server-info-players">32 / 32</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        <li data-serverid="5" class="server-block">
+            <div class="server-status online">Online</div>
+            <div class="server-info">
+                <div class="server-info-name"><a href="#steamconnect" rel="nofollow" data-tooltip="Connect to this server">Trade</a></div>
+                <div class="server-info-map">trade_plaza</div>
+                <div class="server-info-players">14 / 32</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+</section>
+<section class="content-container">
+    <h3>Donations</h3>
+    <p>Support us by donating and receive some awesome premium benefits in return!</p>
+    <ul>
+        <li><strong>Current Donations:</strong> &#36;{{ donation_amount }}</li>
+        <li><strong>Monthly Goal:</strong> &#36;{{ donation_max }}</li>
+    </ul>
+    <div class="progress orange lighten-4" data-tooltip="{{ donation_percent }}% of goal reached">
+        <div class="determinate orange darken-3" style="width: {{ donation_percent }}%"></div>
+    </div>
+    <p class="center-align"><a href="#donate" class="btn waves-effect waves-light">Donate Now</a></p>
+</section>

@@ -1,0 +1,32 @@
+{% load i18n pages_tags %}
+{% spaceless %}
+    {% if page_branch_in_menu %}
+        {% if branch_level == 0 %}
+            {% for page in page_branch %}
+                {% if not has_home and page.is_primary and forloop.first %}
+                    <li{% if on_home %} class="active"{% endif %}>
+                        <a href="{% url "home" %}">{% trans "News" %}</a>
+                    </li>
+                {% endif %}
+                {% if page.in_menu %}
+                    {% if page.has_children_in_menu %}
+                        <li{% if page.is_current_or_ascendant %} class="active"{% endif %}>
+                            <a class="dropdown-button" href="#" data-activates="{{ page.html_id }}">{{ page.title }}<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="{{ page.html_id }}" class="dropdown-content nav-main-bar-dropdown">
+                                {% page_menu page %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li{% if page.is_current_or_ascendant %} class="active"{% endif %}><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% for page in page_branch %}
+                {% if page.in_menu %}
+                    <li{% if page.is_current_or_ascendant %} class="active"{% endif %}><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li> 
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endspaceless %}

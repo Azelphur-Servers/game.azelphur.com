@@ -1,0 +1,38 @@
+{% load i18n pages_tags %}
+{% spaceless %}
+    {% if page_branch_in_menu %}
+        {% if branch_level == 0 %}
+            {% for page in page_branch %}
+                {% if not has_home and page.is_primary and forloop.first %}
+                    <li{% if on_home %} class="active"{% endif %}>
+                        <a href="{% url "home" %}">{% trans "News" %}</a>
+                    </li>
+                {% endif %}
+                {% if page.in_menu %}
+                    {% if page.has_children_in_menu %}
+                        <li>
+                            <ul class="collapsible collapsible-accordion">
+                                <li{% if page.is_current_or_ascendant %} class="active"{% endif %}>
+                                    <a class="collapsible-header waves-effect">{{ page.title }}<i class="fa fa-fw fa-caret-down right"></i></a>
+                                    {% page_menu page %}
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li{% if page.is_current_or_ascendant %} class="active"{% endif %}><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div style="display: block;" class="collapsible-body">
+                <ul>
+                    {% for page in page_branch %}
+                        {% if page.in_menu %}
+                            <li{% if page.is_current_or_ascendant %} class="active"{% endif %}><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li> 
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endspaceless %}

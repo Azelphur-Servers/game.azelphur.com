@@ -1,0 +1,166 @@
+{% extends "base-actual.html" %}
+{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags %}
+
+{% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
+
+{% block body_id %}page-news{% endblock %}
+
+{% block meta_keywords %}{% spaceless %}
+    {% metablock %}
+        {% keywords_for blog_post as tags %}
+        {% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
+    {% endmetablock %}
+{% endspaceless %}{% endblock %}
+
+{% block meta_description %}{% spaceless %}
+    {% metablock %}
+        {{ blog_post.description }}
+    {% endmetablock %}
+{% endspaceless %}{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+    $(document).ready(function() {
+        $('.reply').click(function() {
+            $('.comment-reply-form').hide();
+            $(this).siblings('.comment-reply-form').toggle();
+        });
+    });
+    </script>
+{% endblock %}
+{% block extra_head %}
+    {{ block.super }}
+    <style>.input_id_honeypot {display:none !important;}</style>
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-3">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'home' %}">{% trans 'News' %}</a>
+            <a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main_content %}
+    <section class="content-container">
+        <article>
+            <header>
+                {% block blog_post_list_post_title %}
+                    {% editable blog_post.title %}
+                        <h3>{{ blog_post.title }}</h3>
+                    {% endeditable %}
+                {% endblock %}
+                {% block blog_post_list_post_metainfo %}
+                    {% editable blog_post.publish_date %}
+                        <div class="sub-title">
+                            {% with blog_post.user as author %}
+                            <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ blog_post.publish_date }}">{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time>&nbsp;
+                            {% trans 'by' %} <a href="{% url 'djangobb:forum_profile' author %}">{{ author.username }}</a>
+                            {% endwith %}
+                            {% with blog_post.categories.all as categories %}
+                                {% if categories %}
+                                    {% trans "in" %}
+                                    {% for category in categories %}
+                                        <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    {% endeditable %}
+                {% endblock %}
+            </header>
+            <div class="article-body">
+                {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+                    {% block blog_post_list_post_featured_image %}
+                        <p>
+                            <img class="responsive-img" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}">
+                        </p>
+                    {% endblock %}
+                {% endif %}
+                {% block blog_post_detail_content %}
+                    {% editable blog_post.content %}
+                        {{ blog_post.content|richtext_filters|safe }}
+                    {% endeditable %}
+                {% endblock %}
+            </div>
+            <footer>
+                {% block blog_post_detail_keywords %}
+                    {% keywords_for blog_post as tags %}
+                    {% if tags %}
+                        {% spaceless %}
+                        <p>
+                            <b>{% trans "Tags" %}:</b>&nbsp;&nbsp;
+                            {% for tag in tags %}
+                                <a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                            {% endfor %}
+                        </p>
+                        {% endspaceless %}
+                    {% endif %}
+                {% endblock %}
+                {% block blog_post_detail_sharebuttons %}
+                    {% set_short_url_for blog_post %}
+                    <a class="btn btn-social btn-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">
+                        <i class="fa fa-sm fa-fw fa-twitter"></i> {% trans "Share on Twitter" %}
+                    </a>
+                    <a class="btn btn-social btn-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">
+                        <i class="fa fa-sm fa-fw fa-facebook"></i> {% trans "Share on Facebook" %}
+                    </a>
+                {% endblock %}
+            </footer>
+        </article>
+    </section>
+    {% block blog_post_detail_comments %}
+        {% if blog_post.allow_comments %}
+            {% comments_for blog_post %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% comment %}
+    
+    {% block blog_post_detail_rating %}
+    <div class="panel panel-default rating">
+        <div class="panel-body">
+        {% rating_for blog_post %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block blog_post_previous_next %}
+    <ul class="pager">
+    {% with blog_post.get_previous_by_publish_date as previous %}
+    {% if previous %}
+    <li class="previous">
+        <a href="{{ previous.get_absolute_url }}">&larr; {{ previous }}</a>
+    </li>
+    {% endif %}
+    {% endwith %}
+    {% with blog_post.get_next_by_publish_date as next %}
+    {% if next %}
+    <li class="next">
+        <a href="{{ next.get_absolute_url }}">{{ next }} &rarr;</a>
+    </li>
+    {% endif %}
+    {% endwith %}
+    </ul>
+    {% endblock %}
+
+    {% block blog_post_detail_related_posts %}
+    {% if related_posts %}
+    <div id="related-posts">
+    <h3>{% trans 'Related posts' %}</h3>
+    <ul class="list-unstyled">
+    {% for post in related_posts %}
+         <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+{% endcomment %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+    {% load pages_tags mezzanine_tags i18n staticfiles %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+    
+        <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{% static "img/favicon.ico" %}"/>
+        <!--<link rel="icon" type="image/png" href="/static/img/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/static/img/favicon-16x16.png" sizes="16x16" />-->
+
+        {% block rsslink_head %}
+            {% ifinstalled mezzanine.blog %}
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+            <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+            {% endifinstalled %}
+        {% endblock %}
+
+        <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,700">
+        {% compress css %}
+        <!--<link rel="stylesheet" href="{% static 'css/mezzanine.css' %}">-->
+        <link rel="stylesheet" href="{% static 'css/styles-main.css' %}">
+        {% block extra_css %}{% endblock %}
+        {% endcompress %}
+
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <header id="header-main">
+            <div id="header-brand">
+                <div class="container">
+                    <a href="index2.html" id="site-logo"><img src="{% static 'img/tf2-logo-1.png' %}" alt="" /></a>
+                    <div id="site-branding">
+                        <h1 id="site-title">
+                            {% if settings.SITE_TITLE %}<a href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
+                        </h1>
+                        <h2 id="site-slogan">
+                            {% if settings.SITE_TAGLINE %}<a href="/">{{ settings.SITE_TAGLINE }}</a>{% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            {% include 'includes/nav-main-side.html' %}
+
+            {% include 'includes/nav-main-top.html' %}
+        </header>
+
+        <main id="content-main-wrapper">
+            <div class="container">
+                <div id="content-main-inner" class="row">
+                    <div id="content-main" class="col s12 m12 l9 push-l3 {% block body_id %}{% endblock %}">
+                        {% block breadcrumb_menu %}{% endblock %}
+                        
+                        {% block main_content %}{% endblock %}
+                    </div>
+                    <aside id="content-side" class="col s12 m12 l3 pull-l9">
+                        {% include 'includes/sidebars.html' %}
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer-main" class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l4 s12">
+                        {% if settings.SITE_TITLE %}<h5>{{ settings.SITE_TITLE }}</h5>{% endif %}
+                        <p id="footer-social">
+                            <a href="#" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
+                            <a href="#" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
+                        </p>
+                    </div>
+                    <div class="col l3 offset-l1 s12">
+                        <h5>Useful Links</h5>
+                        {% include 'includes/nav-footer.html' %}
+                    </div>
+                    <div class="col l3 offset-l1 s12">
+                        <h5>User Navigation</h5>
+                        <ul>
+                            {% include 'includes/nav-user.html' %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script src="{% static 'js/hover-v2.js' %}"></script>
+        <script src="{% static 'js/js-main.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+
+        {% include "includes/footer_scripts.html" %}
+    </body>
+</html>

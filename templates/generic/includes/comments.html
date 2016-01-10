@@ -1,0 +1,43 @@
+{% load i18n mezzanine_tags comment_tags %}
+
+{% comment %}
+    {% block extra_js %}
+        {{ block.super }}
+        <script>
+        $(document).ready(function() {
+            $('.reply').click(function() {
+                $('.comment-reply-form').hide();
+                $(this).siblings('.comment-reply-form').toggle();
+            });
+        });
+        </script>
+    {% endblock %}
+    {% block extra_head %}
+        {{ block.super }}
+        <style>.input_id_honeypot {display:none !important;}</style>
+    {% endblock %}
+{% endcomment %}
+
+<h3>{% trans "Comments" %}</h3>
+{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+    <section id="comments" class="content-container">
+        {% include "generic/includes/disqus_comments.html" %}
+    </section>
+{% else %}
+    <section id="comments" class="content-container">
+        {% comment_thread object_for_comments %}
+    </section>
+    <section id="comment" class="content-container">
+        <h3>{% trans "New Comment" %}</h3>
+        <form method="post" id="comment" action="{{ comment_url }}#comment">
+            {% if not request.POST.replied_to %}
+                {% fields_for posted_comment_form %}
+            {% else %}
+                {% fields_for unposted_comment_form %}
+            {% endif %}
+            <div class="form-actions">
+                <input class="btn btn-primary btn-lg" type="submit" value="{% trans "Comment" %}">
+            </div>
+        </form>
+    </section>
+{% endif %}

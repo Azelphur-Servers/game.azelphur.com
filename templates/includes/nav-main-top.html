@@ -1,0 +1,30 @@
+{% load i18n pages_tags %}
+
+<div id="nav-main-container">
+    <nav id="nav-main">
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="#" data-activates="nav-main-side" class="button-collapse" id="main-nav-bar-button-collapse"><i class="fa fa-fw fa-bars"></i><span> Menu</span></a>
+                <span id="nav-main-bar-brand">
+                    Azelphur<br />
+                    Gaming
+                </span>
+                <ul id="nav-main-bar" class="hide-on-med-and-down menu-border-effect">
+                    {% page_menu 'includes/menus/top-main.html' %}
+                </ul>
+                <form id="nav-main-search" action="{% url 'search' %}" method="GET" role="search">
+                    <div class="input-field">
+                        <input id="main-nav-search-input" type="search" name="q" placeholder="Search..." required>
+                        <label for="main-nav-search-input"><i class="fa fa-fw fa-search fa-2x"></i></label>
+                        <i id="nav-main-bar-button-search-close" class="material-icons fa fa-fw fa-times fa-lg"></i>
+                    </div>
+                    <input type="hidden" name="type" value="" />
+                </form>
+                <ul class="right menu-border-effect">
+                    {% include 'includes/nav-user.html' %}
+                    <li><a href="#search" id="nav-main-bar-button-search"><i class="fa fa-fw fa-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
