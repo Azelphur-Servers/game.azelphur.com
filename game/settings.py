@@ -319,6 +319,19 @@ HAYSTACK_CONNECTIONS = {
     }
 }
 
+DONATION_AMOUNTS = (
+    # Amount, Days of premium
+    (2, 7),
+    (5, 30),
+    (10, 90),
+    (17, 180),
+)
+
+# Target donation amount for sidebar
+MONTHLY_DONATION_AMOUNT = 180
+
+PREMIUM_GROUP_NAME = "SM_PREMIUM"
+
 ##################
 # LOCAL SETTINGS #
 ##################
