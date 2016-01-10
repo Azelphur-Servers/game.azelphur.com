@@ -6,12 +6,21 @@ from django.contrib.auth.models import Group
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
 from social.apps.django_app.default.models import UserSocialAuth
+from game_info.models import Server
+from valve.source.rcon import RCON
 from datetime import timedelta
 
 
 class PremiumDonation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     end_time = models.DateTimeField()
+
+
+def reload_admins():
+    servers = Server.objects.all()
+    for server in servers:
+        with RCON((server.host, server.port), settings.RCON_PASSWORD) as rcon:
+            print(rcon("sm_reloadadmins"))
 
 
 def add_premium(sender, **kwargs):

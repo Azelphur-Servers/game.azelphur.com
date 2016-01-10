@@ -33,6 +33,9 @@ SOCIAL_AUTH_STEAM_API_KEY = "Fill this in or steam login won't work."
 
 PAYPAL_RECEIVER_EMAIL="Paypal address for donations"
 
+# Rcon password for donations module to call sm_reloadadmins
+RCON_PASSWORD = ""
+
 ###################
 # DEPLOY SETTINGS #
 ###################
