@@ -7,7 +7,7 @@
                 {% if server.up %}
                     <div class="server-status online">{% trans 'Online' %}</div>
                     <div class="server-info">
-                        <div class="server-info-name"><a href="steam://connect/{{ server.host }}" rel="nofollow" data-tooltip="Connect to this server">{{ server.title|default:'Unknown' }}</a></div>
+                        <div class="server-info-name"><a href="steam://connect/{{ server.host }}" rel="nofollow" data-tooltip="{% blocktrans %}Connect to this server{% endblocktrans %}">{{ server.title|default:'Unknown' }}</a></div>
                         <div class="server-info-map">{{ server.info.map|default:'Unknown' }}</div>
                         <div class="server-info-players">{{ server.info.player_count|default:'0' }} / {{ server.info.max_players|default:'0' }}</div>
                     </div>
@@ -25,7 +25,6 @@
     </ul>
 </section>
 
-
 <section class="content-container">
     <h3>{% trans 'Donations' %}</h3>
     <p>{% blocktrans %}Support us by donating and receive some awesome premium benefits in return!{% endblocktrans %}</p>
@@ -33,8 +32,8 @@
         <li><strong>{% trans 'Current Donations' %}:</strong> &#36;{{ donation_amount }}</li>
         <li><strong>{% trans 'Monthly Goal' %}:</strong> &#36;{{ donation_max }}</li>
     </ul>
-    <div class="progress orange lighten-4" data-tooltip="{{ donation_percent }}% of goal reached">
+    <div class="progress orange lighten-4" data-tooltip="{{ donation_percent }}% {% trans 'of goal reached' %}">
         <div class="determinate orange darken-3" style="width: {{ donation_percent }}%"></div>
     </div>
-    <p class="center-align"><a href="#donate" class="btn waves-effect waves-light">Donate Now</a></p>
+    <p class="center-align"><a href="{% url 'donate' %}" class="btn waves-effect waves-light">Donate Now</a></p>
 </section>

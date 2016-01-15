@@ -1,27 +1,49 @@
 {% load i18n mezzanine_tags comment_tags rating_tags %}
+{% load forum_extras %}
 
 {% for comment in comments_for_thread %}
-    <div id="comment-{{ comment.id }}" class="comment media{% if comment.by_author %} comment-author{% endif %}">
+    <div id="comment-{{ comment.id }}" class="comment {% if comment.by_author %} comment-author{% endif %}">
         {% editable comment.is_public comment.is_removed %}
-        {% if not comment.is_removed and comment.is_public or request.user.is_staff %}
-            {% if comment.url %}
-                <a href="{{ comment.url }}">
-                    <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="{{ comment.url }}">{{ comment.user_name }}</a>
-            {% else %}
-                <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
-                <div class="media-body">
-                    <h4 class="media-heading">{{ comment.user_name }}
+            {% if not comment.is_removed and comment.is_public or request.user.is_staff %}
+                {% if comment.user.forum_profile.avatar and comment.user.forum_profile.show_avatar %}
+                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">
+                        <img class="comment-image" src="{{ comment.user.forum_profile.avatar.url }}" />
+                    </a>
+                {% else %}
+                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">
+                        <img class="comment-image" src="{% gravatar comment.user.email %}" />
+                    </a>
+                {% endif %}
+                <div class="comment-body">
+                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">{{ comment.user_name }}</a>
+                    <a href="#comment-{{ comment.id }}" class="comment-date" data-title="Link to this comment"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ comment.submit_date }}">{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time></a>
+
+                    <p>{{ comment.comment|comment_filter }}</p>
+
+                    {% if not comment.is_removed and comment.is_public %}
+                        <a href="#reply-{{ comment.id }}" class="comment-reply btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Reply" %}</a>
+
+                        <form class="comment-reply-form" method="post" action="{{ comment_url }}#reply-{{ comment.id }}"
+                            {% if replied_to != comment.id %}style="display:none;"{% endif %}>
+                            {% if replied_to == comment.id %}
+                                {% fields_for posted_comment_form %}
+                            {% else %}
+                                {% fields_for unposted_comment_form %}
+                            {% endif %}
+                            <input type="hidden" name="replied_to" value="{{ comment.id }}">
+                            <button class="btn" type="submit">{% trans "Reply" %}</button>
+                        </form>
+                    {% endif %}
+                </div>
             {% endif %}
-                <small class="timespan">
-                    {% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-                </small>
-            </h4>
-            <p>{{ comment.comment|comment_filter }}</p>
-        {% endif %}
-        
+        {% endeditable %}
+    </div>
+{% endfor %}
+{% if no_comments %}
+    <p>{% trans "There are currently no comments" %}</p>
+{% endif %}
+
+{% comment %}
         {% if not comment.is_removed and comment.is_public %}
             <a href="#comment-{{ comment.id }}" class="btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Link" %}</a>
             <a href="#reply-{{ comment.id }}" class="reply btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Reply" %}</a>
@@ -50,9 +72,4 @@
         {% comment_thread comment %}
         
         {% if not comment.is_removed and comment.is_public or request.user.is_staff %}</div>{% endif %}
-        {% endeditable %}
-    </div>
-{% endfor %}
-{% if no_comments %}
-    <p>{% trans "There are currently no comments" %}</p>
-{% endif %}
+{% endcomment %}

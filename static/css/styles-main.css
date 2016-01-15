@@ -169,10 +169,14 @@ small {
 
 /* Forms */
 .input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=url]:focus + label,
 .input-field textarea:focus + label {
     color: #fb8d31 !important;
 }
 .input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=url]:focus,
 .input-field textarea:focus {
     border-bottom: 1px solid #fb8d31 !important;
     box-shadow: 0 1px 0 0 #fb8d31 !important;
@@ -186,6 +190,21 @@ input[type="checkbox"]:checked + label::before {
     border-right-color: #fb8d31 !important;
     border-bottom-color: #fb8d31 !important;
 }
+
+form.editable-form {
+    top: 3rem;
+}
+form.editable-form .btn {
+    padding: 0px 1.5rem;
+}
+
+/* Reset Materialize Checkboxes */
+/*input[type="checkbox"]:not(:checked),
+input[type="checkbox"]:checked {
+    position: static;
+    left: auto;
+    visibility: visible;
+}*/
 
 /* Tooltips */
 #hoverTooltip {
@@ -535,6 +554,37 @@ input[type="checkbox"]:checked + label::before {
 #comments .comment:last-child {
     padding-bottom: 0px;
     border-bottom: 0px;
+}
+
+#comments .comment .comment-image {
+    float: left;
+    margin-top: 5px;
+    max-width: 60px;
+}
+#comments .comment .comment-body {
+    padding-left: 80px;
+}
+#comments .comment .comment-body > .comment-user {
+    display: block;
+    font-size: 1rem;
+}
+#comments .comment .comment-body > .comment-date {
+    color: #858585;
+}
+#comments .comment .comment-body > .comment-reply-form {
+    margin: 10px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 9px;
+}
+
+
+@media screen and (max-width: 600px) {
+    #comments .comment .comment-image {
+        max-width: 30px !important;
+    }
+    #comments .comment .comment-body {
+        padding-left: 40px;
+    }
 }
 
 /* Breadcrumb */

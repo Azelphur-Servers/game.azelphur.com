@@ -18,17 +18,6 @@
     {% endmetablock %}
 {% endspaceless %}{% endblock %}
 
-{% block extra_js %}
-    {{ block.super }}
-    <script>
-    $(document).ready(function() {
-        $('.reply').click(function() {
-            $('.comment-reply-form').hide();
-            $(this).siblings('.comment-reply-form').toggle();
-        });
-    });
-    </script>
-{% endblock %}
 {% block extra_head %}
     {{ block.super }}
     <style>.input_id_honeypot {display:none !important;}</style>
@@ -59,7 +48,7 @@
                     {% editable blog_post.publish_date %}
                         <div class="sub-title">
                             {% with blog_post.user as author %}
-                            <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ blog_post.publish_date }}">{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time>&nbsp;
+                            <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ blog_post.publish_date }}">{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time>
                             {% trans 'by' %} <a href="{% url 'djangobb:forum_profile' author %}">{{ author.username }}</a>
                             {% endwith %}
                             {% with blog_post.categories.all as categories %}
