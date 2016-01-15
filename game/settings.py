@@ -339,6 +339,11 @@ LOGIN_REDIRECT_URL = "/"
 
 BLOG_SLUG = 'news'
 
+COMMENTS_ACCOUNT_REQUIRED = True
+COMMENTS_DEFAULT_APPROVED = True
+COMMENT_FORM_CLASS = 'game.forms.MyCommentForm'
+
+
 ##################
 # LOCAL SETTINGS #
 ##################
