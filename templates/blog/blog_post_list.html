@@ -71,7 +71,7 @@
                         {% editable blog_post.publish_date %}
                             <div class="sub-title">
                                 {% with blog_post.user as author %}
-                                <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ blog_post.publish_date }}">{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time>&nbsp;
+                                <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ blog_post.publish_date }}">{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time>
                                 {% trans 'by' %} <a href="{% url 'djangobb:forum_profile' author %}">{{ author.username }}</a>
                                 {% endwith %}
                                 {% with blog_post.categories.all as categories %}
@@ -114,8 +114,4 @@
     {% endfor %}
 
     {% pagination_for blog_posts %}
-{% endblock %}
-
-{% block right_panel %}
-    {% include "blog/includes/filter_panel.html" %}
 {% endblock %}

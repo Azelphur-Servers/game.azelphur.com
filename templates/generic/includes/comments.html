@@ -1,17 +1,6 @@
 {% load i18n mezzanine_tags comment_tags %}
 
 {% comment %}
-    {% block extra_js %}
-        {{ block.super }}
-        <script>
-        $(document).ready(function() {
-            $('.reply').click(function() {
-                $('.comment-reply-form').hide();
-                $(this).siblings('.comment-reply-form').toggle();
-            });
-        });
-        </script>
-    {% endblock %}
     {% block extra_head %}
         {{ block.super }}
         <style>.input_id_honeypot {display:none !important;}</style>
