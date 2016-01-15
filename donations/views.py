@@ -1,6 +1,7 @@
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sites.shortcuts import get_current_site
 from .forms import DonateForm
 
