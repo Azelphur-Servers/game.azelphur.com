@@ -337,6 +337,8 @@ ACCOUNTS_PROFILE_FORM_EXCLUDE_FIELDS = ("first_name", "last_name")
 
 LOGIN_REDIRECT_URL = "/"
 
+BLOG_SLUG = 'news'
+
 ##################
 # LOCAL SETTINGS #
 ##################
