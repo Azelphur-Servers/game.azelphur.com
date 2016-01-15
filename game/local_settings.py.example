@@ -36,6 +36,10 @@ PAYPAL_RECEIVER_EMAIL="Paypal address for donations"
 # Rcon password for donations module to call sm_reloadadmins
 RCON_PASSWORD = ""
 
+NORECAPTCHA_SITE_KEY = ""
+NORECAPTCHA_SECRET_KEY = ""
+
+
 ###################
 # DEPLOY SETTINGS #
 ###################

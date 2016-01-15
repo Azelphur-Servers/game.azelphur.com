@@ -233,6 +233,7 @@ INSTALLED_APPS = (
     "donations",
     "paypal.standard.ipn",
     "mibbit",
+    "nocaptcha_recaptcha",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -341,8 +342,9 @@ BLOG_SLUG = 'news'
 
 COMMENTS_ACCOUNT_REQUIRED = True
 COMMENTS_DEFAULT_APPROVED = True
-COMMENT_FORM_CLASS = 'game.forms.MyCommentForm'
+COMMENT_FORM_CLASS = "game.forms.MyCommentForm"
 
+ACCOUNTS_PROFILE_FORM_CLASS = "game.forms.MyProfileForm"
 
 ##################
 # LOCAL SETTINGS #
