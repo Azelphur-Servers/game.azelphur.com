@@ -232,6 +232,7 @@ INSTALLED_APPS = (
     "social.apps.django_app.default",
     "donations",
     "paypal.standard.ipn",
+    "mibbit",
 )
 
 # List of processors used by RequestContext to populate the context.
