@@ -2,6 +2,6 @@
     <li class="hide-on-med-and-down"><a href="{% url 'djangobb:forum_profile' user.username %}">Profile</a></li>
     <li class="hide-on-med-and-down"><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
 {% else %}
-    <li class="hide-on-med-and-down"><a href="{% url 'login' %}?next={{ request.path }">Login</a></li>
+    <li class="hide-on-med-and-down"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
     <li class="hide-on-med-and-down"><a href="{% url 'signup' %}?next={{ request.path }}">Register</a></li>
 {% endif %}
