@@ -4,29 +4,28 @@
     <div id="comment-{{ comment.id }}" class="comment media{% if comment.by_author %} comment-author{% endif %}">
         {% editable comment.is_public comment.is_removed %}
         {% if not comment.is_removed and comment.is_public or request.user.is_staff %}
-        {% if comment.url %}
-        <a href="{{ comment.url }}">
-            <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading"><a href="{{ comment.url }}">{{ comment.user_name }}</a>
-        {% else %}
-        <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
-        <div class="media-body">
-            <h4 class="media-heading">{{ comment.user_name }}
-        {% endif %}
+            {% if comment.url %}
+                <a href="{{ comment.url }}">
+                    <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ comment.url }}">{{ comment.user_name }}</a>
+            {% else %}
+                <img class="pull-left media-object" src="{% gravatar_url comment.email %}">
+                <div class="media-body">
+                    <h4 class="media-heading">{{ comment.user_name }}
+            {% endif %}
                 <small class="timespan">
                     {% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}
                 </small>
             </h4>
-        <p>{{ comment.comment|comment_filter }}</p>
+            <p>{{ comment.comment|comment_filter }}</p>
         {% endif %}
         
         {% if not comment.is_removed and comment.is_public %}
-        <a href="{{ request.path }}#comment-{{ comment.id }}" class="btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Link" %}</a>
-        <a href="#reply-{{ comment.id }}" class="reply btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Reply" %}</a>
+            <a href="#comment-{{ comment.id }}" class="btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Link" %}</a>
+            <a href="#reply-{{ comment.id }}" class="reply btn-flat btn-sm"><i class="fa fa-sm fa-fw fa-link"></i> {% trans "Reply" %}</a>
 
-        <div id="reply-{{ comment.id }}">
             <form class="comment-reply-form" method="post" action="{{ comment_url }}#reply-{{ comment.id }}"
                 {% if replied_to != comment.id %}style="display:none;"{% endif %}>
                 {% if replied_to == comment.id %}
@@ -37,8 +36,6 @@
                 <input type="hidden" name="replied_to" value="{{ comment.id }}">
                 <input class="btn btn-primary btn-lg" type="submit" value="{% trans "Reply" %}">
             </form>
-        </div>
-
         {% else %}
         <p>
             {% if comment.is_removed %}

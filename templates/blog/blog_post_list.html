@@ -45,23 +45,7 @@
 
 {% block main_content %}
     {% if tag or category or year or month or author %}
-        {% block blog_post_list_filterinfo %}
-        <div class="head-title">
-            <div class="sub-title">
-            {% if tag %}
-                {% trans "Viewing posts tagged" %} {{ tag }}
-            {% else %}{% if category %}
-                {% trans "Viewing posts for the category" %} {{ category }}
-            {% else %}{% if year or month %}
-                {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
-                {{ year }}
-            {% else %}{% if author %}
-                {% trans "Viewing posts by" %}
-                {{ author.get_full_name|default:author.username }}
-            {% endif %}{% endif %}{% endif %}{% endif %}
-            </div>
-        </div>
-        {% endblock %}
+        {% block blog_post_list_filterinfo %}{% endblock %}
     {% else %}
         {% if page %}
         {% block blog_post_list_pagecontent %}
