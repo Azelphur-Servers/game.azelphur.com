@@ -60,8 +60,6 @@
 
 {% block meta_title %}Forums{% endblock %}
 
-
-
 {% block main_content %}
     {# include 'djangobb_forum/header.html' #}
 
@@ -81,29 +79,10 @@
         </div>
         {% endif %}
     {% endblock messages %}
+
 	{% block pre_content %}{% endblock %}
 	{% block content %}{% endblock %}
 	{% block post_content %}{% endblock %}
-	<div id="brdfooter" class="block">
-	<h2><span>{% trans "Board footer" %}</span></h2>
-        <div class="box">
-            <div class="inbox">
-                {% block controls %}
-                    <dl id="searchlinks" class="conl">
-                        <dt><strong>{% trans "Search links" %}</strong></dt>
-                        <dd><a href="{% url 'djangobb:search' %}?action=show_24h">{% trans "Show recent posts" %}</a></dd>
-                        <dd><a href="{% url 'djangobb:search' %}?action=show_unanswered">{% trans "Show unanswered posts" %}</a></dd>
-                        {% if user.is_authenticated %}
-                        <dd><a href="{% url 'djangobb:search' %}?action=show_subscriptions">{% trans "Show your subscribed topics" %}</a></dd>
-                        <dd>{% trans "Show your" %} <a href="{% url 'djangobb:search' %}?action=show_user&show_as=topics">{% trans "topics" %}</a>/<a href="{% url 'djangobb:search' %}?action=show_user&show_as=posts">{% trans "posts" %}</a></dd>
-                        {% endif %}
-                    </dl>
-                {% endblock controls %}
-                <p class="conr">Powered by <a href="http://djangobb.org/">DjangoBB</a></p>
-                <div class="clearer"></div>
-                {% block lofi %}
-                {% endblock lofi%}
-            </div>
-        </div>
-    </div>
+
+	{% include 'djangobb_forum/forum_board_footer.html' %}
 {% endblock %}

@@ -69,5 +69,5 @@ $(document).ready(function(){
        
     $('textarea').addClass('materialize-textarea');
 
-    //$('.field-add-required').find('input').attr('required', 'required'); 
+    $('.field-add-required').find('input, textarea').attr('required', 'required'); 
 });

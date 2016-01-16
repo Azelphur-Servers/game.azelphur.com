@@ -1,0 +1,105 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum{% endblock %}
+
+{% block extra_meta %}
+	<script type="text/javascript" src="{{ STATIC_URL }}djangobb_forum/js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+
+		function set_collapser(cat_id) {
+			category_body_id = "category_body_" + cat_id;
+			if($.cookie(category_body_id)){
+				item_id = "#" + category_body_id;
+				head_id = item_id.replace("body", "head");
+				$(head_id).addClass("collapsed");
+				$(item_id).hide()
+			}
+		}
+		$(document).ready(function(){
+			$("a.toggle").click(function(){
+				header_id = $(this).parent().attr('id');
+				body_id = header_id.replace("head", "body");
+				item_id = '#' + body_id
+				if ($(this).parent().attr('class')==''){
+					$(this).parent().addClass("collapsed");
+					$.cookie(body_id, 'collapsed');
+				}else {
+					$(this).parent().removeClass("collapsed");
+					$.cookie(body_id, '');
+				}
+				$(item_id).slideToggle("slow");
+			});
+		{% for iter in cats %}
+			set_collapser({{ iter.id }})
+		{% endfor %}
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	{% for iter in cats %}
+		<div class="content-container no-padding">
+	        <ul class="forum-header">
+	            <li>
+	                <dl>
+	                    <dt class="forum-title"><i class="fa fa-fw fa-file-text"></i>{{ iter.cat }}</dt>
+	                    <dd class="forum-topics">{% trans "Topics" %}</dd>
+	                    <dd class="forum-posts">{% trans "Posts" %}</dd>
+	                    <dd class="forum-latest">{% trans "Last post" %}</dd>
+	                </dl>
+	            </li>
+	        </ul>
+	        <ul class="forum-list">
+				{% for forum in iter.forums %}
+					{% include 'djangobb_forum/forum_row.html' %}
+				{% endfor %}
+	        </ul>
+	    </div>
+    {% endfor %}
+
+	<div class="content-container no-padding">
+        <ul class="forum-header">
+            <li>
+                <dl>
+                    <dt class="forum-stats-title"><i class="fa fa-fw fa-info"></i>{% trans "Board information" %}</dt>
+                </dl>
+            </li>
+        </ul>
+		<div class="row row-no-marg">
+			<div class="col s12 m6 l4">
+				<dl>
+					<dt><h6>{% trans "Board statistics" %}</h6></dt>
+					<dd>{% trans "Total number of registered users:" %} {{ users }}</dd>
+					<dd>{% trans "Total number of topics:" %} {{ topics }}</dd>
+					<dd>{% trans "Total number of posts:" %} {{ posts }}</dd>
+				</dl>
+			</div>
+			<div class="col s12 m6 l4">
+				<dl>
+					<dt><h6>{% trans "User information" %}</h6></dt>
+					<dd>{% trans "Newest registered user:" %} {{ last_user|profile_link }}</dd>
+					<dd>{% trans "Registered users online:" %} <strong>{{ online_count }}</strong></dd>
+					<dd>{% trans "Guests online:" %} <strong>{{ guest_count }}</strong></dd>
+				</dl>
+			</div>
+			<div class="col s12 m12 l4">
+				<dl>
+					<dt><h6>{% trans "Online Users" %}</h6></dt>
+                    {% for online in users_online %}
+                        <dd>{{ online|profile_link }}</dd>
+                    {% endfor %}
+				</dl>
+			</div>
+		</div>
+    </div>
+{% endblock %}
+
+{% block lofi %}
+	{% if forum_settings.LOFI_SUPPORT %}
+	    <p class="lofi">
+	        <a href="{% url 'djangobb:lofi_index' %}">Lo-Fi Version</a>
+	    </p>
+	{% endif %}
+{% endblock %}
