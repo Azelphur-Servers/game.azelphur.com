@@ -23,6 +23,7 @@ urlpatterns = i18n_patterns("",
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
     url(r'^chat/', include('mibbit.urls', namespace='mibbit')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^faq/', include('faq.urls')),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
 
