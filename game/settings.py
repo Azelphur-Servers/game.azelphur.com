@@ -346,6 +346,15 @@ COMMENT_FORM_CLASS = "game.forms.MyCommentForm"
 
 ACCOUNTS_PROFILE_FORM_CLASS = "game.forms.MyProfileForm"
 
+# These variables will be overwritten by local settings, but aren't
+# really required in a development environment. I'm nulling them here
+# so that the development server will start without these variables
+# being set
+
+NORECAPTCHA_SITE_KEY = ""
+NORECAPTCHA_SECRET_KEY = ""
+
+
 ##################
 # LOCAL SETTINGS #
 ##################
