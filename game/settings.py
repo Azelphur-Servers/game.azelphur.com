@@ -234,6 +234,7 @@ INSTALLED_APPS = (
     "paypal.standard.ipn",
     "mibbit",
     "nocaptcha_recaptcha",
+    "faq",
 )
 
 # List of processors used by RequestContext to populate the context.
