@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from .views import faq
+from .views import FAQListView
 
 urlpatterns = [
-    url(r'^', faq, name='faq'),
+    url(r'^', FAQListView.as_view(), name='faq'),
 ]
