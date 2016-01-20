@@ -20,12 +20,18 @@ class DonateView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(DonateView, self).get_context_data(**kwargs)
-        try:
-            context['steam'] = self.request.user.social_auth.filter(
-                provider="steam").get()
-        except ObjectDoesNotExist:
-            context['steam'] = None
+        context['steam'] = self._get_steam()
         return context
+
+    def _get_steam(self):
+        if self.request.user.is_authenticated():
+            try:
+                u = self.request.user.social_auth.filter(provider="steam").get()
+                return u.uid
+            except ObjectDoesNotExist:
+                pass
+
+        return ""
 
 
     def get_initial(self):
@@ -33,12 +39,8 @@ class DonateView(FormView):
         Returns the initial data to use for forms on this view.
         """
 
-        try:
-            u = self.request.user.social_auth.filter(provider="steam").get()
-            steam = u.uid
-        except ObjectDoesNotExist:
-            steam = ""
-
+        steam = self._get_steam()
+            
         domain = get_current_site(self.request).domain
 
         initial = {
