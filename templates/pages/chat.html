@@ -5,7 +5,7 @@
 {% block main %}
 <div id="mibbit-chat-widget" class="fullscreen-widget">
 <button class="btn-floating btn-close black"><i class="fa fa-fw fa-times"></i></button>
-<iframe src="https://widget.mibbit.com/?settings=4d7edc8b3a37affbfb73887f7e837acf&amp;server=irc.azelphur.com%3A%2B6697&amp;channel=%23AzelphurIRC_test{% if request.user %}&amp;nick={{ request.user|slugify }}{% endif %}"></iframe>
+<iframe src="https://widget.mibbit.com/?settings=4d7edc8b3a37affbfb73887f7e837acf&amp;server=irc.azelphur.com%3A%2B6697&amp;channel=%23AzelphurIRC_test{% if request.user.is_authenticated %}&amp;nick={{ request.user|slugify }}{% endif %}"></iframe>
 <button class="btn btn-fullscreen right"><i class="fa fa-fw fa-arrows-alt fa-sm"></i>&nbsp;Fullscreen</button>
 </div>
 {% endblock %}
