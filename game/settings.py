@@ -232,7 +232,6 @@ INSTALLED_APPS = (
     "social.apps.django_app.default",
     "donations",
     "paypal.standard.ipn",
-    "mibbit",
     "nocaptcha_recaptcha",
     "faq",
 )
@@ -354,7 +353,6 @@ ACCOUNTS_PROFILE_FORM_CLASS = "game.forms.MyProfileForm"
 
 NORECAPTCHA_SITE_KEY = ""
 NORECAPTCHA_SECRET_KEY = ""
-
 
 ##################
 # LOCAL SETTINGS #
