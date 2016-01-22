@@ -254,6 +254,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "social.apps.django_app.context_processors.login_redirect",
     "donations.processors.donations",
     "game_info.processors.servers",
+    "djangobb_forum.context_processors.forum_settings",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
