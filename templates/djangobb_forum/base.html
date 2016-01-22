@@ -65,17 +65,10 @@
 
     {% block messages %}
         {% if messages %}
-        <div id="messages" class="block">
-            <h2><span>{% trans "Notice" %}</span></h2>
-            <div class="box">
-                <div class="inbox">
-                    <ul class="messagelist">
-                        {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <div id="messages">
+            {% for message in messages %}
+                <div class="message{% if message.tags %} {{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
         </div>
         {% endif %}
     {% endblock messages %}

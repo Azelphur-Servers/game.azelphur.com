@@ -1,0 +1,169 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum{% endblock %}
+{% block meta_title %}{{ forum.name }} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-3">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="forum-head">
+        <h3 class="forum-head-title">
+            {{ forum.name }}
+            <span class="sub-title">{{ forum.description|safe }}</span>
+        </h3>
+        {% if user.is_authenticated %}
+            <div class="forum-head-actions">
+                <a href="{% url 'djangobb:add_topic' forum.id %}" class="btn waves-effect waves-light action-new"><i class="fa fa-fw fa-sm fa-plus"></i>&nbsp;&nbsp;{% trans "New Topic" %}</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="content-container no-padding">
+        <ul class="forum-header">
+            <li>
+                <dl>
+                    <dt class="forum-title"><i class="fa fa-fw fa-file-text"></i>{% trans "Topics" %}</dt>
+                    <dd class="forum-topics">{% trans "Replies" %}</dd>
+                    <dd class="forum-posts">{% trans "Views" %}</dd>
+                    <dd class="forum-latest">{% trans "Last post" %}</dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="forum-list">
+            {% for topic in topics_page %}
+                <li>
+                    <dl class="forum-icon {% if topic|has_unreads:user %}inew {% endif %}{% if topic.closed %}topic-closed{% else %}{% if topic.sticky %}topic-sticky{% endif %}{% endif %}">
+                        <dt class="forum-title">
+                            {% link topic %}<br />
+                            <i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>
+                        </dt>
+                        <dd class="forum-topics">{{ topic.reply_count }}</dd>
+                        <dd class="forum-posts">{{ topic.views }}</dd>
+                        <dd class="forum-latest">
+                            <time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time><br />
+                            {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
+                        </dd>
+                    </dl>
+                </li>
+            {% empty %}
+                <p class="center-align pad-bottom">
+                    {% trans "Forum is empty." %} 
+                    {% if user.is_authenticated %}
+                        &nbsp;<a href="{% url 'djangobb:add_topic' forum.id %}">{% trans "Start a new topic" %}</a>
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% comment %}
+<div class="linkst">
+	<div class="inbox">
+		<div class="pagelink conl">{% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}</div>
+		{% if user.is_authenticated %}
+			<p class="postlink conr"><a href="{% url 'djangobb:add_topic' forum.id %}">{% trans "New topic" %}</a></p>
+		{% endif %}
+		<ul><li><a href="{% url 'djangobb:index' %}">{% trans "Root" %}</a> </li><li>&raquo; {{ forum.name }}</li></ul>
+		<div class="clearer"></div>
+	</div>
+</div>
+<div id="vf" class="blocktable">
+	<h2>
+		<a href="{% url 'djangobb:forum_forum_feed' forum.id %}"><img src="{{ STATIC_URL }}djangobb_forum/img/feed-icon-small.png"  alt="[RSS Feed]" title="[RSS Feed]" class="rss" /></a>
+		<b><span>{{ forum.name }}</span></b>
+	</h2>
+	<div class="box">
+		<div class="inbox">
+			<table cellspacing="0">
+			<thead>
+				<tr>
+					<th class="tcl" scope="col">{% trans "Topic" %}</th>
+					<th class="tc2" scope="col">{% trans "Replies" %}</th>
+					<th class="tc3" scope="col">{% trans "Views" %}</th>
+					<th class="tcr" scope="col">{% trans "Last post" %}</th>
+				</tr>
+			</thead>
+			<tbody>
+            {% for topic in topics_page %}
+                <tr>
+                    <td class="tcl">
+                        <div class="intd">
+                            <div {% if topic.sticky %}class="sticky"{% else %}{% if topic.closed %}class="closed"{% else %}{% if topic|has_unreads:user %}class="inew"{% else %}class="icon"{% endif %}{% endif %}{% endif %}><div class="nosize"><!-- --></div></div>
+                            <div class="tclcon">
+                                {% if topic.sticky %}
+                                    {% trans "Sticky:" %}
+                                {% endif %}
+                                {% if topic|has_unreads:user %}
+                                    <strong>{% link topic %} <span class="byuser">{% trans "by" %} {{ topic.user.username }}</span></strong>
+                                {% else %}
+                                    {% link topic %} <span class="byuser">{% trans "by" %} {{ topic.user.username }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tc2">{{ topic.reply_count }}</td>
+                    <td class="tc3">{{ topic.views }}</td>
+                    <td class="tcr"><a href="{{ topic.last_post.get_absolute_url }}">{% forum_time topic.updated %}</a> <span class="byuser">{% trans "by" %} {{ topic.last_post.user.username }}</span></td>
+                </tr>
+            {% empty %}
+				<tr><td class="djangobbcon1" colspan="4">{% trans "Forum is empty." %}</td></tr>
+            {% endfor %}
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="linkst">
+	<div class="inbox">
+        <div class="pagelink conl">{% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}</div>
+		{% if user.is_authenticated %}
+			<p class="postlink conr"><a href="{% url 'djangobb:add_topic' forum.id %}">{% trans "New topic" %}</a></p>
+		{% endif %}
+		<ul><li><a href="{% url 'djangobb:index' %}">{% trans "Root" %}</a> </li><li>&raquo; {{ forum.name }}</li></ul>
+		<div class="clearer"></div>
+	</div>
+</div>
+{% endcomment %}
+
+
+
+{% block controls %}
+<div class="conl">
+	<form id="qjump" method="get" action="forum">
+		<div><label>{% trans "Jump to" %}
+		<br />
+		<select name="id" id="forum_id" onchange="window.location=('{% url 'djangobb:index' %}'+this.options[this.selectedIndex].value)">
+			{% for category in categories %}
+				<optgroup label="{{ category }}">
+					{% for forum in category.forums.all %}
+						<option value="{{ forum.id }}">{{ forum.name }}</option>
+					{% endfor %}
+				</optgroup>
+			{% endfor %}
+		</select>
+		<input type="button" onclick="window.location=('{% url 'djangobb:index' %}'+getElementById('forum_id').value)" value=" {% trans "Go" %} " accesskey="g" />
+		</label></div>
+	</form>
+	{% if moderator %}
+		<p id="modcontrols"><a href="{% url 'djangobb:moderate' forum.id %}">{% trans "Moderate forum" %}</a></p>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block lofi %}
+{% if forum_settings.LOFI_SUPPORT %}
+    <p class="lofi">
+        <a href="{{ forum.get_absolute_url }}lofi/">Lo-Fi Version</a>
+    </p>
+{% endif %}
+{% endblock %}

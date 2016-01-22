@@ -56,6 +56,15 @@ i.fa.fa-sm {
 .mar-top {
     margin-top: 1.5rem !important;
 }
+.mar-bottom {
+    margin-bottom: 1.5rem !important;
+}
+.pad-top {
+    padding-top: 1rem !important;
+}
+.pad-bottom {
+    padding-bottom: 1rem !important;
+}
 
 .restyle-lists ul,
 ul.restyle-list {
@@ -743,6 +752,9 @@ ul.pagination li.active {
     float: left;
 }
 #content-main.forum ul.forum-list > li > dl > dt a:first-child {
+    font-weight: 400;
+}
+#content-main.forum ul.forum-list > li > dl.inew > dt a:first-child {
     font-weight: 600;
 }
 #content-main.forum ul.forum-list > li > dl > dd,
@@ -762,6 +774,35 @@ ul.pagination li.active {
 #content-main.forum ul.forum-header > li > dl > dd.forum-latest {
     width: 25%;
     text-transform: capitalize;
+}
+
+#content-main.forum ul.forum-list > li > dl.topic-sticky > dt::before {
+    content: 'Pinned';
+    background: #7BA60D;
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    padding: 0px 5px;
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFF;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+#content-main.forum ul.forum-list > li > dl.topic-closed > dt::before {
+    content: 'Closed';
+    background: #BF1D00;
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    padding: 0px 5px;
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFF;
+    border-radius: 4px;
+    vertical-align: middle;
 }
 
 @media screen and (max-width: 992px) {
@@ -978,6 +1019,37 @@ ul.pagination li.active {
         float: none;
         margin-bottom: 12px;
     }
+}
+
+/* Messages */
+#messages .message {
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+
+    color: #31708F;
+    background-color: #D9EDF7;
+    border-color: #BCDFF1;
+}
+#messages .message.info {
+    color: #31708F;
+    background-color: #D9EDF7;
+    border-color: #BCDFF1;
+}
+#messages .message.success {
+    color: #3C763D;
+    background-color: #DFF0D8;
+    border-color: #D0E9C6;
+}
+#messages .message.danger {
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCCC;
+}
+#messages .message.warning {
+    color: #8A6D3B;
+    background-color: #FCF8E3;
+    border-color: #FAF2CC;
 }
 
 /* Page - FAQ List */
