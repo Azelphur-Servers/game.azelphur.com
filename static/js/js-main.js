@@ -1,3 +1,21 @@
+
+// Forum replies
+function copy_paste_custom(post_id) {   
+    var post_div = $(".forum-post#"+post_id);
+    var nick = post_div.find(".username").text();
+    
+    var txt = get_selection(); // quote selection
+    if (txt == '') {
+        // quote the complete post content
+        // FIXME: We should get the markup here (Ajax view?)
+        txt = post_div.find(".forum-post-body").text();
+        txt = $.trim(txt);
+    }
+    txt = '[quote=' + nick + ']' + txt + '[/quote]\n';
+    paste(txt);
+    return false;
+}
+
 $(document).ready(function(){
     var $root = $('html, body');
 

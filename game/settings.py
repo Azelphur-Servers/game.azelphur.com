@@ -350,6 +350,8 @@ ACCOUNTS_PROFILE_FORM_CLASS = "game.forms.MyProfileForm"
 DJANGOBB_AUTHORITY_SUPPORT = False
 DJANGOBB_AVATAR_WIDTH = 80
 DJANGOBB_AVATAR_HEIGHT = 80
+DJANGOBB_FORUM_LOGO_WIDTH = 27
+DJANGOBB_FORUM_LOGO_HEIGHT = 27
 
 # These variables will be overwritten by local settings, but aren't
 # really required in a development environment. I'm nulling them here

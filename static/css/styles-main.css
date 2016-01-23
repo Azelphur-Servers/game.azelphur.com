@@ -53,6 +53,10 @@ i.fa.fa-sm {
     clear: both;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 .mar-top {
     margin-top: 1.5rem !important;
 }
@@ -691,7 +695,7 @@ ul.pagination li.active {
     top: 50%;
     margin-top: -18px;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
     #content-main.forum .forum-head-title {
         margin-right: 0px;
     }
@@ -872,14 +876,16 @@ ul.pagination li.active {
     padding: 20px 5px;
     text-align: center;
 }
+#content-main.forum.forum-posts .forum-user span {
+    color: #A4A4A4;
+}
 #content-main.forum.forum-posts .forum-user dl {
     margin: 0px;
     padding: 0px;
 }
-#content-main.forum.forum-posts .forum-user .forum-user-avatar > img {
+#content-main.forum.forum-posts .forum-user .forum-user-avatar img {
     width: 80px;
 }
-#content-main.forum.forum-posts .forum-user .forum-user-link,
 #content-main.forum.forum-posts .forum-user .forum-user-avatar {
     margin-bottom: 5px;
 }
@@ -894,6 +900,7 @@ ul.pagination li.active {
 #content-main.forum.forum-posts .forum-user .forum-user-rep {
     background: #fafafa;
     margin-bottom: 10px;
+    padding: 2px 0px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-add,
 #content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-minus {
@@ -908,11 +915,13 @@ ul.pagination li.active {
 }
 
 #content-main.forum.forum-posts .forum-user .forum-user-posts {
-    color: #A4A4A4;
     margin-bottom: 5px;
 }
+#content-main.forum.forum-posts .forum-user .forum-user-location {
+    font-size: 0.8rem;
+}
 #content-main.forum.forum-posts .forum-user .forum-user-status {
-    margin-top: 3px;
+    margin-top: 5px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-status.online {
     color: #57B357;
@@ -929,10 +938,13 @@ ul.pagination li.active {
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-date {
     color: #858585;
+    text-transform: capitalize;
+    float: right;
+    margin-right: 0px;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-link {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 15px;
 }
 
@@ -954,7 +966,10 @@ ul.pagination li.active {
 }
 
 #content-main.forum.forum-posts .forum-post-container > .forum-post-edited {
-    
+    font-style: italic;
+    color: #A4A4A4;
+    margin-top: 15px;
+    padding-left: 8px;
 }
 
 /* Forum - Posts - Signature */
