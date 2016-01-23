@@ -18,7 +18,7 @@
         {% if forum.updated %}
             {% if forum.last_post.topic %}
                 <a href="{{ forum.last_post.get_absolute_url }}">{{ forum.last_post.topic|safe }}</a><br />
-                <time datetime="{{ forum.last_post.created|date:'c' }}">{% forum_time forum.last_post.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}">{{ forum.last_post.user.username }}</a></span>
+                <time datetime="{{ forum.last_post.created|date:'c' }}">{% forum_time forum.last_post.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}">{{ forum.last_post.user.username|safe }}</a></span>
             {% endif %}
         {% endif %}
         </dd>

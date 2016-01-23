@@ -1,14 +1,16 @@
 {% extends 'base-actual.html' %}
-
 {% load forum_extras %}
 {% load i18n %}
 {% load pages_tags mezzanine_tags i18n staticfiles %}
+
+{% block meta_keywords %}{% endblock %}
+{% block meta_description %}{% endblock %}
+{% block meta_title %}{% trans 'Forums' %}{% endblock %}
 
 {% block extra_css %}
     {{ block.super }}
     <link type="text/css" rel="stylesheet" href="{% static 'djangobb_forum/css/pygments.css' %}" />
 {% endblock %}
-
 {% block extra_js %}
     {{ block.super }}
 
@@ -38,27 +40,18 @@
         </script>
     {% endif %}
 {% endblock %}
-
 {% block extra_head %}
     {{ block.super }}
-
     <script type="text/javascript">
         var STATIC_URL = "{{ STATIC_URL }}";
         var POST_PREVIEW_URL = "{% url 'djangobb:post_preview' %}";
     </script>
-
     {% block extra_meta %}{% endblock %}
 {% endblock %}
-
 {% block rsslink_head %}
     <link rel="alternate" type="application/atom+xml" href="{% url 'djangobb:forum_posts_feed' %}" title="{% trans "Latest posts on forum" %}" />
     <link rel="alternate" type="application/atom+xml" href="{% url 'djangobb:forum_topics_feed' %}" title="{% trans "Latest topics on forum" %}" />
 {% endblock %}
-
-{% block meta_keywords %}{% endblock %}
-{% block meta_description %}{% endblock %}
-
-{% block meta_title %}Forums{% endblock %}
 
 {% block main_content %}
     {# include 'djangobb_forum/header.html' #}

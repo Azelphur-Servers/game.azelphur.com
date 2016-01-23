@@ -254,6 +254,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "social.apps.django_app.context_processors.login_redirect",
     "donations.processors.donations",
     "game_info.processors.servers",
+    "djangobb_forum.context_processors.forum_settings",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -345,6 +346,10 @@ COMMENTS_DEFAULT_APPROVED = True
 COMMENT_FORM_CLASS = "game.forms.MyCommentForm"
 
 ACCOUNTS_PROFILE_FORM_CLASS = "game.forms.MyProfileForm"
+
+DJANGOBB_AUTHORITY_SUPPORT = False
+DJANGOBB_AVATAR_WIDTH = 80
+DJANGOBB_AVATAR_HEIGHT = 80
 
 # These variables will be overwritten by local settings, but aren't
 # really required in a development environment. I'm nulling them here

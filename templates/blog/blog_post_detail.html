@@ -1,7 +1,7 @@
 {% extends "base-actual.html" %}
 {% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags %}
 
-{% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
+{% block meta_title %}{{ blog_post.meta_title|truncatechars:12 }} | {% trans 'News' %}{% endblock %}
 
 {% block body_id %}page-news{% endblock %}
 

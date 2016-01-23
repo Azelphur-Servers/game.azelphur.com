@@ -1,21 +1,23 @@
 {% load i18n %}
 
-{% if current_page.has_previous or current_page.has_next %}
-    <ul class="pagination">
-        <li {% if not current_page.has_previous %} class="disabled"{% endif %}>
-            <a href="{% if current_page.has_previous %}?{{ page_var }}={{ current_page.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% else %}#{% endif %}">
-                <i class="fa fa-fw fa-chevron-left"></i>
-            </a>
-        </li>
-        {% for page in current_page.visible_page_range %}
-            <li{% if page == current_page.number %} class="active"{% endif %}>
-                <a href="?{{ page_var }}={{ page }}{% if querystring %}&{{ querystring }}{% endif %}">{{ page }}</a>
+{% spaceless %}
+    {% if current_page.has_previous or current_page.has_next %}
+        <ul class="pagination">
+            <li {% if not current_page.has_previous %} class="disabled"{% endif %}>
+                <a href="{% if current_page.has_previous %}?{{ page_var }}={{ current_page.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% else %}#{% endif %}">
+                    <i class="fa fa-fw fa-chevron-left"></i>
+                </a>
             </li>
-        {% endfor %}
-        <li {% if not current_page.has_next %} class="disabled"{% endif %}>
-            <a href="{% if current_page.has_next %}?{{ page_var }}={{ current_page.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% else %}#{% endif %}">
-                <i class="fa fa-fw fa-chevron-right"></i>
-            </a>
-        </li>
-    </ul>
-{% endif %}
+            {% for page in current_page.visible_page_range %}
+                <li{% if page == current_page.number %} class="active"{% endif %}>
+                    <a href="?{{ page_var }}={{ page }}{% if querystring %}&{{ querystring }}{% endif %}">{{ page }}</a>
+                </li>
+            {% endfor %}
+            <li {% if not current_page.has_next %} class="disabled"{% endif %}>
+                <a href="{% if current_page.has_next %}?{{ page_var }}={{ current_page.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% else %}#{% endif %}">
+                    <i class="fa fa-fw fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endspaceless %}

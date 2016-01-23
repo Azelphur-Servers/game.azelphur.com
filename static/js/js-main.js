@@ -66,8 +66,14 @@ $(document).ready(function(){
         if(!wasVisible)
             $(this).siblings('.comment-reply-form').show();
     });
+
+    // Forum Poll
+    $('.forum-poll-auto .infldset').hide();
+    $('.forum-poll-auto').click(function() {
+        $('.poll .infldset').slideDown();
+    });
        
-    $('textarea').addClass('materialize-textarea');
+    $('textarea:not(.markup)').addClass('materialize-textarea');
 
     $('.field-add-required').find('input, textarea').attr('required', 'required'); 
 });

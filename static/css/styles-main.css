@@ -866,52 +866,79 @@ ul.pagination li.active {
 
 }
 
+/* Forum - Posts - User */
 #content-main.forum.forum-posts .forum-user {
     border-right: 1px solid #eeeeee;
     padding: 20px 5px;
     text-align: center;
 }
-#content-main.forum.forum-posts .forum-user > img {
-    width: 80px;
-    padding-bottom: 5px;
+#content-main.forum.forum-posts .forum-user dl {
+    margin: 0px;
+    padding: 0px;
 }
-#content-main.forum.forum-posts .forum-user > a.forum-user-link {
-    font-weight: 600;
-    display: block;
+#content-main.forum.forum-posts .forum-user .forum-user-avatar > img {
+    width: 80px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-link,
+#content-main.forum.forum-posts .forum-user .forum-user-avatar {
+    margin-bottom: 5px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-text,
+#content-main.forum.forum-posts .forum-user .forum-user-authority {
+    margin-bottom: 8px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-link > a {
+    font-weight: 600 !important;
+}
+
+#content-main.forum.forum-posts .forum-user .forum-user-rep {
+    background: #fafafa;
     margin-bottom: 10px;
 }
-#content-main.forum.forum-posts .forum-user > .forum-user-rep {
-    height: 13px;
-    background: #fafafa;
-    margin: 10px 0px;
+#content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-add,
+#content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-minus {
+    font-weight: 700;
+    padding: 0px 6px;
 }
-#content-main.forum.forum-posts .forum-user > .forum-user-status {
-    margin-top: 8px;
-}
-#content-main.forum.forum-posts .forum-user > .forum-user-status.online {
+#content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-add {
     color: #57B357;
 }
-#content-main.forum.forum-posts .forum-user > .forum-user-status.offline {
+#content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-minus {
     color: #FB3131;
 }
 
+#content-main.forum.forum-posts .forum-user .forum-user-posts {
+    color: #A4A4A4;
+    margin-bottom: 5px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-status {
+    margin-top: 3px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-status.online {
+    color: #57B357;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-status.offline {
+    color: #FB3131;
+}
+
+/* Forum - Posts - Post */
 #content-main.forum.forum-posts .forum-post-container {
     border-left: 1px solid #eeeeee;
     margin-left: -1px;
-    padding: 35px 15px 55px;
+    padding: 10px 15px 55px;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-date {
-    position: absolute;
-    top: 10px;
-    right: 15px;
     color: #858585;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-link {
     position: absolute;
-    bottom: 14px;
+    top: 10px;
     right: 15px;
 }
 
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body {
+    padding-top: 15px;
+}
 #content-main.forum.forum-posts .forum-post-container > .forum-post-body > blockquote {
     margin-top: 0px;
     border-color: #FB9F32;
@@ -926,6 +953,11 @@ ul.pagination li.active {
     font-weight: 400;
 }
 
+#content-main.forum.forum-posts .forum-post-container > .forum-post-edited {
+    
+}
+
+/* Forum - Posts - Signature */
 #content-main.forum.forum-posts .forum-post-container > .forum-post-signature {
     border-top: 1px dashed #eeeeee;
     padding: 10px 5px 0px;
@@ -952,6 +984,7 @@ ul.pagination li.active {
     margin-right: 5px;
 }
 
+/* Forum - Posts - Actions */
 #content-main.forum.forum-posts .forum-post-container > .forum-post-action {
     /*margin-top: 10px;*/
     position: absolute;
@@ -969,8 +1002,9 @@ ul.pagination li.active {
     line-height: 20px;
 }
 
-#content-main.forum .forum-reply-box .forum-sub-checkbox {
+#content-main .forum-reply-box .forum-sub-checkbox {
     float: right;
+    z-index: 500;
 }
 
 @media screen and (max-width: 600px) {
@@ -987,10 +1021,9 @@ ul.pagination li.active {
         position: relative;
         line-height: 1.2rem;
         min-height: 55px;
+        font-size: 0.9rem;
     }
-    #content-main.forum.forum-posts .forum-user > img {
-        width: 30px;
-        vertical-align: middle;
+    #content-main.forum.forum-posts .forum-user .forum-user-avatar {
         padding-bottom: 0px;
         margin-right: 10px;
         position: absolute;
@@ -998,20 +1031,30 @@ ul.pagination li.active {
         top: 50%;
         margin-top: -15px;
     }
-    #content-main.forum.forum-posts .forum-user > a.forum-user-link {
+    #content-main.forum.forum-posts .forum-user .forum-user-avatar img {
+        width: 30px !important;
+        vertical-align: middle;
+    }
+    #content-main.forum.forum-posts .forum-user .forum-user-link {
         display: block;
-        margin-bottom: 0px;
+        margin-bottom: 0px !important;
+    }
+    #content-main.forum.forum-posts .forum-user .forum-user-text {
+        display: inline-block;
+        margin-bottom: 0px !important;
+    }
+    #content-main.forum.forum-posts .forum-user .forum-user-link a {
+        display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    #content-main.forum.forum-posts .forum-user > .forum-user-posts {
+    #content-main.forum.forum-posts .forum-user .forum-user-posts,
+    #content-main.forum.forum-posts .forum-user .forum-user-rep,
+    #content-main.forum.forum-posts .forum-user .forum-user-location {
         display: none;
     }
-    #content-main.forum.forum-posts .forum-user > .forum-user-rep {
-        display: none;
-    }
-    #content-main.forum.forum-posts .forum-user > .forum-user-status {
+    #content-main.forum.forum-posts .forum-user .forum-user-status {
         float: right;
         margin-top: 0px;
     }
@@ -1019,6 +1062,15 @@ ul.pagination li.active {
         float: none;
         margin-bottom: 12px;
     }
+}
+
+/* Markup editor */
+.markItUp {
+    width: auto !important;
+    margin-bottom: 20px !important;
+}
+.markItUp .markup {
+    width: 100% !important;
 }
 
 /* Messages */

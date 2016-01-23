@@ -1,0 +1,32 @@
+{% extends "base-actual.html" %}
+{% load i18n %}
+
+{% block meta_title %}FAQs{% endblock %}
+{% block body_id %}page-faqs{% endblock %}
+
+{% block main_content %}
+    <div class="content-container">
+        <h3>FAQ's</h3>
+        <div class="list-side-by-side">
+        <ul>
+            {% for faq in object_list %}
+                <li><a href="#{{ faq.title|slugify }}">{{ faq.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    <div class="content-container no-padding">
+        <ul class="description-list row-color list-pad restyle-lists">
+            {% for faq in object_list %}
+                <li id="{{ faq.title|slugify }}">
+                    <dl>
+                        <dt>{{ faq.title|safe }}</dt>
+                        <dd>
+                        {{ faq.body }}
+                        </dd>
+                    </dl>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
