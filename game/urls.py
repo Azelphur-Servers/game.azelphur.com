@@ -21,6 +21,7 @@ urlpatterns = i18n_patterns("",
     url(r'^game_info/', include('game_info.urls')),
     url(r'^donate/', include('donations.urls')),
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
+    url(r'^messages/', include('django_messages.urls', namespace='messages')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^faq/', include('faq.urls')),
     url('', include('social.apps.django_app.urls', namespace='social'))

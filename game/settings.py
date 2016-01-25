@@ -234,6 +234,7 @@ INSTALLED_APPS = (
     "paypal.standard.ipn",
     "nocaptcha_recaptcha",
     "faq",
+    "django_messages",
 )
 
 # List of processors used by RequestContext to populate the context.
