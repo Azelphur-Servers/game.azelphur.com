@@ -29,4 +29,4 @@ python-social-auth==0.2.13
 django-paypal==0.2.7
 django-nocaptcha-recaptcha==0.0.18
 -e git://github.com/Azelphur/django-messages.git#egg=django_messages
-
+Markdown==2.6.5

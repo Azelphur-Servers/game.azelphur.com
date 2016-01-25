@@ -1,38 +1,8 @@
 {% extends "base-actual.html" %}
-{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags %}
+{% load i18n %}
 
-{% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
-
-{% block body_id %}page-news{% endblock %}
-
-{% block meta_keywords %}{% spaceless %}
-    {% metablock %}
-        {% keywords_for blog_post as tags %}
-        {% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
-    {% endmetablock %}
-{% endspaceless %}{% endblock %}
-
-{% block meta_description %}{% spaceless %}
-    {% metablock %}
-        {{ blog_post.description }}
-    {% endmetablock %}
-{% endspaceless %}{% endblock %}
-
-{% block extra_head %}
-    {{ block.super }}
-    <style>.input_id_honeypot {display:none !important;}</style>
-{% endblock %}
-
-{% block title %}{% endblock %}
-
-{% block breadcrumb_menu %}
-    <div class="content-container no-padding">
-        <div class="breadcrumbs count-3">
-            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
-            <a href="{% url 'faq' %}">{% trans 'FAQ' %}</a>
-        </div>
-    </div>
-{% endblock %}
+{% block meta_title %}FAQs{% endblock %}
+{% block body_id %}page-faqs{% endblock %}
 
 {% block main_content %}
     <div class="content-container">
@@ -50,9 +20,9 @@
             {% for faq in object_list %}
                 <li id="{{ faq.title|slugify }}">
                     <dl>
-                        <dt>{{ faq.title }}</dt>
+                        <dt>{{ faq.title|safe }}</dt>
                         <dd>
-                        {{ faq.body }}
+                        {{ faq.body_html|safe }}
                         </dd>
                     </dl>
                 </li>
