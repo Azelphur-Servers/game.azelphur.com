@@ -1,0 +1,44 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-moderate{% endblock %}
+{% block meta_title %}{% trans 'Move Topic' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-4">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="#move">{% trans 'Move Topic' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+	<div class="content-container">
+		<h3>{% trans "Move topic" %}</h3>
+		<form method="POST" action="{% url 'djangobb:move_topic' %}">
+			{% csrf_token %}
+			{% for topic_id in topic_ids %}
+				<input type="hidden" value="{{ topic_id }}" name="topic_id"/>
+			{% endfor %}
+			<p>{% trans "Select destination of move" %}</p>
+			<div class="input-field">
+				<select name="to_forum">
+					{% for category in categories %}
+						<optgroup label="{{ category }}">
+						{% for forum in category.forums.all %}
+							{% if forum != exclude_forum %}
+								<option value="{{ forum.id }}">{{ forum.name }}</option>
+							{% endif %}
+						{% endfor %}
+						</optgroup>
+					{% endfor %}
+				</select>
+			</div>
+			<input type="submit" class="btn waves-effect waves-lighten" value="{% trans "Move" %}" />
+			 &nbsp;&nbsp;<a class="btn-flat" href="javascript:history.go(-1);">{% trans "Go back" %}</a>
+		</form>
+	</div>
+{% endblock %}

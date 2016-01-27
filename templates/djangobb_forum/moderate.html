@@ -1,0 +1,95 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-moderate{% endblock %}
+{% block meta_title %}{% trans 'Moderate' %} | {{ forum.name|truncatechars:12 }} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-4">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a>
+            <a href="{% url 'djangobb:moderate' forum.id %}">{% trans 'Moderate Forum' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="content-container no-padding">
+            <ul class="forum-header">
+                <li>
+                    <dl>
+                        <dt class="forum-title"><i class="fa fa-fw fa-file-text"></i>{% trans "Topics" %}</dt>
+                        <dd class="forum-topics">{% trans "Replies" %}</dd>
+                        <dd class="forum-posts">{% trans "Views" %}</dd>
+                        <dd class="forum-latest">{% trans "Select" %}</dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="forum-list">
+                {% for topic in topics_page %}
+                    <li>
+                        <dl class="forum-icon {% if topic|has_unreads:user %}inew {% endif %}{% if topic.closed %}topic-closed{% else %}{% if topic.sticky %}topic-sticky{% endif %}{% endif %}">
+                            <dt class="forum-title">
+                                {% link topic %}<br />
+                                {% trans 'Started' %} <time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>
+                            </dt>
+                            <dd class="forum-topics">{{ topic.reply_count }}</dd>
+                            <dd class="forum-posts">{{ topic.views }}</dd>
+                            <dd class="forum-latest">
+                                {% spaceless %}
+                                <p class="left no-mar">
+                                    <input type="checkbox" name="topic_id" value="{{ topic.id }}" id="topic_id_{{ topic.id }}" />
+                                    <label for="topic_id_{{ topic.id }}">&nbsp;</label>
+                                </p>
+                                {% endspaceless %}
+                            </dd>
+                        </dl>
+                    </li>
+                {% empty %}
+                    <p class="center-align pad-bottom">
+                        {% trans "Forum is empty." %} 
+                    </p>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <p class="center-align pad-bottom">
+            <button type="submit" class="btn" name="move_topics">{% trans "Move" %}</button>&nbsp;&nbsp;
+            <button type="submit" onClick="return confirm('{% trans "Are you sure you want to delete these topics?" %}');" class="btn" name="delete_topics">{% trans "Delete" %}</button>&nbsp;&nbsp;
+            <button type="submit" class="btn" name="open_topics">{% trans "Open" %}</button>&nbsp;&nbsp;
+            <button type="submit" class="btn" name="close_topics">{% trans "Close" %}</button>
+        </p>
+    </form>
+
+    {% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}
+
+{% endblock %}
+
+
+{% comment %}
+
+<form method="post">
+{% csrf_token %}
+
+<div class="linksb">
+	<div class="inbox">
+        <div class="pagelink conl">{% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}</div>
+		<p class="conr">
+			<input type="submit" name="move_topics" value="{% trans "Move" %}" />&nbsp;&nbsp;
+			<input type="submit" name="delete_topics" value="{% trans "Delete" %}" />&nbsp;&nbsp;
+			<input type="submit" name="open_topics" value="{% trans "Open" %}" />&nbsp;&nbsp;
+			<input type="submit" name="close_topics" value="{% trans "Close" %}" />
+		</p>
+		<div class="clearer"></div>
+	</div>
+</div>
+</form>
+{% endcomment %}
+
+{% block controls %}
+{% endblock %}

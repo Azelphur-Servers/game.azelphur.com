@@ -1,0 +1,60 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-moderate{% endblock %}
+{% block meta_title %}{% trans 'Delete Posts' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-5">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="#delete">{% trans 'Delete Posts' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+{% csrf_token %}
+{% for post in posts_page %}
+<div id="p{{ post.id }}" class="blockpost roweven firstpost">
+	<a name="post-{{ post.id }}"></a>
+	<h2><span><span class="conr">#{{ forloop.counter }}&nbsp;</span><a href="{{ post.get_absolute_url }}">{% forum_time post.created %}</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postleft">
+				<dl>
+					<dt><strong><a href="{% url 'djangobb:forum_profile' post.user.username %}">{{ post.user.username }}</a></strong></dt>
+					<dd class="usertitle"><strong>{{ post.user.forum_profile.status }}</strong></dd>
+				</dl>
+			</div>
+			<div class="postright">
+				<h3>{{ post.topic.name }}</h3>
+				<div class="postmsg">
+					{{ post.body_html|safe }}
+			{% if post.updated %}
+				<p class="postedit"><em>{% trans "Edited" %} {{ post.user.username }} ({% forum_time post.updated %})</em></p>
+			{% endif %}
+				</div>
+				{% if not forloop.first %}
+				<p class="multidelete"><label><strong>{% trans "Select" %}</strong>&nbsp;&nbsp;<input type="checkbox" name="post" value="{{ post.id }}" /></label></p>
+				{% endif %}
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+<div class="postlinksb">
+	<div class="inbox">
+        <div class="pagelink conl">{% include 'djangobb_forum/paginator.html' with page=posts_page request=request only %}</div>
+		<p class="conr"><input type="submit" value="{% trans "Delete" %}" /></p>
+		<div class="clearer"></div>
+	</div>
+</div>
+</form>
+{% endblock %}

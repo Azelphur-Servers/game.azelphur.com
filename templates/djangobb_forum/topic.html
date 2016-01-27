@@ -28,7 +28,6 @@
         {% endif %}
     </div>
 
-
 	{% if poll %}
 		<div id="poll">
 		    <h2><span>{% trans "Poll" %}</span></h2>
@@ -69,13 +68,13 @@
 						{% else %}
 							{% if forum_settings.GRAVATAR_SUPPORT %}
 								<dt class="forum-user-avatar">
-									<a href="{% url 'djangobb:forum_profile' post.user.username %}" class="username">
+									<a href="{% url 'djangobb:forum_profile' post.user.username %}">
 										<img src="{% gravatar post.user.email %}" alt="User Avatar" />
 									</a>
 								</dt>
 							{% endif %}
 						{% endif %}
-	                	<dt class="forum-user-link"><a href="{% url 'djangobb:forum_profile' post.user.username %}" class="username">{{ post.user.username }}</a></dt>
+	                	<dt class="forum-user-link"><a href="{% url 'djangobb:forum_profile' post.user.username %}" class="forum-username">{{ post.user.username }}</a></dt>
 						{% if post.user.forum_profile.status %}
 							<dd class="forum-user-text">{{ post.user.forum_profile.status }}</dd>
 						{% else %}

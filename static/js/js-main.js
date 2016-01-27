@@ -2,7 +2,7 @@
 // Forum replies
 function copy_paste_custom(post_id) {   
     var post_div = $(".forum-post#"+post_id);
-    var nick = post_div.find(".username").text();
+    var nick = post_div.find(".forum-username").text();
     
     var txt = get_selection(); // quote selection
     if (txt == '') {

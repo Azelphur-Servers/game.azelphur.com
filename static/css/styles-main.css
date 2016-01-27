@@ -105,7 +105,7 @@ p.no-padding-bottom {
 }
 
 .no-mar {
-    margin: 0px;
+    margin: 0px !important;
 }
 
 .text-highlight {
@@ -733,11 +733,22 @@ ul.pagination li.active {
     padding: 0px;
     margin: 0px;
 }
+
 #content-main.forum ul.forum-list > li > dl.forum-icon {
-    background-image: url('../img/forum_read.svg');
+    background-image: url('../img/forum/icon-default.png');
     background-repeat: no-repeat;
     background-position: 10px 50%;
 }
+#content-main.forum ul.forum-list > li > dl.forum-icon.topic-sticky {
+    background-image: url('../img/forum/icon-pinned.png');
+}
+#content-main.forum ul.forum-list > li > dl.forum-icon.topic-closed {
+    background-image: url('../img/forum/icon-closed.png');
+}
+#content-main.forum ul.forum-list > li > dl.forum-icon.topic-new {
+    background-image: url('../img/forum/icon-new.png');
+}
+
 #content-main.forum ul.forum-list > li > dl > dt,
 #content-main.forum ul.forum-list > li > dl > dd,
 #content-main.forum ul.forum-header > li > dl > dt,

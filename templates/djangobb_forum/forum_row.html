@@ -7,7 +7,7 @@
 {% else %}
 	<li>
 {% endif %}
-    <dl class="forum-icon{% if forum|forum_unreads:user %} inew{% endif %}"{% if forum.forum_logo %} style="background-image:url('{{ forum.forum_logo.url }}');"{% endif %}>
+    <dl class="forum-icon{% if forum|forum_unreads:user %} topic-new{% endif %}"{% if forum.forum_logo %} style="background-image:url('{{ forum.forum_logo.url }}') !important;"{% endif %}>
         <dt class="forum-title">
             {% link forum %}<br />
             {{ forum.description|safe }}
