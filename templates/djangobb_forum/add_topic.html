@@ -1,0 +1,21 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-add-topic{% endblock %}
+{% block meta_title %}{% trans 'New Topic' %} | {{ forum.name|truncatechars:12 }} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-4">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a>
+            <a href="{% url 'djangobb:add_topic' forum.id %}">{% trans 'New Topic' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% include "djangobb_forum/includes/post_form.html" %}
+{% endblock %}

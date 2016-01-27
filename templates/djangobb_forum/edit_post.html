@@ -1,0 +1,38 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-edit{% endblock %}
+{% block meta_title %}{% trans 'Edit Post' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-5">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum.name }}</a>
+            <a href="{{ post.topic.get_absolute_url }}">{{ post.topic.name }}</a>
+            <a href="{% url 'djangobb:edit_post' post.id %}">{% trans 'Edit Post' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+	<div class="content-container forum-reply-box">
+		<h3>{% trans "Edit post" %}</h3>
+		<form action="{% url 'djangobb:edit_post' post.id %}" method="post" enctype="multipart/form-data" class="mar-top">
+			{% csrf_token %}
+			<div class="input-field">
+				{% if post.id == post.topic.head.id %}
+					{{ form.name }}
+					<label for="id_name">{% trans "Subject" %}</label>
+				{% endif %}
+			</div>
+			<div class="input-field">
+				{{ form.body }}
+			</div>
+	        <input type="submit" class="btn waves-effect waves-lighten" value="{% trans "Submit" %}" />
+			 &nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default_if_none:"javascript:history.go(-1)" }}">{% trans "Go back" %}</a>
+		</form>
+	</div>
+{% endblock %}

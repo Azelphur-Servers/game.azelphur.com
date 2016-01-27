@@ -1,0 +1,36 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-report{% endblock %}
+{% block meta_title %}{% trans 'Report Post' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-5">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="#report">{% trans 'Report Post' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+	<div class="content-container forum-reply-box">
+		<h3>{% trans "Report post" %}</h3>
+		<form id="report" method="post">
+			{% csrf_token %}
+			<p>{% trans "Please enter a short reason why you are reporting this post" %}</p>
+			<div class="input-field">
+				{{ form.post }}
+				{{ form.reason }}
+				<label for="id_reason">{% trans "Reason" %}</label>
+			</div>
+			<input type="submit" class="btn waves-effect waves-lighten" value="{% trans "Submit" %}" />
+			 &nbsp;&nbsp;<a class="btn-flat" href="javascript:history.go(-1);">{% trans "Go back" %}</a>
+		</form>
+	</div>
+{% endblock %}
+
+{% block controls %}
+{% endblock %}

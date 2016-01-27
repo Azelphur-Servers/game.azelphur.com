@@ -94,4 +94,6 @@ $(document).ready(function(){
     $('textarea:not(.markup)').addClass('materialize-textarea');
 
     $('.field-add-required').find('input, textarea').attr('required', 'required'); 
+
+    $('select').material_select();
 });

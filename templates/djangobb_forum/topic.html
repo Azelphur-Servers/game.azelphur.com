@@ -122,8 +122,10 @@
 						{% endif %}
 					{% endif %}
                     <div class="forum-post-action">
-                         <a href="{% url 'djangobb:misc' %}?action=report&amp;post_id={{ post.id }}" class="btn-flat forum-btn-report"><i class="fa fa-fw fa-sm fa-exclamation"></i><span class="hide-on-small-only">&nbsp;{% trans "Report" %}</span></a>
-                    	{% if moderator or post.user|forum_equal_to:user %}
+                        {% if not post.user|forum_equal_to:user %}
+                            <a href="{% url 'djangobb:misc' %}?action=report&amp;post_id={{ post.id }}" class="btn-flat forum-btn-report"><i class="fa fa-fw fa-sm fa-exclamation"></i><span class="hide-on-small-only">&nbsp;{% trans "Report" %}</span></a>
+                    	{% endif %}
+                        {% if moderator or post.user|forum_equal_to:user %}
                         	<a href="{% url 'djangobb:edit_post' post.id %}" class="btn-flat forum-btn-edit"><i class="fa fa-fw fa-sm fa-pencil"></i><span class="hide-on-small-only">&nbsp;{% trans "Edit" %}</span></a>
                         	<a onclick="return confirm('{% trans "Are you sure you want to delete this post?" %}')" href="{% url 'djangobb:delete_post' post.id %}" class="btn-flat forum-btn-edit"><i class="fa fa-fw fa-sm fa-trash"></i><span class="hide-on-small-only">&nbsp;{% trans "Delete" %}</span></a>
                     	{% endif %}
@@ -224,23 +226,8 @@
 {% endcomment %}
 
 {% block controls %}
-<div class="conl">
-	<form id="qjump" method="get" action="forum">
-		<div><label>{% trans "Jump to " %}
-		<br />
-		<select name="id" id="forum_id" onchange="window.location=('{% url 'djangobb:index' %}'+this.options[this.selectedIndex].value)">
-			{% for category in categories %}
-				<optgroup label="{{ category }}">
-					{% for forum in category.forums.all %}
-						<option value="{{ forum.id }}">{{ forum }}</option>
-					{% endfor %}
-				</optgroup>
-			{% endfor %}
-		</select>
-		<input type="button" onclick="window.location=('{% url 'djangobb:index' %}'+getElementById('forum_id').value)" value=" {% trans "Go" %} " accesskey="g" />
-		</label></div>
-	</form>
-	<dl id="modcontrols"><dt><strong>{% trans "Moderator control" %}</strong></dt>
+	<dl id="modcontrols">
+        <dt><strong>{% trans "Moderator control" %}</strong></dt>
 	{% if moderator %}
 		<dd><a href="{% url 'djangobb:delete_posts' topic.id %}">{% trans "Delete multiple posts" %}</a></dd>
 		<dd><a href="{% url 'djangobb:move_topic' %}?topic_id={{ topic.id }}">{% trans "Move topic" %}</a></dd>
@@ -256,13 +243,4 @@
 		{% endif %}
 	{% endif %}
     </dl>
-</div>
-{% endblock %}
-
-{% block lofi %}
-{% if forum_settings.LOFI_SUPPORT %}
-    <p class="lofi">
-        <a href="{{ topic.get_absolute_url }}lofi/">Lo-Fi Version</a>
-    </p>
-{% endif %}
 {% endblock %}
