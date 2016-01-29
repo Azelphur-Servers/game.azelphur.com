@@ -27,12 +27,19 @@ a {
     cursor: pointer;
     transition: color 0.5s ease;
 }
+
 .btn-flat {
     color: #fb8d31;
+    margin-bottom: 7px;
 }
 .btn {
     background-color: #fb8523 !important;
     margin-bottom: 7px;
+}
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+    color: #fb8d31;
 }
 
 a:hover {
@@ -196,16 +203,20 @@ small {
 }
 
 /* Forms */
-.input-field input[type=text]:focus + label,
-.input-field input[type=email]:focus + label,
-.input-field input[type=url]:focus + label,
-.input-field textarea:focus + label {
+input[type="text"]:focus + label,
+input[type="email"]:focus + label,
+input[type="url"]:focus + label,
+input[type="password"]:focus + label,
+input[type="number"]:focus + label,
+textarea.materialize-textarea:focus + label {
     color: #fb8d31 !important;
 }
-.input-field input[type=text]:focus,
-.input-field input[type=email]:focus,
-.input-field input[type=url]:focus,
-.input-field textarea:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea.materialize-textarea:focus {
     border-bottom: 1px solid #fb8d31 !important;
     box-shadow: 0 1px 0 0 #fb8d31 !important;
 }
@@ -217,6 +228,14 @@ input[type="checkbox"] + label {
 input[type="checkbox"]:checked + label::before {
     border-right-color: #fb8d31 !important;
     border-bottom-color: #fb8d31 !important;
+}
+
+.with-gap[type="radio"]:checked + label::before {
+    border-color: #fb8d31;
+}
+.with-gap[type="radio"]:checked + label::after {
+    border-color: #fb8d31;
+    background-color: #fb8d31;
 }
 
 form.editable-form {
