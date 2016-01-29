@@ -1,0 +1,43 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n static %}
+
+{% block body_id %}profile edit-avatar{% endblock %}
+{% block meta_title %}{% trans 'Avatar Settings' %}{% endblock %}
+
+{% block content %}
+	<div class="content-container">
+		<h3>{% trans "Avatar" %}</h3>
+		<form id="upload_avatar" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{% blocktrans %}An avatar is a small image that will be displayed under your username in your posts. It must not be any bigger than {{ avatar_width }} x {{ avatar_height }} pixels {% endblocktrans %}</p>
+			{% if user.forum_profile.avatar %}
+				<div class="row">
+					<div class="col s12 input-field">
+						<h5>{% trans "Current Avatar" %}</h5>
+						<img src="{% get_media_prefix %}{{ user.forum_profile.avatar }}" alt="User Avatar" class="left pad-right" />
+						<p>
+							<input id="avatar-clear_id" name="avatar-clear" type="checkbox" />
+							<label for="avatar-clear_id">{% trans "Delete current avatar" %}</label>
+						</p>
+					</div>
+				</div>
+			{% endif %}
+			<div class="row">
+				<div class="col s12">
+					<h5>{% if user.forum_profile.avatar %}{% trans "Change Avatar" %}{% else %}{% trans "Upload Avatar" %}{% endif %}</h5>
+					{{ form.avatar.errors }}
+
+					<input id="id_avatar" name="avatar" type="file">
+				</div>
+			</div>
+
+
+			<button name="upload" type="submit" class="btn">{% trans "Save" %}</button>
+			&nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default:"javascript:history.go(-1);" }}">{% trans "Go back" %}</a>
+		</form>
+	</div>
+{% endblock %}
+
+{% block controls %}{% endblock %}
+{% block board_footer %}{% endblock %}

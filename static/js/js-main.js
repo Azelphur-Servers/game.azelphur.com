@@ -84,16 +84,13 @@ $(document).ready(function(){
         if(!wasVisible)
             $(this).siblings('.comment-reply-form').show();
     });
-
-    // Forum Poll
-    $('.forum-poll-auto .infldset').hide();
-    $('.forum-poll-auto').click(function() {
-        $('.poll .infldset').slideDown();
-    });
        
+    // Add material class to textareas
     $('textarea:not(.markup)').addClass('materialize-textarea');
 
+    // Add 'requried' attribtue to form elements
     $('.field-add-required').find('input, textarea').attr('required', 'required'); 
 
+    // Init material select's
     $('select').material_select();
 });

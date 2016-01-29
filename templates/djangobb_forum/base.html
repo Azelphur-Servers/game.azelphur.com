@@ -70,48 +70,49 @@
 	{% block content %}{% endblock %}
 	{% block post_content %}{% endblock %}
 
-	{# Controls #}
-    <div class="content-container no-padding">
-        <ul class="forum-header">
-            <li>
-                <dl>
-                    <dt class="forum-stats-title"><i class="fa fa-fw fa-info"></i>{% trans "Board footer" %}</dt>
-                </dl>
-            </li>
-        </ul>
-        <div class="row row-no-marg">
-            <div class="col s12 m12 l4">
-                <dl id="searchlinks" class="conl">
-                    <dt><h6>{% trans "Search links" %}</h6></dt>
-                    <dd><a href="{% url 'djangobb:search' %}?action=show_24h">{% trans "Show recent posts" %}</a></dd>
-                    <dd><a href="{% url 'djangobb:search' %}?action=show_unanswered">{% trans "Show unanswered posts" %}</a></dd>
-                    {% if user.is_authenticated %}
-                        <dd><a href="{% url 'djangobb:search' %}?action=show_subscriptions">{% trans "Show your subscribed topics" %}</a></dd>
-                        <dd>{% trans "Show your" %} <a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=topics">{% trans "topics" %}</a>&nbsp;/&nbsp;<a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=posts">{% trans "posts" %}</a></dd>
-                    {% endif %}
-                </dl>
-            </div>
-            <div class="col s12 m12 l3">
-                {% block controls %}{% endblock %}
-            </div>
-            <div class="col s12 m12 l5">
-                {% block jumpto_select %}
-                <form method="GET" class="forum-jumpto-select" action="{% url 'djangobb:index' %}">
-                    <div class="input-field">
-                        <select id="forum_id" onchange="window.location=('{% url 'djangobb:index' %}'+this.options[this.selectedIndex].value)">
-                            <option value="" disabled selected>{% trans 'Jump to' %}</option>
-                            {% for category in categories %}
-                                <optgroup label="{{ category }}">
-                                    {% for forum in category.forums.all %}
-                                        <option value="{{ forum.id }}">{{ forum }}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </form>
-                {% endblock %}
+    {% block board_footer %}
+        <div class="content-container no-padding">
+            <ul class="forum-header">
+                <li>
+                    <dl>
+                        <dt class="forum-stats-title"><i class="fa fa-fw fa-info"></i>{% trans "Board footer" %}</dt>
+                    </dl>
+                </li>
+            </ul>
+            <div class="row row-no-marg">
+                <div class="col s12 m12 l4">
+                    <dl id="searchlinks" class="conl">
+                        <dt><h6>{% trans "Search links" %}</h6></dt>
+                        <dd><a href="{% url 'djangobb:search' %}?action=show_24h">{% trans "Show recent posts" %}</a></dd>
+                        <dd><a href="{% url 'djangobb:search' %}?action=show_unanswered">{% trans "Show unanswered posts" %}</a></dd>
+                        {% if user.is_authenticated %}
+                            <dd><a href="{% url 'djangobb:search' %}?action=show_subscriptions">{% trans "Show your subscribed topics" %}</a></dd>
+                            <dd>{% trans "Show your" %} <a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=topics">{% trans "topics" %}</a>&nbsp;/&nbsp;<a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=posts">{% trans "posts" %}</a></dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="col s12 m12 l3">
+                    {% block controls %}{% endblock %}
+                </div>
+                <div class="col s12 m12 l5">
+                    {% block jumpto_select %}
+                    <form method="GET" class="forum-jumpto-select" action="{% url 'djangobb:index' %}">
+                        <div class="input-field">
+                            <select id="forum_id" onchange="window.location=('{% url 'djangobb:index' %}'+this.options[this.selectedIndex].value)">
+                                <option value="" disabled selected>{% trans 'Jump to' %}</option>
+                                {% for category in categories %}
+                                    <optgroup label="{{ category }}">
+                                        {% for forum in category.forums.all %}
+                                            <option value="{{ forum.id }}">{{ forum }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                    {% endblock %}
+                </div>
             </div>
         </div>
-    </div>
+    {% endblock board_footer %}
 {% endblock %}

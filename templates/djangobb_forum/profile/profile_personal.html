@@ -1,0 +1,51 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}profile{% endblock %}
+{% block meta_title %}{{ profile.username|safe|truncatechars:20 }} | {% trans 'User' %}{% endblock %}
+
+{% block content %}
+	{% include 'djangobb_forum/profile/profile_menu.html' %}
+	<div class="content-container">
+		<h3>{% trans "Personal Settings" %}</h3>
+		<form id="profile2" method="post">
+			{% csrf_token %}
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.name.errors }}
+					{{ form.name }}
+					<label for="id_name">{{ form.name.label }}</label>
+				</div>
+			</div>
+			{% if user.is_superuser %}
+				<div class="row no-mar-bottom">
+					<div class="col s12 input-field">
+						{{ form.status.errors }}
+						{{ form.status }}
+						<label for="id_status">{{ form.status.label }}</label>
+					</div>
+				</div>
+			{% endif %}
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.location.errors }}
+					{{ form.location }}
+					<label for="id_location">{{ form.location.label }}</label>
+				</div>
+			</div>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.site.errors }}
+					{{ form.site }}
+					<label for="id_location">{{ form.site.label }}</label>
+				</div>
+			</div>
+			<button name="update" type="submit" class="btn">{% trans "Save" %}</button>
+			<div class="grey-text">{% trans "When you update your profile, you will be redirected back to this page." %}</div>
+		</form>
+	</div>
+{% endblock %}
+
+{% block controls %}{% endblock %}
+{% block board_footer %}{% endblock %}

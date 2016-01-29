@@ -51,7 +51,7 @@
     	                {% blocktrans with count=poll.choice_count %}({{ count }} answers allows.){% endblocktrans %}
     	            </p>
     	            {% endif %}
-    	            <p><button type="submit" class="btn">{% trans "Vote" %}</button></p>
+    	            <p><button type="submit" name="{{ poll_form.FORM_NAME }}" class="btn">{% trans "Vote" %}</button></p>
 	            </form>
 	        {% else %}
 	            <ul>
