@@ -1,48 +1,37 @@
 {% load i18n %}
 
 <div class="content-container forum-reply-box" id="reply">
-    <h3>{% if forum %}{% trans "Create a new topic" %}{% else %}{% trans "Post a new reply" %}{% endif %}</h3>
+    <h3>{% if forum %}{% trans "Posting a New Topic" %}{% else %}{% trans "Reply to this topic" %}{% endif %}</h3>
     <form id="post" action="{{ form_url|default_if_none:"." }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% if create_poll_form %}
-            <div class="poll forum-poll-auto">
-                <fieldset>
-                    <legend>{% trans "Create a poll" %}</legend>
-                    <div class="infldset">
-                        <div class="rbox">
-                            {{ create_poll_form }}
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-        {% endif %}
-
         {% if forum %}
             <div class="input-field">
                 {{ form.name }}
-                <label for="id_name">{% trans 'Subject' %}</label>
+                <label for="id_name">{% trans 'Topic Title' %}</label>
             </div>
         {% endif %}
         <div class="input-field">
             {{ form.body }}
         </div>
+        {% if create_poll_form %}
+            <ul class="collapsible z-depth-0" data-collapsible="expandable">
+                <li>
+                  <div class="collapsible-header"><i class="fa fa-pie-chart"></i>{% trans "Create a poll" %}</div>
+                  <div class="collapsible-body"><p>{{ create_poll_form }}</p></div>
+                </li>
+            </ul>
+        {% endif %}
         {% if forum_settings.ATTACHMENT_SUPPORT %}
-            <div class="mar-bottom">
-                <fieldset>
-                    <legend>{% trans "Attachment" %}</legend>
+            <ul class="collapsible z-depth-0" data-collapsible="expandable">
+                <li>
+                  <div class="collapsible-header"><i class="fa fa-paperclip"></i>{% trans "Add an attachment" %}</div>
+                  <div class="collapsible-body">
                     {{ form.attachment.errors }}
-                    <!--<div class="file-field input-field">
-                        <div class="btn">
-                            <span>Browse</span>
-                            <input type="file" id="id_attachment" name="attachment">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
-                    </div>-->
-                    {{ form.attachment }}
-                </fieldset>
-            </div>
+                    <p>{{ form.attachment }}</p>
+                  </div>
+                </li>
+            </ul>
+
         {% endif %}
         <div class="forum-sub-checkbox">
             <input type="checkbox" id="id_subscribe" name="subscribe" />
