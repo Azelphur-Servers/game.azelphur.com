@@ -52,7 +52,7 @@ $(document).ready(function(){
     // Hash/Internal Links
     $('a[href*=#]:not([href=#])').on('click', function(e) {
         var findElem = $(this).attr('href');
-        if($('body').find(findElem).length) {
+        if($root.find(findElem).length) {
             e.preventDefault();
             if(window.history)
                 history.replaceState({}, '', this.href);

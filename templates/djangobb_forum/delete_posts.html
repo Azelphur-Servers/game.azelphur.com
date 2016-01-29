@@ -2,7 +2,7 @@
 {% load forum_extras %}
 {% load i18n %}
 
-{% block body_id %}forum forum-moderate{% endblock %}
+{% block body_id %}forum forum-posts forum-moderate{% endblock %}
 {% block meta_title %}{% trans 'Delete Posts' %} | {% trans 'Forums' %}{% endblock %}
 
 {% block breadcrumb_menu %}
@@ -16,44 +16,90 @@
 {% endblock %}
 
 {% block content %}
+	<div class="forum-head">
+        <h3 class="forum-head-title">{% trans 'Delete multiple posts' %}</h3>
+    </div>
 	<form method="post">
-	{% csrf_token %}
-	{% for post in posts_page %}
-	<div id="p{{ post.id }}" class="blockpost roweven firstpost">
-		<a name="post-{{ post.id }}"></a>
-		<h2><span><span class="conr">#{{ forloop.counter }}&nbsp;</span><a href="{{ post.get_absolute_url }}">{% forum_time post.created %}</a></span></h2>
-		<div class="box">
-			<div class="inbox">
-				<div class="postleft">
-					<dl>
-						<dt><strong><a href="{% url 'djangobb:forum_profile' post.user.username %}">{{ post.user.username }}</a></strong></dt>
-						<dd class="usertitle"><strong>{{ post.user.forum_profile.status }}</strong></dd>
-					</dl>
-				</div>
-				<div class="postright">
-					<h3>{{ post.topic.name }}</h3>
-					<div class="postmsg">
-						{{ post.body_html|safe }}
-				{% if post.updated %}
-					<p class="postedit"><em>{% trans "Edited" %} {{ post.user.username }} ({% forum_time post.updated %})</em></p>
-				{% endif %}
-					</div>
-					{% if not forloop.first %}
-					<p class="multidelete"><label><strong>{% trans "Select" %}</strong>&nbsp;&nbsp;<input type="checkbox" name="post" value="{{ post.id }}" /></label></p>
-					{% endif %}
-				</div>
-				<div class="clearer"></div>
-			</div>
-		</div>
-	</div>
-	{% endfor %}
+		{% csrf_token %}
+		{% for post in posts_page %}
+	        <div class="content-container forum-post no-padding" id="post-{{ post.id }}">
+	            <div class="row row-no-marg">
+	                <div class="col s12 m3 l2 forum-user">
+	                	<dl>
+							{% if post.user.forum_profile.avatar and post.user.forum_profile.show_avatar %}
+								<dt class="forum-user-avatar"><img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" /></dt>
+							{% else %}
+								{% if forum_settings.GRAVATAR_SUPPORT %}
+									<dt class="forum-user-avatar">
+										<a href="{% url 'djangobb:forum_profile' post.user.username %}">
+											<img src="{% gravatar post.user.email %}" alt="User Avatar" />
+										</a>
+									</dt>
+								{% endif %}
+							{% endif %}
+		                	<dt class="forum-user-link"><a href="{% url 'djangobb:forum_profile' post.user.username %}" class="forum-username">{{ post.user.username }}</a></dt>
+							{% if post.user.forum_profile.status %}
+								<dd class="forum-user-text">{{ post.user.forum_profile.status }}</dd>
+							{% else %}
+								<dd class="forum-user-text">{{ post.user.forum_profile.group }}</dd>
+							{% endif %}
+							{% if forum_settings.AUTHORITY_SUPPORT %}
+								<dd class="forum-user-authority">{{ post.user|forum_authority }}</dd>
+							{% endif %}
+							{% if forum_settings.REPUTATION_SUPPORT %}
+									<dd class="forum-user-rep"><a href="{% url 'djangobb:reputation' post.user.username %}">{% trans "Rep" %}</a>:
+									{% if user != post.user %}
+										<a href="{% url 'djangobb:reputation' post.user.username %}?action=plus&amp;post_id={{ post.id }}" class="rep-add"><i class="fa fa-fw fa-plus-square"></i></a>
+										{{ post.user.forum_profile.reply_total|default_if_none:"0" }}
+										<a href="{% url 'djangobb:reputation' post.user.username %}?action=minus&amp;post_id={{ post.id }}" class="rep-minus"><i class="fa fa-fw fa-minus-square"></i></a>
+									{% else %}
+										{{ post.user.forum_profile.reply_total|default_if_none:"0" }}
+									{% endif %}
+									</dd>
+							{% endif %}
+		                    <dd class="forum-user-posts"><span>{{ post.user.forum_profile.post_count }} {% trans "posts" %}</span></dd>
+							{% if post.user.forum_profile.location %}
+								<dd class="forum-user-location">{% trans "Location:" %} <span>{{ post.user.forum_profile.location }}</span></dd>
+							{% endif %}
+							{% if post.user|online %}
+		                    	<dd class="forum-user-status online">{% trans "Online" %}</dd>
+		                	{% else %}
+		                    	<dd class="forum-user-status offline">{% trans "Offline" %}</dd>
+		                    {% endif %}
+		                </dl>
+	                </div>
+	                <div class="col s12 m9 l10 forum-post-container">
+	                    <div class="forum-post-date"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ post.created|date:'c' }}">{% forum_time post.created %}</time></div>
+	                    <div class="forum-post-body restyle-lists">
+	                        {{ post.body_html|safe }}
+	                    </div>
+						{% if post.updated %}
+							<div class="forum-post-edited">{% trans "Edited by" %} {{ post.updated_by.username }} - <span class="capitalize">{% forum_time post.updated %}</span></div>
+						{% endif %}                    
+						{% if not user.is_authenticated or user.forum_profile.show_signatures %}
+							{% if post.user.forum_profile.signature_html %}
+								<div class="forum-post-signature restyle-lists">
+									{{ post.user.forum_profile.signature_html|safe }}
+								</div>
+							{% endif %}
+						{% endif %}
+	                    <div class="forum-post-action">
+	                        <p class="">
+	                        	<input type="checkbox" name="post" value="{{ post.id }}" id="checkbox_post_{{ post.id }}" />
+	                        	<label for="checkbox_post_{{ post.id }}">{% trans 'Select this post' %}</label>
+	                        </p>
+	                    </div>
+	                    <a href="#post-{{ post.id }}" class="forum-post-link">#{{ forloop.counter }}</a>
+	                </div>
+	            </div>
+	        </div>
+		{% endfor %}
 
-	<div class="postlinksb">
-		<div class="inbox">
-	        <div class="pagelink conl">{% include 'djangobb_forum/paginator.html' with page=posts_page request=request only %}</div>
-			<p class="conr"><input type="submit" value="{% trans "Delete" %}" /></p>
-			<div class="clearer"></div>
-		</div>
-	</div>
+		{% include 'djangobb_forum/paginator.html' with page=posts_page request=request only %}
+		
+		<p class="pad-bottom">
+			<button onClick="return confirm('{% trans "Are you sure you want to delete the selected post(s)?" %}');" type="submit" class="btn red"><i class="fa fa-fw fa-sm fa-trash"></i>&nbsp;{% trans "Delete Selected" %}</button>
+			&nbsp;&nbsp;<a class="btn-flat" href="javascript:history.go(-1);">{% trans "Go back" %}</a>
+		</p>
 	</form>
 {% endblock %}

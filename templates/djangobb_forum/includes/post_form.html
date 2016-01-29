@@ -48,10 +48,10 @@
             <input type="checkbox" id="id_subscribe" name="subscribe" />
             <label for="id_subscribe">{% trans "Subscribe this topic" %}</label>
         </div>
-        <input type="submit" name="{{ form.FORM_NAME }}" class="btn waves-effect waves-lighten" value="{% trans "Submit" %}" />
+        <button type="submit" class="btn waves-effect waves-lighten" name="{{ form.FORM_NAME }}">{% trans "Submit" %}</button>
 
         {% if forum %}
-            &nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default_if_none:"javascript:history.go(-1)" }}">{% trans "Go back" %}</a>
+            &nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default:"javascript:history.go(-1)" }}">{% trans "Go back" %}</a>
         {% endif %}
     </form>
 </div>
