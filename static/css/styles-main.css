@@ -32,6 +32,7 @@ a {
 }
 .btn {
     background-color: #fb8523 !important;
+    margin-bottom: 7px;
 }
 
 a:hover {
@@ -129,6 +130,20 @@ h4 {
     margin: 0px 0px 10px 0px;
     font-size: 19px;
     font-weight: 400;
+}
+h5 {
+    color: #000;
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.content-container > h3:first-child,
+.content-container > h4:first-child,
+.content-container > h5:first-child,
+.content-container > h6:first-child {
+    margin-top: 0px;
 }
 
 dl > dd {
@@ -1008,6 +1023,13 @@ ul.pagination li.active {
     content: '\f08e';
     color: #858585;
     margin-right: 5px;
+}
+
+/* Forum - Moderate */
+.forum.forum-moderate .moderate-checkbox {
+    position: absolute;
+    left: 15px;
+    margin: 0px;
 }
 
 /* Forum - Posts - Actions */

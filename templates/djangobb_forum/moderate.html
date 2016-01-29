@@ -26,27 +26,29 @@
                         <dt class="forum-title"><i class="fa fa-fw fa-file-text"></i>{% trans "Topics" %}</dt>
                         <dd class="forum-topics">{% trans "Replies" %}</dd>
                         <dd class="forum-posts">{% trans "Views" %}</dd>
-                        <dd class="forum-latest">{% trans "Select" %}</dd>
+                        <dd class="forum-latest">{% trans "Latest" %}</dd>
                     </dl>
                 </li>
             </ul>
             <ul class="forum-list">
                 {% for topic in topics_page %}
                     <li>
-                        <dl class="forum-icon {% if topic|has_unreads:user %}inew {% endif %}{% if topic.closed %}topic-closed{% else %}{% if topic.sticky %}topic-sticky{% endif %}{% endif %}">
+                        <dl class="">
                             <dt class="forum-title">
+                                {% spaceless %}
+                                <p class="moderate-checkbox">
+                                    <input type="checkbox" name="topic_id" value="{{ topic.id }}" id="topic_id_{{ topic.id }}" />
+                                    <label for="topic_id_{{ topic.id }}">&nbsp;</label>
+                                </p>
+                                {% endspaceless %}
                                 {% link topic %}<br />
                                 {% trans 'Started' %} <time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>
                             </dt>
                             <dd class="forum-topics">{{ topic.reply_count }}</dd>
                             <dd class="forum-posts">{{ topic.views }}</dd>
                             <dd class="forum-latest">
-                                {% spaceless %}
-                                <p class="left no-mar">
-                                    <input type="checkbox" name="topic_id" value="{{ topic.id }}" id="topic_id_{{ topic.id }}" />
-                                    <label for="topic_id_{{ topic.id }}">&nbsp;</label>
-                                </p>
-                                {% endspaceless %}
+                                <time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time><br />
+                                {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
                             </dd>
                         </dl>
                     </li>

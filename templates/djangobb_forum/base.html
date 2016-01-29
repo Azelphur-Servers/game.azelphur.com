@@ -95,7 +95,8 @@
                 {% block controls %}{% endblock %}
             </div>
             <div class="col s12 m12 l5">
-                <form method="GET" action="{% url 'djangobb:index' %}">
+                {% block jumpto_select %}
+                <form method="GET" class="forum-jumpto-select" action="{% url 'djangobb:index' %}">
                     <div class="input-field">
                         <select id="forum_id" onchange="window.location=('{% url 'djangobb:index' %}'+this.options[this.selectedIndex].value)">
                             <option value="" disabled selected>{% trans 'Jump to' %}</option>
@@ -109,6 +110,7 @@
                         </select>
                     </div>
                 </form>
+                {% endblock %}
             </div>
         </div>
     </div>

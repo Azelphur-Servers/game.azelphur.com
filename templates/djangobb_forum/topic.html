@@ -29,32 +29,40 @@
     </div>
 
 	{% if poll %}
-		<div id="poll">
-		    <h2><span>{% trans "Poll" %}</span></h2>
-		    <div class="box">
-		        <div class="inbox"><p><strong>{{ poll.question }}</strong></p>
-		        {% if poll_form %}
-		            <form action="." method="post">{% csrf_token %}
-		            {{ poll_form }}
-		            {% if poll.choice_count > 1 %}
-		            <p>
-		                {% blocktrans with count=poll.choice_count %}({{ count }} answers allows.){% endblocktrans %}
-		            </p>
-		            {% endif %}
-		            <input type="submit" name="{{ poll_form.FORM_NAME }}" value="{% trans "Vote" %}" />
-		            </form>
-		        {% else %}
-		            <ul>
-		            {% for choice in poll.choices.all %}
-		                <li>
-		                    <div class="bar" style="width:{{ choice.percent|floatformat:0 }}%;" title="{{ choice.choice }}">&nbsp;</div>
-		                    {% blocktrans with percent=choice.percent|floatformat:1 choice_text=choice.choice count count=choice.votes %}{{ count }} vote ({{ percent }}%) for: {{ choice_text }}{% plural %}{{ count }} votes ({{ percent }}%) for: {{ choice_text }}{% endblocktrans %}
-		                </li>
-		            {% endfor %}
-		            </ul>
-		        {% endif %}
-		        </div>
-		    </div>
+		<div class="content-container forum-poll" id="poll">
+		    <h4><i class="fa fa-fw fa-pie-chart"></i>&nbsp;{% trans "Poll" %} - <small>{{ poll.question }}</small></h4>
+	        {% if poll_form %}
+	            <form action="." method="post">
+                    {% csrf_token %}
+                    <ul>
+                        {% for choice in poll.choices.all %}
+                            <li>
+                                <p>
+                                    <input type="{% if poll.choice_count > 1 %}checkbox{% else %}radio{% endif %}"
+                                     id="id_choice_{{ choice.id }}" name="choice" value="{{ choice.id }}"
+                                     {% if not poll.choice_count > 1 %}class="with-gap"{% endif %}  />
+                                    <label for="id_choice_{{ choice.id }}">{{ choice }}</label>
+                                </p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+    	            {% if poll.choice_count > 1 %}
+    	            <p>
+    	                {% blocktrans with count=poll.choice_count %}({{ count }} answers allows.){% endblocktrans %}
+    	            </p>
+    	            {% endif %}
+    	            <p><button type="submit" class="btn">{% trans "Vote" %}</button></p>
+	            </form>
+	        {% else %}
+	            <ul>
+	            {% for choice in poll.choices.all %}
+	                <li>
+	                    <div class="bar" style="width:{{ choice.percent|floatformat:0 }}%;" title="{{ choice.choice }}">&nbsp;</div>
+	                    {% blocktrans with percent=choice.percent|floatformat:1 choice_text=choice.choice count count=choice.votes %}{{ count }} vote ({{ percent }}%) for: {{ choice_text }}{% plural %}{{ count }} votes ({{ percent }}%) for: {{ choice_text }}{% endblocktrans %}
+	                </li>
+	            {% endfor %}
+	            </ul>
+	        {% endif %}
 		</div>
 	{% endif %}
 
