@@ -148,7 +148,7 @@
         </div>
 	{% endfor %}
 
-	{% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}
+	{% include 'djangobb_forum/paginator.html' with page=posts_page request=request only %}
 
 	{% if reply_form %}
 	    {% with form=reply_form %}
