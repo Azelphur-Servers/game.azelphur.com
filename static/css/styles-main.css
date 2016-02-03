@@ -280,6 +280,11 @@ input[type="checkbox"]:checked {
     visibility: visible;
 }*/
 
+/* Signup form fix */
+.account.signup .input_id_captcha label {
+    display: none;
+}
+
 /* Tooltips */
 #hoverTooltip {
     background-color: rgba(10,10,10,0.9);

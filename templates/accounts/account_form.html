@@ -5,24 +5,16 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body_id %}account{% endblock %}
 
-{% block breadcrumb_menu %}
-{{ block.super }}
-<li>{{ title }}</li>
-{% endblock %}
+{% block breadcrumb_menu %}{% endblock %}
 
 {% block main %}
-
-{% errors_for form %}
-
-<form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
-    <fieldset>
-    <legend>{{ title }}</legend>
-    {% fields_for form %}
-    <div class="form-actions">
-        {% block account_form_actions %}
-        <input class="btn btn-primary btn-lg pull-right" type="submit" value="{{ title }}">
-        {% endblock %}
-    </div>
-    </fieldset>
-</form>
+    {% errors_for form %}
+    <form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+        {% fields_for form %}
+        <div class="form-actions">
+            {% block account_form_actions %}
+                <div class="right-align"><button class="btn" type="submit">{{ title }}</button></div>
+            {% endblock %}
+        </div>
+    </form>
 {% endblock %}

@@ -6,13 +6,14 @@
 {% endnevercache %}
 
 {% for field in form_for_fields %}
+    {% spaceless %}
     {% if field.is_hidden %}
         {{ field }}
     {% else %}
         <div class="input-field input_{{ field.id_for_label }} {{ field.field.type }}{% if field.errors %} has-error{% endif %}{% if field.field.required %} field-add-required{% endif %}">
             {{ field }}
             {% if field.label %}
-                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.help_text %} <small>({{ field.help_text }}){% endif %}</small></label>
+                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.help_text %} <small>({{ field.help_text }})</small>{% endif %}</label>
             {% endif %}
             {% if field.errors %}
                 <p class="help-block">
@@ -21,8 +22,9 @@
                     {% endfor %}
                 </p>
             {% elif field.help_text %}
-                <!--<p class="help-block">{{ field.field.required }} {{ field.help_text }}</p>-->
+                {# <p class="help-block">{{ field.field.required }} {{ field.help_text }}</p> #}
             {% endif %}
         </div>
     {% endif %}
+    {% endspaceless %}
 {% endfor %}
