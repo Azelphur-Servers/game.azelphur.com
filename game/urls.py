@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
@@ -21,7 +22,7 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
     url(r'^game_info/', include('game_info.urls')),
     url(r'^donate/', include('donations.urls')),
-    url(r'^forum/user/(?P<username>.*)/social/$', TemplateView.as_view(template_name='profile_social.html')),
+    url(r'^forum/user/(?P<username>.*)/social/$', login_required(TemplateView.as_view(template_name='profile_social.html'))),
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
     url(r'^messages/', include('django_messages.urls', namespace='messages')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
