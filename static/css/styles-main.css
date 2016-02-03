@@ -161,6 +161,10 @@ h5 {
     font-weight: 400;
 }
 
+strong {
+    font-weight: 600 !important;
+}
+
 .content-container > h3:first-child,
 .content-container > h4:first-child,
 .content-container > h5:first-child,
@@ -215,6 +219,14 @@ ul.description-list dl > dd {
 small {
     line-height: 0.75rem;
     display: inline-block;
+}
+
+/* Progress */
+.progress {
+    background-color: #FFE0B2;
+}
+.progress .determinate {
+    background-color: #EF6C00;
 }
 
 /* Forms */

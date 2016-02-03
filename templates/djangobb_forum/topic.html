@@ -57,8 +57,12 @@
 	            <ul>
 	            {% for choice in poll.choices.all %}
 	                <li>
-	                    <div class="bar" style="width:{{ choice.percent|floatformat:0 }}%;" title="{{ choice.choice }}">&nbsp;</div>
-	                    {% blocktrans with percent=choice.percent|floatformat:1 choice_text=choice.choice count count=choice.votes %}{{ count }} vote ({{ percent }}%) for: {{ choice_text }}{% plural %}{{ count }} votes ({{ percent }}%) for: {{ choice_text }}{% endblocktrans %}
+	                    {% blocktrans with percent=choice.percent|floatformat:1 choice_text=choice.choice count count=choice.votes %}
+                            {{ count }} vote <em>({{ percent }}%)</em>&nbsp;&nbsp;for: <strong>{{ choice_text }}</strong>
+                        {% plural %}
+                            {{ count }} votes <em>({{ percent }}%)</em>&nbsp;&nbsp;for: <strong>{{ choice_text }}</strong>
+                        {% endblocktrans %}
+                        <div class="progress"><div class="determinate" style="width:{{ choice.percent|floatformat:0 }}%;" data-tooltip="{{ choice.choice }}"></div></div>
 	                </li>
 	            {% endfor %}
 	            </ul>
