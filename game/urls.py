@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.views.generic.base import TemplateView
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
@@ -24,6 +25,7 @@ urlpatterns = i18n_patterns("",
     url(r'^messages/', include('django_messages.urls', namespace='messages')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^faq/', include('faq.urls')),
+    url(r'^forum/user/(?P<username>.*)/social/$', TemplateView.as_view(template_name='social.html')),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
 
