@@ -272,6 +272,10 @@ form.editable-form .btn {
     padding: 0px 1.5rem;
 }
 
+form.inline-form {
+    display: inline;
+}
+
 /* Reset Materialize Checkboxes */
 /*input[type="checkbox"]:not(:checked),
 input[type="checkbox"]:checked {
