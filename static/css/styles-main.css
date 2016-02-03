@@ -64,6 +64,9 @@ i.fa.fa-sm {
 .capitalize {
     text-transform: capitalize;
 }
+.strong {
+    font-weight: bold;
+}
 
 .mar-top {
     margin-top: 1.5rem !important;
