@@ -1,0 +1,64 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum{% endblock %}
+{% block meta_title %}{% trans 'Search' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-3">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{% url 'djangobb:search' %}">{% trans 'Search' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="forum-head">
+        <h3 class="forum-head-title">
+            {% trans "Search results" %}
+            <span class="sub-title"><a href="{{ as_post_url }}">{% trans "Show results as post list." %}</a></span>
+        </h3>
+    </div>
+
+    <div class="content-container no-padding">
+        <ul class="forum-header">
+            <li>
+                <dl>
+                    <dt class="forum-title"><i class="fa fa-fw fa-file-text"></i>{% trans "Topics" %}</dt>
+                    <dd class="forum-topics">{% trans "Replies" %}</dd>
+                    <dd class="forum-posts">{% trans "Views" %}</dd>
+                    <dd class="forum-latest">{% trans "Last post" %}</dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="forum-list">
+            {% for topic in topics_page %}
+                <li>
+                    <dl class="forum-icon {% if topic|has_unreads:user %}topic-new {% endif %}{% if topic.closed %}topic-closed{% else %}{% if topic.sticky %}topic-sticky{% endif %}{% endif %}">
+                        <dt class="forum-title">
+                            {% link topic %}<br />
+                            {% trans 'Started' %} <time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>
+                        </dt>
+                        <dd class="forum-topics">{{ topic.reply_count }}</dd>
+                        <dd class="forum-posts">{{ topic.views }}</dd>
+                        <dd class="forum-latest">
+                            <time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time><br />
+                            {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
+                        </dd>
+                    </dl>
+                </li>
+            {% empty %}
+                <p class="center-align pad-bottom">
+                    {% trans "No results found." %} 
+                </p>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% include 'djangobb_forum/paginator.html' with page=topics_page request=request only %}
+{% endblock %}
+
+{% block controls %}{% endblock %}

@@ -1,0 +1,64 @@
+{% load forum_extras %}
+{% load i18n %}
+
+<h4>{% link post.topic.forum %}&nbsp;&raquo;&nbsp;{% link post.topic %}</h4>
+<div class="content-container forum-post no-padding" id="post-{{ post.id }}">
+    <div class="row row-no-marg">
+        <div class="col s12 m3 l2 forum-user">
+            <dl>
+                {% if post.user.forum_profile.avatar and post.user.forum_profile.show_avatar %}
+                    <dt class="forum-user-avatar"><img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" /></dt>
+                {% else %}
+                    {% if forum_settings.GRAVATAR_SUPPORT %}
+                        <dt class="forum-user-avatar">
+                            <a href="{% url 'djangobb:forum_profile' post.user.username %}">
+                                <img src="{% gravatar post.user.email %}" alt="User Avatar" />
+                            </a>
+                        </dt>
+                    {% endif %}
+                {% endif %}
+                <dt class="forum-user-link"><a href="{% url 'djangobb:forum_profile' post.user.username %}" class="forum-username">{{ post.user.username }}</a></dt>
+                {% if post.user.forum_profile.status %}
+                    <dd class="forum-user-text">{{ post.user.forum_profile.status }}</dd>
+                {% else %}
+                    <dd class="forum-user-text">{{ post.user.forum_profile.group }}</dd>
+                {% endif %}
+                {% if forum_settings.AUTHORITY_SUPPORT %}
+                    <dd class="forum-user-authority">{{ post.user|forum_authority }}</dd>
+                {% endif %}
+                {% if forum_settings.REPUTATION_SUPPORT %}
+                        <dd class="forum-user-rep"><a href="{% url 'djangobb:reputation' post.user.username %}">{% trans "Rep" %}</a>:
+                        {% if user != post.user %}
+                            <a href="{% url 'djangobb:reputation' post.user.username %}?action=plus&amp;post_id={{ post.id }}" class="rep-add"><i class="fa fa-fw fa-plus-square"></i></a>
+                            {{ post.user.forum_profile.reply_total|default_if_none:"0" }}
+                            <a href="{% url 'djangobb:reputation' post.user.username %}?action=minus&amp;post_id={{ post.id }}" class="rep-minus"><i class="fa fa-fw fa-minus-square"></i></a>
+                        {% else %}
+                            {{ post.user.forum_profile.reply_total|default_if_none:"0" }}
+                        {% endif %}
+                        </dd>
+                {% endif %}
+                <dd class="forum-user-posts"><span>{{ post.user.forum_profile.post_count }} {% trans "posts" %}</span></dd>
+                {% if post.user.forum_profile.location %}
+                    <dd class="forum-user-location">{% trans "Location:" %} <span>{{ post.user.forum_profile.location }}</span></dd>
+                {% endif %}
+                {% if post.user|online %}
+                    <dd class="forum-user-status online">{% trans "Online" %}</dd>
+                {% else %}
+                    <dd class="forum-user-status offline">{% trans "Offline" %}</dd>
+                {% endif %}
+            </dl>
+        </div>
+        <div class="col s12 m9 l10 forum-post-container">
+            <div class="forum-post-date"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ post.created|date:'c' }}">{% forum_time post.created %}</time></div>
+            <div class="forum-post-body restyle-lists">
+                {{ post.body_html|safe }}
+            </div>
+            {% if post.updated %}
+                <div class="forum-post-edited">{% trans "Edited by" %} {{ post.updated_by.username }} - <span class="capitalize">{% forum_time post.updated %}</span></div>
+            {% endif %}
+            <div class="forum-post-action">
+                <a href="{{ post.get_absolute_url }}" class="btn-flat">{% trans "See full post" %}&nbsp;<i class="fa fa-fw fa-chevron-right fa-sm"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

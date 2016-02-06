@@ -1,0 +1,93 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-search{% endblock %}
+{% block meta_title %}{% trans 'Search' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-3">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{% url 'djangobb:search' %}">{% trans 'Search' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+	<div class="content-container">
+		<h3>{% trans "Search forum" %}</h3>
+		<form id="search" method="get" action="">
+			{% csrf_token %}
+			<input type="hidden" name="action" value="search" />
+			<h5>{% trans "Enter your search criteria" %}</h5>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.keywords.errors }}
+					{{ form.keywords }}
+					<label for="id_keywords">{{ form.keywords.label }}</label>
+				</div>
+			</div>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.author.errors }}
+					{{ form.author }}
+					<label for="id_author">{{ form.author.label }}</label>
+				</div>
+			</div>
+			<p><em>{% trans "To search by keyword, enter a term or terms to search for. Separate terms with spaces. To search by author enter the username of the author whose posts you wish to search for." %}</em></p>
+
+			<hr />
+			<h5 class="mar-top">{% trans "Select where to search" %}</h5>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					<select id="id_forum" name="forum">
+						<option value="0">{% trans "All forums" %}</option>
+						{% for category in categories %}
+						<optgroup label="{{ category }}">
+							{% for forum in category.forums.all %}
+							<option value="{{ forum.id }}">{{ forum }}</option>
+							{% endfor %}
+						</optgroup>
+						{% endfor %}
+					</select>
+					<label for="id_forum">{{ form.forum.label }}</label>
+				</div>
+			</div>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.search_in.errors }}
+					{{ form.search_in }}
+					<label for="id_search_in">{{ form.search_in.label }}</label>
+				</div>
+			</div>
+			<p><em>{% trans "Choose in which forum you would like to search and if you want to search in topic subjects, message text or both." %}</em></p>
+
+			<hr />
+			<h5 class="mar-top">{% trans "Select how to view search results" %}</h5>
+			<div class="row no-mar-bottom">
+				<div class="col s12 m8 input-field">
+					{{ form.sort_by }}
+					<label for="id_sort_by">{{ form.sort_by.label }}</label>
+				</div>
+				<div class="col s12 m4 input-field">
+					{{ form.sort_dir }}
+					<label for="id_sort_dir">{{ form.sort_dir.label }}</label>
+				</div>
+			</div>
+			<div class="row no-mar-bottom">
+				<div class="col s12 input-field">
+					{{ form.show_as }}
+					<label for="id_show_as">{{ form.show_as.label }}</label>
+				</div>
+			</div>
+			<p><em>{% trans "You can choose how you wish to sort and show your results." %}</em></p>
+
+			<button class="btn mar-top" type="submit" accesskey="s">{% trans "Search" %}</button>
+		</form>
+	</div>
+{% endblock %}
+
+{% block controls %}
+{% endblock %}

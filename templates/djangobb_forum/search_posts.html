@@ -1,0 +1,46 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum forum-search forum-posts{% endblock %}
+{% block meta_title %}{% trans 'Search' %} | {% trans 'Forums' %}{% endblock %}
+
+{% block breadcrumb_menu %}
+    <div class="content-container no-padding">
+        <div class="breadcrumbs count-3">
+            <a href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></a>
+            <a href="{% url 'djangobb:index' %}">{% trans 'Forums' %}</a>
+            <a href="{% url 'djangobb:search' %}">{% trans 'Search' %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="forum-head">
+        <h3 class="forum-head-title">
+            {% trans "Search results" %}
+            <span class="sub-title"><a href="{{ as_topic_url }}">{% trans "Show results as topic list." %}</a></span>
+        </h3>
+    </div>
+
+    {% for post in posts_page %}
+        {% if post.object %}
+            {% with post=post.object %}
+                {% include "djangobb_forum/includes/post_in_search_page.html" %}
+            {% endwith %}
+        {% else %}
+            {% include "djangobb_forum/includes/post_in_search_page.html" %}
+        {% endif %}
+    {% empty %}
+    <div class="content-container">
+        <p class="center-align">
+            {% trans "No results found." %} 
+        </p>
+    </div>
+    {% endfor %}
+
+
+    {% include 'djangobb_forum/paginator.html' with page=posts_page request=request only %}
+{% endblock %}
+
+{% block controls %}{% endblock %}
