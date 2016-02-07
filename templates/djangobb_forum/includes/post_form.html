@@ -11,6 +11,7 @@
             </div>
         {% endif %}
         <div class="input-field">
+            {{ form.body.errors }}
             {{ form.body }}
         </div>
         {% if create_poll_form %}
@@ -37,7 +38,7 @@
             <input type="checkbox" id="id_subscribe" name="subscribe" />
             <label for="id_subscribe">{% trans "Subscribe this topic" %}</label>
         </div>
-        <button type="submit" class="btn waves-effect waves-lighten" name="{{ form.FORM_NAME }}">{% trans "Submit" %}</button>
+        <input type="submit" class="btn" name="{{ form.FORM_NAME }}" value="{% trans "Submit" %}" />
 
         {% if forum %}
             &nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default:"javascript:history.go(-1)" }}">{% trans "Go back" %}</a>

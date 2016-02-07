@@ -114,6 +114,16 @@ ul.list-mar-bottom {
     margin-bottom: 1.3rem;
 }
 
+ol {
+    margin: 0.7rem 0px 0.7rem 0rem;
+    padding: 0px 0px 0px 15px;
+}
+ol > li {
+    position: relative;
+    margin: 0px;
+    padding: 0px 0px 0px 5px;
+}
+
 p.no-padding-top {
     margin-top: 0px !important;
 }
@@ -1043,18 +1053,25 @@ ul.pagination li.active {
 #content-main.forum.forum-posts .forum-post-container > .forum-post-body {
     padding-top: 22px;
 }
-#content-main.forum.forum-posts .forum-post-container > .forum-post-body > blockquote {
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body blockquote {
     margin-top: 0px;
     border-color: #FB9F32;
     padding-left: 1.1rem;
 }
-#content-main.forum.forum-posts .forum-post-container > .forum-post-body > blockquote > em {
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body blockquote > em {
     font-weight: 600;
     font-size: 1rem;
+    padding-bottom: 5px;
+    display: inline-block;
 }
-#content-main.forum.forum-posts .forum-post-container > .forum-post-body > blockquote > em:before {
-    content: 'Quoted from: ';
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body blockquote > em:after {
+    content: ' said:';
     font-weight: 400;
+}
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body ol,
+#content-main.forum.forum-posts .forum-post-container > .forum-post-body ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 #content-main.forum.forum-posts .forum-post-container > .forum-post-edited {
@@ -1185,6 +1202,9 @@ ul.pagination li.active {
 }
 .markItUp .markup {
     width: 100% !important;
+}
+.markItUp .markItUpHeader ul ul {
+    top: 15px !important;
 }
 
 div.code {
