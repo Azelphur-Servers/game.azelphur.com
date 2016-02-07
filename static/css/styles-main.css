@@ -981,15 +981,17 @@ ul.pagination li.active {
 }
 #content-main.forum.forum-posts .forum-user .forum-user-text,
 #content-main.forum.forum-posts .forum-user .forum-user-authority {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-link > a {
     font-weight: 600 !important;
 }
 
 #content-main.forum.forum-posts .forum-user .forum-user-rep {
+    margin-bottom: 5px;
+}
+#content-main.forum.forum-posts .forum-user .forum-user-rep.can-edit {
     background: #fafafa;
-    margin-bottom: 10px;
     padding: 2px 0px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-rep > .rep-add,
@@ -1005,13 +1007,13 @@ ul.pagination li.active {
 }
 
 #content-main.forum.forum-posts .forum-user .forum-user-posts {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-location {
     font-size: 0.8rem;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-status {
-    margin-top: 5px;
+    margin-top: 3px;
 }
 #content-main.forum.forum-posts .forum-user .forum-user-status.online {
     color: #57B357;
@@ -1024,7 +1026,7 @@ ul.pagination li.active {
 #content-main.forum.forum-posts .forum-post-container {
     border-left: 1px solid #eeeeee;
     margin-left: -1px;
-    padding: 10px 15px 55px;
+    padding: 8px 15px 55px;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-date {
     color: #858585;
@@ -1039,7 +1041,7 @@ ul.pagination li.active {
 }
 
 #content-main.forum.forum-posts .forum-post-container > .forum-post-body {
-    padding-top: 15px;
+    padding-top: 22px;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-body > blockquote {
     margin-top: 0px;
@@ -1070,7 +1072,7 @@ ul.pagination li.active {
     max-height: 160px;
     overflow: auto;
 }
-#content-main.forum.forum-posts .forum-post-container > .forum-post-signature a:before {
+#content-main.forum.forum-posts .forum-post-container > .forum-post-signature a:after {
     display: inline-block;
     font-family: FontAwesome;
     font-style: normal;
@@ -1083,10 +1085,10 @@ ul.pagination li.active {
     font-kerning: auto;
     font-synthesis: weight style;
     font-variant: normal;
-    font-size: inherit;
+    font-size: 0.6rem;
     content: '\f08e';
     color: #858585;
-    margin-right: 5px;
+    margin-left: 3px;
 }
 
 /* Forum - Moderate */
@@ -1183,6 +1185,17 @@ ul.pagination li.active {
 }
 .markItUp .markup {
     width: 100% !important;
+}
+
+div.code {
+    color: #272A34;
+    background-color: #FAFAFA;
+    padding: 0px;
+    font-size: 12px;
+}
+div.code > pre {
+    margin: 0px;
+    padding: 15px;
 }
 
 /* Profile */
