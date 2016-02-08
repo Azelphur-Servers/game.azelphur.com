@@ -24,7 +24,7 @@ urlpatterns = i18n_patterns("",
     url(r'^donate/', include('donations.urls')),
     url(r'^forum/user/(?P<username>.*)/social/$', login_required(TemplateView.as_view(template_name='profile_social.html'))),
     url(r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
-    url(r'^messages/', include('django_messages.urls', namespace='messages')),
+    url(r'^messages/', include('django_messages.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^faq/', include('faq.urls')),
     url('', include('social.apps.django_app.urls', namespace='social'))
