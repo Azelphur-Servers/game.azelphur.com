@@ -1,0 +1,38 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load i18n %} 
+
+{% block body_id %}forum forum-messages{% endblock %}
+{% block meta_title %}{% trans 'Compose Message' %} | {% trans 'Forum' %}{% endblock %}
+
+{% block content %}
+    {% include 'django_messages/messages_menu.html' with menu_active_item='compose' %}
+
+    <div class="content-container">
+        <h3>{% trans "New Message" %}</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row no-mar-bottom">
+                <div class="col s12 input-field">
+                    {{ form.recipient.errors }}
+                    {{ form.recipient }}
+                    <label for="id_recipient">{{ form.recipient.label }}</label>
+                </div>
+            </div>
+            <div class="row no-mar-bottom">
+                <div class="col s12 input-field">
+                    {{ form.subject.errors }}
+                    {{ form.subject }}
+                    <label for="id_subject">{{ form.subject.label }}</label>
+                </div>
+            </div>
+            <div class="row no-mar-bottom">
+                <div class="col s12 input-field">
+                    {{ form.body.errors }}
+                    {{ form.body }}
+                    <label for="id_subject">{% trans 'Message' %}</label>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="{% trans "Send" %}" />
+        </form>
+    </div>
+{% endblock %}

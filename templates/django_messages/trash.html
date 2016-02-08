@@ -1,0 +1,52 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %} 
+
+{% block body_id %}forum forum-messages{% endblock %}
+{% block meta_title %}{% trans 'Deleted Messages' %} | {% trans 'Forum' %}{% endblock %}
+
+{% block content %}
+    {% include 'django_messages/messages_menu.html' with menu_active_item='trash' %}
+
+    <div class="forum-head">
+        <h3 class="forum-head-title">
+            {% trans "Deleted Messages" %}
+        </h3>
+        <div class="forum-head-actions">
+            <a href="{% url 'messages_compose' %}" class="btn"><i class="fa fa-fw fa-sm fa-plus"></i>&nbsp;&nbsp;{% trans "New Message" %}</a>
+        </div>
+    </div>
+
+    <div class="content-container no-padding grid-table">
+        <div class="row table-header">
+            <div class="col s6 m3">{% trans "Sender" %}</div>
+            <div class="col s6 m5">{% trans "Subject" %}</div>
+            <div class="col m2 hide-on-small-only">{% trans "Received" %}</div>
+            <div class="col m2 hide-on-small-only">{% trans "Action" %}</div>
+        </div>
+        <div class="table-body">
+            {% for message in message_list %}
+                <div class="row">
+                    <div class="col s12 m3">
+                        {% if message.sender.forum_profile.avatar %}
+                            <img src="{{ message.sender.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-small" />
+                        {% else %}
+                            {% if forum_settings.GRAVATAR_SUPPORT %}
+                                <img src="{% gravatar message.sender.email %}" alt="User Avatar" class="left avatar-small" />
+                            {% endif %}
+                        {% endif %}
+                        <a href="{% url 'djangobb:forum_profile' message.sender %}" class="forum-username">{{ message.sender }}</a>
+                    </div>
+                    <div class="col s12 m5"><a href="{{message.get_absolute_url }}">{{ message.subject }}</a></div>
+                    <div class="col s12 m2">{{ message.sent_at|date:_("DATETIME_FORMAT") }}</div>
+                    <div class="col m2 hide-on-small-only"><a class="btn-flat btn-sm" href="{% url 'messages_undelete' message.id %}">{% trans "Undelete" %}</a></div>
+                </div>
+            {% empty %}
+                <p class="center-align pad-bottom">
+                    {% trans "No messages to display." %} 
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+    <p>{% trans "Deleted Messages are removed from the trash at unregular intervals, don't rely on this feature for long-time storage." %}</p>
+{% endblock %}

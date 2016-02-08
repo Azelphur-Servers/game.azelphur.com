@@ -75,8 +75,8 @@
                     <div class="col l4 s12">
                         {% if settings.SITE_TITLE %}<h5>{{ settings.SITE_TITLE }}</h5>{% endif %}
                         <p id="footer-social">
-                            <a href="#" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
-                            <a href="#" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
+                            <a href="https://steamcommunity.com/groups/azelphur-servers" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
+                            <a href="{% url "blog_post_feed" "rss" %}" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
                         </p>
                     </div>
                     <div class="col l3 offset-l1 s12">
