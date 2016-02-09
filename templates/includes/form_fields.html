@@ -10,20 +10,22 @@
     {% if field.is_hidden %}
         {{ field }}
     {% else %}
-        <div class="input-field input_{{ field.id_for_label }} {{ field.field.type }}{% if field.errors %} has-error{% endif %}{% if field.field.required %} field-add-required{% endif %}">
-            {{ field }}
-            {% if field.label %}
-                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.help_text %} <small>({{ field.help_text }})</small>{% endif %}</label>
-            {% endif %}
-            {% if field.errors %}
-                <p class="help-block">
-                    {% for e in field.errors %}
-                    {% if not forloop.first %} / {% endif %}{{ e }}
-                    {% endfor %}
-                </p>
-            {% elif field.help_text %}
-                {# <p class="help-block">{{ field.field.required }} {{ field.help_text }}</p> #}
-            {% endif %}
+        <div class="row">
+            <div class="col s12 input-field input_{{ field.id_for_label }} {{ field.field.type }}{% if field.errors %} has-error{% endif %}{% if field.field.required %} field-add-required{% endif %}">
+                {{ field }}
+                {% if field.label %}
+                    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                {% endif %}
+                {% if field.errors %}
+                    <p class="help-block">
+                        {% for e in field.errors %}
+                        {% if not forloop.first %} / {% endif %}{{ e }}
+                        {% endfor %}
+                    </p>
+                {% elif field.help_text %}
+                    <p class="help-block no-mar-top pad-bottom right-align"><small><em>{{ field.help_text }}</em></small></p>
+                {% endif %}
+            </div>
         </div>
     {% endif %}
     {% endspaceless %}

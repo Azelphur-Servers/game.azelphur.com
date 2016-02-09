@@ -27,6 +27,9 @@ a {
     cursor: pointer;
     transition: color 0.5s ease;
 }
+a.link-color-normal {
+    color: inherit;
+}
 
 .btn-flat {
     color: #fb8d31;
@@ -813,10 +816,10 @@ ul.pagination li.active {
     padding: 0px;
     font-size: 24px;
     line-height: 30px;
-    overflow: hidden;
+    /*overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    word-wrap: break-word;
+    word-wrap: break-word;*/
 }
 #content-main.forum .forum-head-title {
     margin: -3px 180px 25px 0px;
@@ -826,8 +829,8 @@ ul.pagination li.active {
     display: block;
     font-size: 13px;
     color: #858585;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /*overflow: hidden;
+    text-overflow: ellipsis;*/
     margin-top: -5px;
 }
 
@@ -897,10 +900,10 @@ ul.pagination li.active {
 #content-main.forum ul.forum-header > li > dl > dd  {
     padding: 10px;
     margin: 0px;
-    overflow: hidden;
+    /*overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    word-wrap: break-word;
+    word-wrap: break-word;*/
 }
 #content-main.forum ul.forum-list > li > dl > dt,
 #content-main.forum ul.forum-header > li > dl > dt {
@@ -963,11 +966,22 @@ ul.pagination li.active {
 }
 
 @media screen and (max-width: 992px) {
-    #content-main.forum ul.forum-list li > dl > dd.forum-topics,
-    #content-main.forum ul.forum-list > li > dl > dd.forum-posts,
     #content-main.forum ul.forum-header li > dl > dd.forum-topics,
     #content-main.forum ul.forum-header > li > dl > dd.forum-posts {
         display: none;
+    }
+    #content-main.forum ul.forum-list li > dl > dd.forum-topics {
+        padding-left: 50px;
+    }
+    #content-main.forum ul.forum-list li > dl > dd.forum-topics,
+    #content-main.forum ul.forum-list > li > dl > dd.forum-posts {
+        display: block;
+        width: 50%;
+        line-height: 1;
+        padding-top: 0px !important;
+        margin-top: -5px;
+        color: #858585;
+        text-align: left;
     }
     #content-main.forum ul.forum-list > li > dl > dt,
     #content-main.forum ul.forum-header > li > dl > dt {

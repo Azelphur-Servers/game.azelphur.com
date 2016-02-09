@@ -12,13 +12,13 @@
             {% link forum %}<br />
             {{ forum.description|safe }}
         </dt>
-        <dd class="forum-topics">{{ forum.topic_count }}</dd>
-        <dd class="forum-posts">{{ forum.post_count }}</dd>
+        <dd class="forum-topics">{{ forum.topic_count }}<span class="hide-on-large-only">&nbsp;{% trans 'Topics' %}</span></dd>
+        <dd class="forum-posts">{{ forum.post_count }}<span class="hide-on-large-only">&nbsp;{% trans 'Posts' %}</span></dd>
         <dd class="forum-latest">
         {% if forum.updated %}
             {% if forum.last_post.topic %}
-                <a href="{{ forum.last_post.get_absolute_url }}">{{ forum.last_post.topic|safe }}</a><br />
-                <time datetime="{{ forum.last_post.created|date:'c' }}">{% forum_time forum.last_post.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}">{{ forum.last_post.user.username|safe }}</a></span>
+                <a href="{{ forum.last_post.get_absolute_url }}"><time datetime="{{ forum.last_post.created|date:'c' }}">{% forum_time forum.last_post.created %}</time></a><br />
+                {% trans "by" %} <a class="link-color-normal" href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}">{{ forum.last_post.user.username|safe }}</a>
             {% endif %}
         {% endif %}
         </dd>

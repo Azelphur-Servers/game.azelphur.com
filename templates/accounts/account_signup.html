@@ -1,28 +1,47 @@
 {% extends "accounts/account_form.html" %}
-{% load i18n static %}
+{% load i18n static mezzanine_tags %}
 
 {% block breadcrumb_menu %}{% endblock %}
 {% block body_id %}account signup{% endblock %}
 
-{% block main %}
+{% block main_content %}
     {% if request.user.is_authenticated %}
-        <p>{% trans "You're already logged in. If you'd like to create a new account, you'll need to log out first." %}</p>
-    {% else %}
-        {{ block.super }}
-
-        <div>
-            <h4>{% trans 'Or, signup with' %}</h4>
-            {% for backend in backends.backends %}
-                {% with 'img/social/'|add:backend|add:'-signup.png' as image_url %}
-                    <a class="pad-right" href="{% url 'social:begin' backend %}" data-tooltip="{% trans 'Signup with' %} {{ backend }}"><img src="{% static image_url %}"></a>
-                {% endwith %}
-            {% endfor %}
+        <div class="content-container">
+            <h3>{% trans 'Create an account' %}</h3>
+            <p>{% trans "You're already logged in. If you'd like to create a new account, you'll need to log out first." %}</p>
         </div>
-        {% if settings.ACCOUNTS_APPROVAL_REQUIRED %}
-            <p>{% trans "After signing up, your account will be reviewed for approval. You'll receive an email when your account is activated." %}</p>
-        {% elif settings.ACCOUNTS_VERIFICATION_REQUIRED %}
-            <p>{% trans "After signing up, you'll receive an email with a link you need to click, in order to activate your account." %}</p>
-        {% endif %}
+    {% else %}
+       <div class="row">
+            <div class="col s12 m8">
+                <div class="content-container">
+                    <h3>{% trans 'Create an account' %}</h3>
+                    {% errors_for form %}
+                    <form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                        {% fields_for form %}
+                        <div class="form-actions">
+                            {% block account_form_actions %}
+                                <button class="btn" type="submit">{{ title }}</button>
+                            {% endblock %}
+                        </div>
+                    </form>
+                    {% if settings.ACCOUNTS_APPROVAL_REQUIRED %}
+                        <p>{% trans "After signing up, your account will be reviewed for approval. You'll receive an email when your account is activated." %}</p>
+                    {% elif settings.ACCOUNTS_VERIFICATION_REQUIRED %}
+                        <p>{% trans "After signing up, you'll receive an email with a link you need to click, in order to activate your account." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="content-container">
+                    <h4>{% trans 'Or, signup with' %}</h4>
+                    {% for backend in backends.backends %}
+                        {% with 'img/social/'|add:backend|add:'-signup.png' as image_url %}
+                            <a class="pad-right" href="{% url 'social:begin' backend %}" data-tooltip="{% trans 'Signup with' %} {{ backend }}"><img src="{% static image_url %}"></a>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 
