@@ -302,6 +302,10 @@ form > p:first-child {
     margin-top: 5px;
 }
 
+form .errorlist {
+    color: #d32f2f;
+}
+
 /* Reset Materialize Checkboxes */
 /*input[type="checkbox"]:not(:checked),
 input[type="checkbox"]:checked {
@@ -1116,7 +1120,7 @@ ul.pagination li.active {
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-link {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     right: 15px;
 }
 
@@ -1505,6 +1509,10 @@ div.code > pre {
     border-top: 2px solid #fb8d31;
     background: #2e2e2e;
     color: #eee;
+    padding-top: 00px;
+}
+#footer-main .row > .col {
+    margin-top: 20px;
 }
 #footer-main a {
     color: #eee;
