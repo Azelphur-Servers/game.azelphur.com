@@ -2,73 +2,68 @@
 {% load forum_extras %}
 {% load i18n %}
 
+{% block body_id %}forum reputation{% endblock %}
+{% block meta_title %}{{ profile.user|truncatechars:12 }} | {% trans 'Reputation' %} | {% trans 'Forum' %}{% endblock %}
+
 {% block content %}
-<div class="linkst">
-	<div class="inbox">
-		<p class="pagelink conl">{# pagination #}</p>
-		<div class="clearer"></div>
-	</div>
-</div>
-
-<form method="POST">
-{% csrf_token %}
-<div class="blockform">
-	<h2><span>{% trans "Reputation of the user" %} {{ profile.user }}&nbsp;&nbsp;<strong>[+{{ profile.reply_count_plus|default_if_none:"0" }} / -{{ profile.reply_count_minus|default_if_none:"0" }}] &nbsp;</strong></span></h2>
-	<div class="box">
-		<div class="inbox">
-			<table cellspacing="0">
-			<thead>
-				<tr>
-				<th class="tc3" style="width: 15%;">{% trans "From user" %}</th>
-				<th class="tc3" style="width: 15%;">{% trans "For post in topic" %}</th>
-				<th class="tc3" style="width: 35%;">{% trans "Reason" %}</th>
-				<th class="tc3" style="width: 10%; text-align: center;">{% trans "Estimation" %}</th>
-				<th class="tc3" style="width: 15%;">{% trans "Date" %}</th>
-				{% if user.is_superuser %}
-					<th class="tc3" style="width: 10%;">{% trans "Delete" %}</th>
-				{% endif %}
-				</tr>
-			</thead>
-				<tbody>
-				{% for reputation in reputations %}
-					<tr>
-						<td><a href="{% url 'djangobb:reputation' reputation.from_user %}">{{ reputation.from_user }}</a></td>
-						<td><a href="{{ reputation.post.get_absolute_url }}">{{ reputation.post.topic }}</a></td>
-						<td>{{ reputation.reason }}</td>
-						<td style="text-align: center;">
-						{% if reputation.sign == 1 %}
-							<img src="{{ STATIC_URL }}djangobb_forum/img/reputation/warn_add.gif" alt="+" border="0">
-						{% else %}
-							<img src="{{ STATIC_URL }}djangobb_forum/img/reputation/warn_minus.gif" alt="+" border="0">
-						{% endif %}
-						</td>
-						<td>{% forum_time reputation.time %}</td>
-						{% if user.is_superuser %}
-							<td style="text-align: center;"><input type="checkbox" name="reputation_id" value="{{ reputation.id }}"></td>
-						{% endif %}
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-
-<div class="clearer"></div>
-<div class="postlinksb">
-	<div class="inbox">
-		<p class="pagelink conl">{# pagination #}</p>
-		<p class="postlink conr">
-			{% if user.is_superuser %}
-				<input name="del_reputation" value="Delete" onclick="return confirm('{% trans "Are you sure" %}?')" type="submit">
+    <div class="forum-head">
+		{% if profile.forum_profile.avatar %}
+			<img src="{{ profile.user.forum_profile.avatar.url }}" alt="User Avatar" class="left" />
+		{% else %}
+			{% if forum_settings.GRAVATAR_SUPPORT %}
+				<img src="{% gravatar profile.user.email %}" alt="User Avatar" class="left" />
 			{% endif %}
-			<a href="javascript:history.go(-1)">{% trans "Go back" %}</a>
-		</p>
-		
-		<div class="clearer"></div>
-	</div>
-</div>
-</form>
+		{% endif %}
+        <h3 class="forum-head-title">
+            {{ profile.user }}
+            <span class="sub-title">{{ profile.user.forum_profile.status|default:'Member' }}</span>
+            <span class="sub-title">
+            	<span class="green-text"><i class="fa fa-thumbs-up"></i> {{ profile.user.forum_profile.reply_count_plus|default_if_none:"0" }}</span>&nbsp;&nbsp;&nbsp;
+				<span class="red-text"><i class="fa fa-thumbs-down"></i> {{ profile.user.forum_profile.reply_count_minus|default_if_none:"0" }}</span>
+			</span>
+        </h3>
+    </div>
+	<h3>{% trans "User Reputation" %}</h3>
+
+    <div class="content-container no-padding grid-table">
+        <div class="row table-header">
+            <div class="col s12 hide-on-med-and-up">{% trans "From / For a post in / Comment" %}</div>
+            <div class="col m2 hide-on-small-only">{% trans "From User" %}</div>
+            <div class="col m3 hide-on-small-only">{% trans "For a post in" %}</div>
+            <div class="col m5 hide-on-small-only">{% trans "Rep/Comment" %}</div>
+            <div class="col m2 hide-on-small-only">{% trans "Received" %}</div>
+        </div>
+        <div class="table-body">
+            {% for reputation in reputations %}
+                <div class="row">
+                    <div class="col s12 m2">
+                        {% if message.sender.forum_profile.avatar %}
+                            <a href="{% url 'djangobb:forum_profile' reputation.from_user %}"><img src="{{ reputation.from_user.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-small" /></a>
+                        {% else %}
+                            {% if forum_settings.GRAVATAR_SUPPORT %}
+                                <a href="{% url 'djangobb:forum_profile' reputation.from_user %}"><img src="{% gravatar reputation.from_user.email %}" alt="User Avatar" class="left avatar-small" /></a>
+                            {% endif %}
+                        {% endif %}
+                        <a class="link-color-normal" href="{% url 'djangobb:forum_profile' reputation.from_user %}">{{ reputation.from_user }}</a>
+                    </div>
+                    <div class="col s12 m3"><a href="{{ reputation.post.get_absolute_url }}">{{ reputation.post.topic }}</a></div>
+                    <div class="col s12 m5">
+                    	{% if reputation.sign == 1 %}
+                    		<span class="green-text"><i class="fa fa-thumbs-up"></i></span>&nbsp;&nbsp;
+                    	{% else %}
+                    		<span class="red-text"><i class="fa fa-thumbs-down"></i></span>&nbsp;&nbsp;
+                    	{% endif %}
+                    	{{ reputation.reason }}
+                    </div>
+                    <div class="col s12 m2">{{ reputation.time|date:"M. j, Y" }}</div>
+                </div>
+            {% empty %}
+                <p class="center-align pad-bottom">
+                    {% trans "No reputation to display." %} 
+                </p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block controls %}

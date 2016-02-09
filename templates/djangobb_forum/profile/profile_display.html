@@ -31,20 +31,7 @@
 			<div class="grey-text">{% trans "When you update your profile, you will be redirected back to this page." %}</div>
 		</form>
 	</div>
-
 {% endblock %}
 
 {% block controls %}{% endblock %}
 {% block board_footer %}{% endblock %}
-
-{% comment %}
-<fieldset>
-	<legend>{% trans "Select your preferred style" %}</legend>
-	<div class="infldset">
-		{{ form.theme.errors }}
-		<label>{% trans "If you like you can use a different visual style for this forum." %}<br>
-		{{ form.theme }}
-		<br></label>
-	</div>
-</fieldset>
-{% endcomment %}

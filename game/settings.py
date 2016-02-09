@@ -353,6 +353,7 @@ DJANGOBB_AVATAR_WIDTH = 80
 DJANGOBB_AVATAR_HEIGHT = 80
 DJANGOBB_FORUM_LOGO_WIDTH = 27
 DJANGOBB_FORUM_LOGO_HEIGHT = 27
+DJANGOBB_USER_TO_USER_EMAIL = False
 
 # These variables will be overwritten by local settings, but aren't
 # really required in a development environment. I'm nulling them here

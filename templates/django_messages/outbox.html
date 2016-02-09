@@ -29,13 +29,13 @@
                 <div class="row">
                     <div class="col s12 m3">
                         {% if message.recipient.forum_profile.avatar %}
-                            <img src="{{ message.recipient.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-small" />
+                            <a href="{% url 'djangobb:forum_profile' reputation.from_user %}"><img src="{{ message.recipient.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-small" /></a>
                         {% else %}
                             {% if forum_settings.GRAVATAR_SUPPORT %}
-                                <img src="{% gravatar message.recipient.email %}" alt="User Avatar" class="left avatar-small" />
+                                <a href="{% url 'djangobb:forum_profile' reputation.from_user %}"><img src="{% gravatar message.recipient.email %}" alt="User Avatar" class="left avatar-small" /></a>
                             {% endif %}
                         {% endif %}
-                        <a href="{% url 'djangobb:forum_profile' message.recipient %}" class="forum-username">{{ message.recipient }}</a>
+                        <a href="{% url 'djangobb:forum_profile' message.recipient %}" class="link-color-normal">{{ message.recipient }}</a>
                     </div>
                     <div class="col s12 m5"><a href="{{message.get_absolute_url }}">{{ message.subject }}</a></div>
                     <div class="col s12 m2">{{ message.sent_at|date:_("DATETIME_FORMAT") }}</div>

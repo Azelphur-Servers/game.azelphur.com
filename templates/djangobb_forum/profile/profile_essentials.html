@@ -58,11 +58,28 @@
 			<div class="row no-mar-bottom">
 				<div class="col s12">
 					<h5>{% trans "User activity" %}</h5>
-					<ul class="restyle-list">
-						<li>{% trans "Registered:" %} {{ profile.date_joined|date:"Y-m-d" }}</li>
-						<li>{% trans "Last post:" %} {{ profile.forum_profile.last_post }}</li>
-                    	<li>{% trans "Posts:" %} {{ profile.forum_profile.post_count }} - <a href="{% url 'djangobb:search' %}?action=show_user&amp;user_id={{ profile.id }}">{% trans "Show all posts" %}</a></li>
-                	</ul>
+			     	<dl class="styled-dl">
+			    		<dt><strong>{% trans "Reputation:" %}</strong></dt>
+			    		<dd>
+							<span class="green-text"><i class="fa fa-thumbs-up"></i> {{ profile.forum_profile.reply_count_plus|default_if_none:"0" }}</span>&nbsp;&nbsp;&nbsp;
+							<span class="red-text"><i class="fa fa-thumbs-down"></i> {{ profile.forum_profile.reply_count_minus|default_if_none:"0" }}</span>&nbsp;
+							- <a href="{% url 'djangobb:reputation' profile %}">{% trans "View All" %}</a>
+						</dd>
+			    		<dt><strong>{% trans "Posts:" %}</strong></dt>
+			    		<dd>
+							{{ profile.forum_profile.post_count }} - <a href="{% url 'djangobb:search' %}?action=show_user&amp;user_id={{ profile.id }}">{% trans "Show all posts" %}</a>
+						</dd>
+						{% if profile.forum_profile.last_post %}
+				    		<dt><strong>{% trans "Last post:" %}</strong></dt>
+				    		<dd>
+								{{ profile.forum_profile.last_post }}
+							</dd>
+						{% endif %}
+			    		<dt><strong>{% trans "Registered:" %}</strong></dt>
+			    		<dd>
+							{{ profile.date_joined|date:"M. j, Y" }}
+						</dd>
+					</dl>
 				</div>
 			</div>
 			<button name="update" type="submit" class="btn">{% trans "Save" %}</button>

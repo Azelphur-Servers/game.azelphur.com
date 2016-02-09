@@ -19,13 +19,15 @@
 						<input id="id_privacy_permission_0" name="privacy_permission" value="0" type="radio" class="with-gap"{% if form.privacy_permission.value == 0 %} checked="checked"{% endif %}>
 						<label for="id_privacy_permission_0">{% trans "Display your e-mail address." %}</label>
 					</p>
-					<p>
-						<input id="id_privacy_permission_1" name="privacy_permission" value="1" type="radio" class="with-gap"{% if form.privacy_permission.value == 1 %} checked="checked"{% endif %}>
-						<label for="id_privacy_permission_1">{% trans "Hide your e-mail address but allow form e-mail." %}</label>
-					</p>
+					{% if forum_settings.USER_TO_USER_EMAIL %}
+						<p>
+							<input id="id_privacy_permission_1" name="privacy_permission" value="1" type="radio" class="with-gap"{% if form.privacy_permission.value == 1 %} checked="checked"{% endif %}>
+							<label for="id_privacy_permission_1">{% trans "Hide your e-mail address but allow form e-mail." %}</label>
+						</p>
+					{% endif %}
 					<p>
 						<input id="id_privacy_permission_2" name="privacy_permission" value="2" type="radio" class="with-gap"{% if form.privacy_permission.value == 2 %} checked="checked"{% endif %}>
-						<label for="id_privacy_permission_2">{% trans "Hide your e-mail address and disallow form e-mail." %}</label>
+						<label for="id_privacy_permission_2">{% if forum_settings.USER_TO_USER_EMAIL %}{% trans "Hide your e-mail address and disallow form e-mail." %}{% else %}{% trans "Hide your e-mail address." %}{% endif %}</label>
 					</p>
 				</div>
 			</div>

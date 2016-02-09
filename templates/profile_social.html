@@ -6,7 +6,7 @@
 {% block meta_title %}{{ user.username|safe|truncatechars:20 }} | {% trans 'User' %}{% endblock %}
 
 {% block content %}
-	{% include 'djangobb_forum/profile/profile_menu.html' with active_menu='social' %}
+	{% include 'djangobb_forum/profile/profile_menu.html' with active_menu='social' profile=user.username %}
 	<div class="content-container">
 		<h3>{% trans "Social Auths" %}</h3>
 		<h4>Active associations</h4>

@@ -318,9 +318,10 @@ input[type="checkbox"]:checked {
 img.avatar-small {
     max-width: 27px;
     max-height: 27px;
+    vertical-align: middle;
 }
 img.left {
-    margin-right: 15px;
+    margin-right: 10px;
 }
 
 /* Forum Messages */
@@ -801,11 +802,22 @@ ul.pagination li.active {
     color: #FFF;
     font-size: 14px;
 }
-.grid-table .col {
+.grid-table .row .col {
     padding: 12px 10px;
 }
 .grid-table > .table-body > .row:nth-child(2n) {
     background-color: #FBFBFB;
+}
+@media screen and (max-width: 600px) {
+    .grid-table > .table-body .row .col {
+        padding: 3px 10px;
+    }
+    .grid-table > .table-body .row .col:first-child {
+        padding-top: 12px;
+    }
+    .grid-table > .table-body .row .col:last-child {
+        padding-bottom: 12px;
+    }
 }
 
 /* Forum */

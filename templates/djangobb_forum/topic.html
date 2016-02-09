@@ -122,7 +122,7 @@
 							<dd class="forum-user-location">{% trans "Location:" %} <span>{{ post.user.forum_profile.location }}</span></dd>
 						{% endif %}
 						{% if post.user|online %}
-	                    	<dd class="forum-user-status online">{% trans "Online" %} - {% if forum_settings.PM_SUPPORT %}{% if user.is_authenticated %}<a href="{% url 'messages_compose_to' post.user.username %}">{% trans "PM" %}</a>{% endif %}{% endif %}</dd>
+	                    	<dd class="forum-user-status online">{% trans "Online" %}</dd>
 	                	{% else %}
 	                    	<dd class="forum-user-status offline">{% trans "Offline" %}</dd>
 	                    {% endif %}

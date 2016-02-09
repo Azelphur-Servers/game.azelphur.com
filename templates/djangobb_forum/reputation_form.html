@@ -1,0 +1,46 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum reputation{% endblock %}
+{% block meta_title %}{{ form.to_user|truncatechars:12 }} | {% trans 'Reputation' %} | {% trans 'Forum' %}{% endblock %}
+
+{% block content %}
+	<div class="content-container">
+		<h3>{% trans "Submit user reputation" %}</h3>
+	    <div class="messages-user-detail mar-bottom">
+	        {% if form.to_user.forum_profile.avatar %}
+	            <img src="{{ form.to_user.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-messages" />
+	        {% else %}
+	            {% if forum_settings.GRAVATAR_SUPPORT %}
+	                <img src="{% gravatar form.to_user.email %}" alt="User Avatar" class="left avatar-messages" />
+	            {% endif %}
+	        {% endif %}
+	        <a href="{% url 'djangobb:forum_profile' form.to_user %}" class="forum-username">{{ form.to_user }}</a><br />
+	        {{ form.to_user.forum_profile.status|default:'Member' }}
+	        <div class="clearfix"></div>
+	    </div>
+		
+		<form action="{% url 'djangobb:reputation' form.to_user %}" method="post">
+			{% csrf_token %}
+			{{ form.post }}
+			{{ form.sign }}
+			{% if request.GET.action == "plus" %}
+				<p class="green-text no-mar-top"><strong>{% trans "Adding reputation" %}</strong></p>
+			{% else %}
+				<p class="red-text no-mar-top"><strong>{% trans "Reduction of reputation" %}</strong></p>
+			{% endif %}
+			<div class="row">
+				<div class="col s12 input-field">
+					{{ form.reason.errors }}
+	                <textarea id="id_reason"></textarea>
+	                <label for="id_reason">{{ form.reason.label }}</label>
+				</div>
+			</div>
+			<input name="submit" value="{% trans "Submit" %}" type="submit" class="btn"> <a href="javascript:history.go(-1)" class="btn-flat">{% trans "Go back" %}</a>
+		</form>
+	</div>
+{% endblock %}
+
+{% block controls %}
+{% endblock %}
