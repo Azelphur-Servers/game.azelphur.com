@@ -1,0 +1,103 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block body_id %}forum profile{% endblock %}
+{% block meta_title %}{{ profile|truncatechars:12 }} | {% trans 'Users' %}{% endblock %}
+
+{% block content %}
+    <div class="forum-head pad-bottom">
+        <h3 class="forum-head-title">
+			{% if profile.forum_profile.avatar %}
+				<img src="{{ profile.forum_profile.avatar.url }}" alt="User Avatar" class="left pad-right" />
+			{% else %}
+				{% if forum_settings.GRAVATAR_SUPPORT %}
+					<img src="{% gravatar profile.email %}" alt="User Avatar" class="left pad-right" />
+				{% endif %}
+			{% endif %}
+            {{ profile }}
+            <span class="sub-title">{{ profile.forum_profile.status|default:'Member' }}</span>
+        </h3>
+    </div>
+    <div class="content-container">
+    	<h3>{% trans "Personal" %}</h3>
+    	<dl class="styled-dl">
+    		<dt><strong>{% trans "Real name:" %}</strong></dt>
+    		<dd>
+    			{% if profile.first_name or profile.last_name %}
+					{{ profile.first_name }} {{ profile.last_name }}
+				{% else %}
+					{% trans "(Unknown)" %}
+				{% endif %}
+			</dd>
+    		<dt><strong>{% trans "Location:" %}</strong></dt>
+    		<dd>
+				{% if profile.forum_profile.location %}
+					{{ profile.forum_profile.location }}
+				{% else %}
+					{% trans "(Unknown)" %}
+				{% endif %}
+			</dd>
+			<dt><strong>{% trans "Website:" %}</strong></dt>
+			<dd>
+				{% if profile.forum_profile.site %}
+					{{ profile.forum_profile.site|urlize }}
+				{% else %}
+					{% trans "(Unknown)" %}
+				{% endif %}
+			</dd>
+			{% if forum_settings.USER_TO_USER_EMAIL %}
+				<dt><strong>{% trans "E-mail:" %}</strong></dt>
+				<dd>
+					{% if profile.forum_profile.privacy_permission == 0 %}
+						<a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+					{% else %}
+						{% if profile.forum_profile.privacy_permission == 1 %}
+							<a href="{% url 'djangobb:misc' %}?mail_to={{ profile }}">{% trans "Send e-mail" %}</a>
+						{% else %}
+							{% trans "(Hidden)" %}
+						{% endif %}
+					{% endif %}
+				</dd>
+			{% endif %}
+    	</dl>
+    </div>
+    <div class="content-container">
+    	<h3>{% trans "Personality" %}</h3>
+    	<dl class="styled-dl">
+    		<dt class="full-width"><strong>{% trans "Forum Signature:" %}</strong></dt>
+    		<dd class="full-width">
+				{% if profile.forum_profile.signature_html %}
+					{{ profile.forum_profile.signature_html|safe }}
+				{% else %}
+					{% trans "(Unknown)" %}
+				{% endif %}
+			</dd>
+		</dl>
+    </div>
+    <div class="content-container">
+    	<h3>{% trans "User activity" %}</h3>
+     	<dl class="styled-dl">
+    		<dt><strong>{% trans "Reputation:" %}</strong></dt>
+    		<dd>
+				<span class="green-text"><i class="fa fa-thumbs-up"></i> {{ profile.reply_count_plus|default:"0" }}</span>&nbsp;&nbsp;&nbsp;
+				<span class="red-text"><i class="fa fa-thumbs-down"></i> {{ profile.reply_count_minus|default:"0" }}</span>&nbsp;
+				- <a href="{% url 'djangobb:reputation' profile %}">{% trans "View All" %}</a>
+			</dd>
+    		<dt><strong>{% trans "Posts:" %}</strong></dt>
+    		<dd>
+				{{ profile.forum_profile.post_count }} - <a href="{% url 'djangobb:search' %}?action=show_user&amp;user_id={{ profile.id }}">{% trans "Show all posts" %}</a>
+			</dd>
+			{% if profile.forum_profile.last_post %}
+	    		<dt><strong>{% trans "Last post:" %}</strong></dt>
+	    		<dd>
+					{{ profile.forum_profile.last_post }}
+				</dd>
+			{% endif %}
+    		<dt><strong>{% trans "Registered:" %}</strong></dt>
+    		<dd>
+				{{ profile.date_joined|date:"M. j, Y" }}
+			</dd>
+		</dl>
+    </div>
+{% endblock %}

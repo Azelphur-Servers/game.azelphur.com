@@ -510,7 +510,8 @@ img.avatar-messages {
 nav li > a > i {
     margin-right: 10px;
 }
-nav li > a > i.fa-caret-down {
+nav li > a > i.fa-caret-down,
+nav li > a > i.fa-search {
     margin-right: 0px;
 }
 
@@ -1331,6 +1332,25 @@ div.code > pre {
 .tabs-top-menu > .tab > a.active {
     border-bottom-color: #FB8D31;
 }
+
+dl.styled-dl {
+    font-size: 1.1em;
+}
+dl.styled-dl > dt {
+    display: block;
+    width: 100px;
+    float: left;
+}
+dl.styled-dl > dt,
+dl.styled-dl > dd {
+    padding: 5px 0px;
+}
+dl.styled-dl > dt.full-width,
+dl.styled-dl > dd.full-width {
+    width: 100%;
+    float: none;
+}
+
 
 /* Messages */
 #messages .message {
