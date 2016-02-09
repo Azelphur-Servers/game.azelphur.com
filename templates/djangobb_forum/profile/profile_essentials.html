@@ -15,7 +15,9 @@
 				<div class="col s12 input-field">
 					{{ form.username.errors }}
 					{{ form.username }}
-					<label for="id_username">{{ form.username.label }}</label>
+					{% if user.is_superuser %}
+						<label for="id_username">{{ form.username.label }}</label>
+					{% endif %}
 				</div>
 			</div>
 			<div class="row no-mar-bottom">

@@ -10,8 +10,8 @@
     {% if field.is_hidden %}
         {{ field }}
     {% else %}
-        <div class="row">
-            <div class="col s12 input-field input_{{ field.id_for_label }} {{ field.field.type }}{% if field.errors %} has-error{% endif %}{% if field.field.required %} field-add-required{% endif %}">
+        <div class="row input_{{ field.id_for_label }}">
+            <div class="col s12 input-field {{ field.field.type }}{% if field.errors %} has-error{% endif %}{% if field.field.required %} field-add-required{% endif %}">
                 {{ field }}
                 {% if field.label %}
                     <label for="{{ field.auto_id }}">{{ field.label }}</label>

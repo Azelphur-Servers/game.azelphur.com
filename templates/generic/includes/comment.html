@@ -6,17 +6,17 @@
         {% editable comment.is_public comment.is_removed %}
             {% if not comment.is_removed and comment.is_public or request.user.is_staff %}
                 {% if comment.user.forum_profile.avatar and comment.user.forum_profile.show_avatar %}
-                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">
+                    <a href="{% url 'djangobb:forum_profile' comment.user.username %}" class="comment-user">
                         <img class="comment-image" src="{{ comment.user.forum_profile.avatar.url }}" />
                     </a>
                 {% else %}
-                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">
+                    <a href="{% url 'djangobb:forum_profile' comment.user.username %}" class="comment-user">
                         <img class="comment-image" src="{% gravatar comment.user.email %}" />
                     </a>
                 {% endif %}
                 <div class="comment-body">
-                    <a href="{% url 'djangobb:forum_profile' comment.user_name %}" class="comment-user">{{ comment.user_name }}</a>
-                    <a href="#comment-{{ comment.id }}" class="comment-date" data-title="Link to this comment"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ comment.submit_date|date:'c' }}">{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time></a>
+                    <a href="{% url 'djangobb:forum_profile' comment.user.username %}" class="comment-user link-color-normal">{{ comment.user.username }}</a>
+                    <a href="#comment-{{ comment.id }}" class="comment-date" data-tooltip="Link to this comment"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ comment.submit_date|date:'c' }}">{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}</time></a>
 
                     <p>{{ comment.comment|comment_filter }}</p>
 
