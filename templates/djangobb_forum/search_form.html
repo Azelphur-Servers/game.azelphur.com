@@ -17,11 +17,9 @@
 
 {% block content %}
 	<div class="content-container">
-		<h3>{% trans "Search forum" %}</h3>
 		<form id="search" method="get" action="">
-			{% csrf_token %}
 			<input type="hidden" name="action" value="search" />
-			<h5>{% trans "Enter your search criteria" %}</h5>
+			<h3>{% trans "Enter your search criteria" %}</h3>
 			<div class="row no-mar-bottom">
 				<div class="col s12 input-field">
 					{{ form.keywords.errors }}
@@ -38,8 +36,7 @@
 			</div>
 			<p><em>{% trans "To search by keyword, enter a term or terms to search for. Separate terms with spaces. To search by author enter the username of the author whose posts you wish to search for." %}</em></p>
 
-			<hr />
-			<h5 class="mar-top">{% trans "Select where to search" %}</h5>
+			<h3 class="mar-top">{% trans "Select where to search" %}</h3>
 			<div class="row no-mar-bottom">
 				<div class="col s12 input-field">
 					<select id="id_forum" name="forum">
@@ -64,8 +61,7 @@
 			</div>
 			<p><em>{% trans "Choose in which forum you would like to search and if you want to search in topic subjects, message text or both." %}</em></p>
 
-			<hr />
-			<h5 class="mar-top">{% trans "Select how to view search results" %}</h5>
+			<h3 class="mar-top">{% trans "Select how to view search results" %}</h3>
 			<div class="row no-mar-bottom">
 				<div class="col s12 m8 input-field">
 					{{ form.sort_by }}

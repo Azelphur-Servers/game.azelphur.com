@@ -12,13 +12,13 @@
                 <ul id="nav-main-bar" class="hide-on-med-and-down menu-border-effect">
                     {% page_menu 'pages/menus/dropdown.html' %}
                 </ul>
-                <form id="nav-main-search" action="{% url 'search' %}" method="GET">
+                <form id="nav-main-search" action="{% url 'djangobb:search' %}" method="GET">
                     <div class="input-field">
-                        <input id="main-nav-search-input" type="search" name="q" placeholder="Search..." required>
+                        <input id="main-nav-search-input" type="search" name="keywords" placeholder="Search..." required>
                         <label for="main-nav-search-input"><i class="fa fa-fw fa-search fa-2x"></i></label>
                         <i id="nav-main-bar-button-search-close" class="material-icons fa fa-fw fa-times fa-lg"></i>
                     </div>
-                    <input type="hidden" name="type" value="" />
+                    <input type="hidden" name="action" value="search" />
                 </form>
                 <ul class="right menu-border-effect">
                     {% if request.user.is_authenticated %}
@@ -36,7 +36,7 @@
                         <li class="hide-on-med-and-down"><a href="{% url 'login' %}?next={{ request.path }}">{% trans 'Log in' %}</a></li>
                         <li class="hide-on-med-and-down"><a href="{% url 'signup' %}?next={{ request.path }}">{% trans 'Register' %}</a></li>
                     {% endif %}
-                    <li><a href="#search" id="nav-main-bar-button-search"><i class="fa fa-fw fa-search"></i></a></li>
+                    <li><a href="#" id="nav-main-bar-button-search"><i class="fa fa-fw fa-search"></i></a></li>
                 </ul>
             </div>
         </div>
