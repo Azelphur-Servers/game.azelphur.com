@@ -22,11 +22,19 @@
                 </form>
                 <ul class="right menu-border-effect">
                     {% if request.user.is_authenticated %}
-                        <li class="hide-on-med-and-down"><a href="{% url 'djangobb:forum_profile' user.username %}">Profile</a></li>
-                        <li class="hide-on-med-and-down"><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+                        <li class="hide-on-med-and-down">
+                            <a class="dropdown-button" href="#" data-activates="main_nav_profile_dd">{% trans 'Profile' %}<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="main_nav_profile_dd" class="dropdown-content nav-main-bar-dropdown">
+                                <li><a href="{% url 'messages_inbox' %}"><i class="fa fa-fw fa-sm fa-envelope"></i>{% trans 'Messages' %}</a></li>
+                                <li><a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=topics"><i class="fa fa-fw fa-sm fa-file-text"></i>{% trans 'My Topics' %}</a></li>
+                                <li><a href="{% url 'djangobb:search' %}?action=show_user&amp;show_as=posts"><i class="fa fa-fw fa-sm fa-comment"></i>{% trans 'My Posts' %}</a></li>
+                                <li><a href="{% url 'djangobb:forum_profile' user.username %}"><i class="fa fa-fw fa-sm fa-cog"></i>{% trans 'Settings' %}</a></li>
+                            </ul>
+                        </li>
+                        <li class="hide-on-med-and-down"><a href="{% url 'logout' %}?next={{ request.path }}">{% trans 'Logout' %}</a></li>
                     {% else %}
-                        <li class="hide-on-med-and-down"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-                        <li class="hide-on-med-and-down"><a href="{% url 'signup' %}?next={{ request.path }}">Register</a></li>
+                        <li class="hide-on-med-and-down"><a href="{% url 'login' %}?next={{ request.path }}">{% trans 'Log in' %}</a></li>
+                        <li class="hide-on-med-and-down"><a href="{% url 'signup' %}?next={{ request.path }}">{% trans 'Register' %}</a></li>
                     {% endif %}
                     <li><a href="#search" id="nav-main-bar-button-search"><i class="fa fa-fw fa-search"></i></a></li>
                 </ul>

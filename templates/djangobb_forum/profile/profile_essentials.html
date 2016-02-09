@@ -26,11 +26,11 @@
 				</div>
 			</div>
 			<div class="row no-mar-bottom">
-				<div class="col s12">
+				<div class="col s12 pad-bottom">
 					{% if user.is_superuser %}
-						<a class="btn-flat" href="{% url 'admin:auth_user_password_change' profile.id %}">{% trans "Change password" %}</a>
+						<a class="btn-flat btn-sm" href="{% url 'admin:auth_user_password_change' profile.id %}">{% trans "Change password" %}</a>
 					{% else %}
-						<a class="btn-flat" href="{% url 'account_change_password' %}">{% trans "Change password" %}</a>
+						<a class="btn-flat btn-sm" href="{% url 'account_change_password' %}">{% trans "Change password" %}</a>
 					{% endif %}
 				</div>
 			</div>

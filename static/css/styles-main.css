@@ -27,6 +27,9 @@ a {
     cursor: pointer;
     transition: color 0.5s ease;
 }
+a.link-color-normal {
+    color: inherit;
+}
 
 .btn-flat {
     color: #fb8d31;
@@ -295,6 +298,14 @@ form.inline-form {
     display: inline;
 }
 
+form > p:first-child {
+    margin-top: 5px;
+}
+
+form .errorlist {
+    color: #d32f2f;
+}
+
 /* Reset Materialize Checkboxes */
 /*input[type="checkbox"]:not(:checked),
 input[type="checkbox"]:checked {
@@ -302,6 +313,32 @@ input[type="checkbox"]:checked {
     left: auto;
     visibility: visible;
 }*/
+
+/* Images */
+img.avatar-small {
+    max-width: 27px;
+    max-height: 27px;
+}
+img.left {
+    margin-right: 15px;
+}
+
+/* Forum Messages */
+.message-headers dd {
+    padding-left: 20px;
+}
+.messages-user-detail {
+    padding: 10px;
+    background-color: #fafafa;
+}
+.messages-user-detail a {
+    font-weight: 600 !important;
+}
+img.avatar-messages {
+    max-width: 60px;
+    max-height: 60px;
+    margin-right: 15px;
+}
 
 /* Signup form fix */
 .account.signup .input_id_captcha label {
@@ -468,6 +505,14 @@ input[type="checkbox"]:checked {
     /*font-size: 0.9rem;*/
     padding: 0px 16px;
     line-height: 40px !important;
+}
+
+nav li > a > i {
+    margin-right: 10px;
+}
+nav li > a > i.fa-caret-down,
+nav li > a > i.fa-search {
+    margin-right: 0px;
 }
 
 /* Main Nav Search */
@@ -747,11 +792,33 @@ ul.pagination li.active {
     background-color: #FB8D31;
 }
 
+/* Tables / Grid Tables */
+.grid-table .row {
+    margin: 0px !important;
+}
+.grid-table .table-header {
+    background-color: #FB9F32;
+    color: #FFF;
+    font-size: 14px;
+}
+.grid-table .col {
+    padding: 12px 10px;
+}
+.grid-table > .table-body > .row:nth-child(2n) {
+    background-color: #FBFBFB;
+}
+
 /* Forum */
 
 /* Forum title */
 #content-main.forum .forum-head {
     position: relative;
+    margin-bottom: 15px;
+}
+#content-main.forum .forum-head::after {
+    display: block;
+    clear: both;
+    content: ' ';
 }
 
 #content-main .head-title,
@@ -760,29 +827,23 @@ ul.pagination li.active {
     padding: 0px;
     font-size: 24px;
     line-height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: break-word;
 }
 #content-main.forum .forum-head-title {
-    margin: -3px 180px 25px 0px;
+    margin: -3px 0px 10px 0px;
+    display: inline-block;
 }
 #content-main .head-title .sub-title,
 #content-main.forum .forum-head-title .sub-title {
     display: block;
     font-size: 13px;
     color: #858585;
-    overflow: hidden;
-    text-overflow: ellipsis;
     margin-top: -5px;
 }
 
 #content-main.forum .forum-head-actions {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -18px;
+    margin-top: -7px;
+    float: right;
+    display: inline-block;
 }
 @media screen and (max-width: 600px) {
     #content-main.forum .forum-head-title {
@@ -791,11 +852,6 @@ ul.pagination li.active {
     #content-main.forum .forum-head-actions a.btn {
         padding-left: 15px;
         padding-right: 15px;
-    }
-    #content-main.forum .forum-head-actions {
-        position: relative;
-        text-align: right;
-        margin-bottom: 15px;
     }
 }
 
@@ -844,10 +900,10 @@ ul.pagination li.active {
 #content-main.forum ul.forum-header > li > dl > dd  {
     padding: 10px;
     margin: 0px;
-    overflow: hidden;
+    /*overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    word-wrap: break-word;
+    word-wrap: break-word;*/
 }
 #content-main.forum ul.forum-list > li > dl > dt,
 #content-main.forum ul.forum-header > li > dl > dt {
@@ -910,11 +966,22 @@ ul.pagination li.active {
 }
 
 @media screen and (max-width: 992px) {
-    #content-main.forum ul.forum-list li > dl > dd.forum-topics,
-    #content-main.forum ul.forum-list > li > dl > dd.forum-posts,
     #content-main.forum ul.forum-header li > dl > dd.forum-topics,
     #content-main.forum ul.forum-header > li > dl > dd.forum-posts {
         display: none;
+    }
+    #content-main.forum ul.forum-list li > dl > dd.forum-topics {
+        padding-left: 50px;
+    }
+    #content-main.forum ul.forum-list li > dl > dd.forum-topics,
+    #content-main.forum ul.forum-list > li > dl > dd.forum-posts {
+        display: block;
+        width: 50%;
+        line-height: 1;
+        padding-top: 0px !important;
+        margin-top: -5px;
+        color: #858585;
+        text-align: left;
     }
     #content-main.forum ul.forum-list > li > dl > dt,
     #content-main.forum ul.forum-header > li > dl > dt {
@@ -959,10 +1026,13 @@ ul.pagination li.active {
     color: #fff;
     font-size: 20px;
     font-weight: 400;
-     padding-left: 10px;
+    padding-left: 10px;
 }
 #content-main.forum ul > li > dl > dt.forum-stats-title {
     width: 100%;
+}
+#content-main.forum .forum-header > li > dl > dt.forum-title.normal {
+    font-size: 13px;
 }
 
 /* Forum - Posts */
@@ -1046,7 +1116,7 @@ ul.pagination li.active {
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-link {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     right: 15px;
 }
 
@@ -1219,23 +1289,19 @@ div.code > pre {
 }
 
 /* Profile */
-#content-main.profile .profile-top-menu {
-    /*display: flex;*/
+.tabs-top-menu {
     position: relative;
-    /*overflow-x: auto;
-    overflow-y: hidden;*/
     min-height: 50px;
     background-color: #FFF;
     margin: 0px auto;
     width: 100%;
-    /*white-space: nowrap;*/
 }
-#content-main.profile .profile-top-menu::after {
+.tabs-top-menu::after {
     display: block;
     clear: both;
     content: " ";
 }
-#content-main.profile .profile-top-menu > .tab {
+.tabs-top-menu > .tab {
     /*flex-grow: 1;*/
     display: block;
     float: left;
@@ -1250,7 +1316,7 @@ div.code > pre {
     letter-spacing: 0.8px;
     min-width: 80px;
 }
-#content-main.profile .profile-top-menu > .tab > a {
+.tabs-top-menu > .tab > a {
     display: block;
     width: 100%;
     height: 100%;
@@ -1258,9 +1324,28 @@ div.code > pre {
     overflow: hidden;
     border-bottom: 2px solid transparent;
 }
-#content-main.profile .profile-top-menu > .tab > a.active {
+.tabs-top-menu > .tab > a.active {
     border-bottom-color: #FB8D31;
 }
+
+dl.styled-dl {
+    font-size: 1.1em;
+}
+dl.styled-dl > dt {
+    display: block;
+    width: 100px;
+    float: left;
+}
+dl.styled-dl > dt,
+dl.styled-dl > dd {
+    padding: 5px 0px;
+}
+dl.styled-dl > dt.full-width,
+dl.styled-dl > dd.full-width {
+    width: 100%;
+    float: none;
+}
+
 
 /* Messages */
 #messages .message {
@@ -1439,6 +1524,10 @@ div.code > pre {
     border-top: 2px solid #fb8d31;
     background: #2e2e2e;
     color: #eee;
+    padding-top: 00px;
+}
+#footer-main .row > .col {
+    margin-top: 20px;
 }
 #footer-main a {
     color: #eee;

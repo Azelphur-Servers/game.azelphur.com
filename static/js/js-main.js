@@ -29,6 +29,7 @@ $(document).ready(function(){
     $("#nav-main .dropdown-button").dropdown({
         belowOrigin: true,
         hover: true,
+        constrain_width: false,
     });
 
     // Main nav pushpin

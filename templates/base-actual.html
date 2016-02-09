@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
         <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <meta name="theme-color" content="#ef6c00">
     
         <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 
@@ -75,8 +76,8 @@
                     <div class="col l4 s12">
                         {% if settings.SITE_TITLE %}<h5>{{ settings.SITE_TITLE }}</h5>{% endif %}
                         <p id="footer-social">
-                            <a href="#" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
-                            <a href="#" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
+                            <a href="https://steamcommunity.com/groups/azelphur-servers" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
+                            <a href="{% url "blog_post_feed" "rss" %}" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
                         </p>
                     </div>
                     <div class="col l3 offset-l1 s12">

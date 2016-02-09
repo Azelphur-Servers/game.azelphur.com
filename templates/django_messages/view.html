@@ -1,0 +1,34 @@
+{% extends 'djangobb_forum/base.html' %}
+{% load forum_extras %}
+{% load i18n %} 
+
+{% block body_id %}forum forum-messages{% endblock %}
+{% block meta_title %}{% trans 'View Message' %} | {% trans 'Forum' %}{% endblock %}
+
+{% block content %}
+    {% include 'django_messages/messages_menu.html' with menu_active_item='inbox' %}
+
+    <div class="content-container">
+        <h3>{% trans "Message Detail" %}</h3>
+        <h5>{{ message.subject }}</h5>
+        <div class="messages-user-detail">
+            {% if message.sender.forum_profile.avatar %}
+                <img src="{{ message.sender.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-messages" />
+            {% else %}
+                {% if forum_settings.GRAVATAR_SUPPORT %}
+                    <img src="{% gravatar message.sender.email %}" alt="User Avatar" class="left avatar-messages" />
+                {% endif %}
+            {% endif %}
+            <a href="{% url 'djangobb:forum_profile' message.sender %}" class="forum-username">{{ message.sender }}</a><br />
+            {{ message.sent_at|date:_("DATETIME_FORMAT")}}
+            <div class="clearfix"></div>
+        </div>
+        <p>{{ message.body|linebreaksbr }}</p>
+        <div>
+            {% ifequal message.recipient.pk user.pk %}
+                <a href="{% url 'messages_reply' message.id %}" class="btn-flat"><span class="hide-on-small-only">{% trans "Reply" %}&nbsp;</span><i class="fa fa-fw fa-sm fa-reply"></i></a>
+            {% endifequal %}
+            <a onclick="return confirm('{% trans "Are you sure you want to delete this message?" %}')" href="{% url 'messages_delete' message.id %}" class="btn-flat"><i class="fa fa-fw fa-sm fa-trash"></i><span class="hide-on-small-only">&nbsp;{% trans "Delete" %}</span></a>
+        </div>
+    </div>
+{% endblock %}
