@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 
+from django.contrib.auth.views import password_change
+
 
 admin.autodiscover()
 
@@ -27,6 +29,12 @@ urlpatterns = i18n_patterns("",
     url(r'^messages/', include('django_messages.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^faq/', include('faq.urls')),
+    url(
+        r'^accounts/password_change/',
+        password_change,
+        {'post_change_redirect': '/', 'template_name': 'accounts/password_change.html'},
+        name='account_change_password'
+    ),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
 
