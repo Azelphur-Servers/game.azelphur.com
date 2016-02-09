@@ -813,6 +813,12 @@ ul.pagination li.active {
 /* Forum title */
 #content-main.forum .forum-head {
     position: relative;
+    margin-bottom: 15px;
+}
+#content-main.forum .forum-head::after {
+    display: block;
+    clear: both;
+    content: ' ';
 }
 
 #content-main .head-title,
@@ -821,29 +827,23 @@ ul.pagination li.active {
     padding: 0px;
     font-size: 24px;
     line-height: 30px;
-    /*overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: break-word;*/
 }
 #content-main.forum .forum-head-title {
-    margin: -3px 180px 25px 0px;
+    margin: -3px 0px 10px 0px;
+    display: inline-block;
 }
 #content-main .head-title .sub-title,
 #content-main.forum .forum-head-title .sub-title {
     display: block;
     font-size: 13px;
     color: #858585;
-    /*overflow: hidden;
-    text-overflow: ellipsis;*/
     margin-top: -5px;
 }
 
 #content-main.forum .forum-head-actions {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -18px;
+    margin-top: -7px;
+    float: right;
+    display: inline-block;
 }
 @media screen and (max-width: 600px) {
     #content-main.forum .forum-head-title {
@@ -852,11 +852,6 @@ ul.pagination li.active {
     #content-main.forum .forum-head-actions a.btn {
         padding-left: 15px;
         padding-right: 15px;
-    }
-    #content-main.forum .forum-head-actions {
-        position: relative;
-        text-align: right;
-        margin-bottom: 15px;
     }
 }
 

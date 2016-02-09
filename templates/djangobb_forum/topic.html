@@ -23,7 +23,14 @@
         </h3>
         {% if user.is_authenticated %}
 	        <div class="forum-head-actions">
-	            <a href="#reply" class="btn waves-effect waves-light action-new"><i class="fa fa-fw fa-sm fa-reply"></i>&nbsp;&nbsp;{% trans 'Post Reply' %}</a>
+                {% if user.is_authenticated %}
+                    {% if subscribed %}
+                        <a class="btn-flat" href="{% url 'djangobb:forum_delete_subscription' topic.id %}?from_topic">{% trans "Unsubscribe" %}</a>
+                    {% else %}
+                        <a class="btn-flat" href="{% url 'djangobb:forum_add_subscription' topic.id %}">{% trans "Subscribe" %}</a>
+                    {% endif %}
+                {% endif %}
+                <a href="#reply" class="btn action-new"><i class="fa fa-fw fa-sm fa-reply"></i>&nbsp;&nbsp;{% trans 'Post Reply' %}</a>
 	        </div>
         {% endif %}
     </div>
@@ -194,21 +201,21 @@
 {% endcomment %}
 
 {% block controls %}
-	<dl id="modcontrols">
-        <dt><strong>{% trans "Moderator control" %}</strong></dt>
 	{% if moderator %}
-		<dd><a href="{% url 'djangobb:delete_posts' topic.id %}">{% trans "Delete multiple posts" %}</a></dd>
-		<dd><a href="{% url 'djangobb:move_topic' %}?topic_id={{ topic.id }}">{% trans "Move topic" %}</a></dd>
-		{% if topic.closed %}
-			<dd><a href="{% url 'djangobb:open_close_topic' topic.id 'o' %}">{% trans "Open topic" %}</a></dd>
-		{% else %}
-			<dd><a href="{% url 'djangobb:open_close_topic' topic.id 'c' %}">{% trans "Close topic" %}</a></dd>
-		{% endif %}
-		{% if topic.sticky %}
-			<dd><a href="{% url 'djangobb:stick_unstick_topic' topic.id 'u' %}">{% trans "Unstick topic" %}</a></dd></dl>
-		{% else %}
-			<dd><a href="{% url 'djangobb:stick_unstick_topic' topic.id 's' %}">{% trans "Stick topic" %}</a></dd></dl>
-		{% endif %}
+        <dl id="modcontrols">
+            <dt><strong>{% trans "Moderator control" %}</strong></dt>
+    		<dd><a href="{% url 'djangobb:delete_posts' topic.id %}">{% trans "Delete multiple posts" %}</a></dd>
+    		<dd><a href="{% url 'djangobb:move_topic' %}?topic_id={{ topic.id }}">{% trans "Move topic" %}</a></dd>
+    		{% if topic.closed %}
+    			<dd><a href="{% url 'djangobb:open_close_topic' topic.id 'o' %}">{% trans "Open topic" %}</a></dd>
+    		{% else %}
+    			<dd><a href="{% url 'djangobb:open_close_topic' topic.id 'c' %}">{% trans "Close topic" %}</a></dd>
+    		{% endif %}
+    		{% if topic.sticky %}
+    			<dd><a href="{% url 'djangobb:stick_unstick_topic' topic.id 'u' %}">{% trans "Unstick topic" %}</a></dd></dl>
+    		{% else %}
+    			<dd><a href="{% url 'djangobb:stick_unstick_topic' topic.id 's' %}">{% trans "Stick topic" %}</a></dd></dl>
+    		{% endif %}
+        </dl>
 	{% endif %}
-    </dl>
 {% endblock %}
