@@ -11,7 +11,7 @@
 		<h3>{% trans "Profile Settings" %}</h3>
 		<form id="profile1" method="post">
 			{% csrf_token %}
-			<div class="row no-mar-bottom">
+			<div class="row no-mar-bottom{% if not user.is_superuser %} hide{% endif %}">
 				<div class="col s12 input-field">
 					{{ form.username.errors }}
 					{{ form.username }}
@@ -65,7 +65,7 @@
 			    		<dd>
 							<span class="green-text"><i class="fa fa-thumbs-up"></i> {{ profile.forum_profile.reply_count_plus|default_if_none:"0" }}</span>&nbsp;&nbsp;&nbsp;
 							<span class="red-text"><i class="fa fa-thumbs-down"></i> {{ profile.forum_profile.reply_count_minus|default_if_none:"0" }}</span>&nbsp;
-							- <a href="{% url 'djangobb:reputation' profile %}">{% trans "View All" %}</a>
+							- <a href="{% url 'djangobb:reputation' profile %}">{% trans "View Reputation" %}</a>
 						</dd>
 			    		<dt><strong>{% trans "Posts:" %}</strong></dt>
 			    		<dd>

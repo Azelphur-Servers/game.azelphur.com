@@ -71,9 +71,9 @@
     		<dt class="full-width"><strong>{% trans "Forum Signature:" %}</strong></dt>
     		<dd class="full-width">
 				{% if profile.forum_profile.signature_html %}
-					{{ profile.forum_profile.signature_html|safe }}
+					<div class="forum-sig-box">{{ profile.forum_profile.signature_html|safe }}</div>
 				{% else %}
-					{% trans "(Unknown)" %}
+					{% trans "Not set." %}
 				{% endif %}
 			</dd>
 		</dl>

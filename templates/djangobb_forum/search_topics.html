@@ -40,13 +40,13 @@
                     <dl class="forum-icon {% if topic|has_unreads:user %}topic-new {% endif %}{% if topic.closed %}topic-closed{% else %}{% if topic.sticky %}topic-sticky{% endif %}{% endif %}">
                         <dt class="forum-title">
                             {% link topic %}<br />
-                            {% trans 'Started' %} <time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time> {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>
+                            {% trans 'By' %} <a class="link-color-normal" href="{% url 'djangobb:forum_profile' topic.user.username %}">{{ topic.user.username }}</a>, <time datetime="{{ topic.created|date:'c' }}">{% forum_time topic.created %}</time>
                         </dt>
                         <dd class="forum-topics">{{ topic.reply_count }}</dd>
                         <dd class="forum-posts">{{ topic.views }}</dd>
                         <dd class="forum-latest">
-                            <time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time><br />
-                            {% trans "by" %} <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
+                            <a href="{{ topic.last_post.get_absolute_url }}"><time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time></a><br />
+                            {% trans "By" %} <a class="link-color-normal" href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
                         </dd>
                     </dl>
                 </li>

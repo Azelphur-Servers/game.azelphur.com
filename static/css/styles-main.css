@@ -302,7 +302,8 @@ form > p:first-child {
     margin-top: 5px;
 }
 
-form .errorlist {
+.errorlist,
+.form-errors {
     color: #d32f2f;
 }
 
@@ -1001,7 +1002,7 @@ ul.pagination li.active {
     }
     #content-main.forum ul.forum-list > li > dl > dd.forum-latest,
     #content-main.forum ul.forum-header > li > dl > dd.forum-latest {
-        width: 35%;
+        display: none;
     }
 }
 @media screen and (max-width: 500px) {
@@ -1045,6 +1046,13 @@ ul.pagination li.active {
 }
 #content-main.forum .forum-header > li > dl > dt.forum-title.normal {
     font-size: 13px;
+}
+
+@media screen and (max-width:600px) {
+    #content-main.forum .forum-header > li > dl > dt.forum-stats-title,
+    #content-main.forum .forum-header > li > dl > dt.forum-title {
+        font-size: 16px;
+    }
 }
 
 /* Forum - Posts */
@@ -1118,7 +1126,7 @@ ul.pagination li.active {
 #content-main.forum.forum-posts .forum-post-container {
     border-left: 1px solid #eeeeee;
     margin-left: -1px;
-    padding: 8px 15px 55px;
+    padding: 8px 15px 65px;
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-date {
     color: #858585;
@@ -1199,10 +1207,8 @@ ul.pagination li.active {
 
 /* Forum - Posts - Actions */
 #content-main.forum.forum-posts .forum-post-container > .forum-post-action {
-    /*margin-top: 10px;*/
     position: absolute;
     bottom: 6px;
-
 }
 #content-main.forum.forum-posts .forum-post-container > .forum-post-action > a,
 .btn-flat.btn-sm {
@@ -1356,6 +1362,12 @@ dl.styled-dl > dt.full-width,
 dl.styled-dl > dd.full-width {
     width: 100%;
     float: none;
+}
+
+.forum-sig-box {
+    color: #272A34;
+    background-color: #FAFAFA;
+    padding: 15px;
 }
 
 
