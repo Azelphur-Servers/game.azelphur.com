@@ -35,6 +35,7 @@ urlpatterns = i18n_patterns("",
         {'post_change_redirect': '/', 'template_name': 'accounts/password_change.html'},
         name='account_change_password'
     ),
+    url(r'^rules/$', TemplateView.as_view(template_name='rules.html')),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
 
