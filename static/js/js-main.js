@@ -50,6 +50,9 @@ $(document).ready(function(){
         $('#nav-main-search').slideUp('fast');
     });
 
+    // Modal
+    $('.modal-trigger').leanModal();
+
     // Hash/Internal Links
     $('a[href*=#]:not([href=#])').on('click', function(e) {
         var findElem = $(this).attr('href');
