@@ -100,9 +100,10 @@ $(document).ready(function(){
 
 
     // Server Updater
-    var serverUpdateTimer = 0;
-    var serverUpdateTime = 15000;
+    var serverUpdateInterval = 15000;
     var serverUpdateURL = '/game_info/server/';
+
+    var serverUpdateTimer = 0;
     var serverUpdateLast = 0;
 
     // Visibility
@@ -112,22 +113,23 @@ $(document).ready(function(){
     function visibilityChanged() {
         clearTimeout(serverUpdateTimer);
         if(!document.hidden) {
-            serverUpdateTimer = setInterval(function(){UpdateServerBar();}, serverUpdateTime);
+            serverUpdateTimer = setInterval(function(){UpdateServerBar();}, serverUpdateInterval);
             
-            if(serverUpdateLast > 0 && (Math.floor(Date.now() / 1000) - serverUpdateLast) > serverUpdateTime)
+            if(serverUpdateLast > 0 && (Math.floor(Date.now() / 1000) - serverUpdateLast) >= serverUpdateInterval)
                 UpdateServerBar();
         }
     }
 
+    // Server block update function
     function UpdateServerBar() {
         var $ServerElem = $('#content-side .side-server-list');
         if(!$ServerElem.length)
             return false;
 
+        var shouldUpdateTooltips = false;
         serverUpdateLast = Math.floor(Date.now() / 1000);
 
-        DoTooltips = false;
-
+        // Get JSON data and loop over it
         $.getJSON(serverUpdateURL, function(data) {
             $.each(data, function() {
                 if(!$ServerElem.find('[data-serverid="'+this.id+'"]').length)
@@ -150,12 +152,11 @@ $(document).ready(function(){
                     var $InfoElm = $ServerBlock.find('.server-info-name').first();
                     if(this.up == true && !$InfoElm.find('a').length) {
                         $InfoElm.html($('<a>').attr('href', 'steam://connect/'+this.host+(this.port == 27015?'':':'+this.port)).attr('data-tooltip', 'Connect to this server').text(this.title));
-                        DoTooltips = true;
-                        console.log(DoTooltips);
+                        shouldUpdateTooltips = true;
                     } else if(this.up == true && $InfoElm.find('a').first().text() != this.title) {
                         $InfoElm.find('a').first().text(this.title);
                     } else if(this.up == false && $InfoElm.find('a').length) {
-                        $InfoElm.html(this.title);
+                        $InfoElm.text(this.title);
                     } else if(this.up == false && $InfoElm.text() != this.title) {
                         $InfoElm.text(this.title);
                     }
@@ -183,7 +184,7 @@ $(document).ready(function(){
                         if($InfoElm.text() != '0 / 0')
                             $InfoElm.text('0 / 0');
                     } else {
-                        if(this.up == true && $InfoElm.text() != this.info.map) {
+                        if(this.up == true) {
                              $InfoElm.text(this.info.player_count+' '+((this.info.bot_count !== null && this.info.bot_count === null > 0)?'('+this.info.bot_count+') ':'')+'/ '+this.info.max_players);
                          } else if(this.up == false && $InfoElm.text() != '0 / 0') {
                              $InfoElm.text('0 / 0');
@@ -193,12 +194,13 @@ $(document).ready(function(){
                 }
             });
 
-            if(DoTooltips == true) {
+            // Have links with tooltips been changed?
+            if(shouldUpdateTooltips) {
                 $('[data-tooltip][data-tooltip!=""]').hoverTooltip({wrapperSelector: 'body'});
             }
         });
-
     }
 
-    serverUpdateTimer = setInterval(function(){UpdateServerBar();}, serverUpdateTime);
+    // Init 
+    serverUpdateTimer = setInterval(function(){UpdateServerBar();}, serverUpdateInterval);
 });
