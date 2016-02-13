@@ -842,7 +842,7 @@ ul.pagination li.active {
     margin: -3px 0px 25px 0px;
     padding: 0px;
     font-size: 24px;
-    line-height: 30px;
+    line-height: 1;
 }
 #content-main.forum .forum-head-title {
     margin: -3px 0px 10px 0px;
@@ -853,11 +853,12 @@ ul.pagination li.active {
     display: block;
     font-size: 13px;
     color: #858585;
-    margin-top: -5px;
+    margin-top: 5px;
+    line-height: 1;
 }
 
 #content-main.forum .forum-head-actions {
-    margin-top: -7px;
+    margin-top: 0px;
     float: right;
     display: inline-block;
 }

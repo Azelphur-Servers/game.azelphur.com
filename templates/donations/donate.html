@@ -53,33 +53,33 @@
     </div>
     <div class="content-container">
         <h4>{% trans 'Donate with TF2 keys' %}</h4>
-        <p class="no-padding-top">{% blocktrans %}Aren't able to donate with real money but still want access to these fantastic features? Well, you can now donate using TF2 keys! The process is automated and amazingly simply. Just add <a href="https://steamcommunity.com/id/azelbot" rel="nofollow">AzelBot</a> on Steam, send it a trade request and add some keys! 1 key will get you a week, 3 keys a month and 5 keys 3 months.{% endblocktrans %}</p>
+        <p class="no-padding-top">{% blocktrans %}Aren't able to donate with real money but still want access to these fantastic features? Well, you can now donate using TF2 keys! The process is automated and amazingly simply. Just add <a href="https://steamcommunity.com/id/azelbot" rel="nofollow" target="_blank">AzelBot</a> on Steam, send it a trade request and add some keys! 1 key will get you a week, 3 keys a month and 5 keys 3 months.{% endblocktrans %}</p>
     </div>
-            <p class="no-padding-bottom"><small class="grey-text text-darken-1">{% blocktrans %}* By donating to Azelphur Servers you are not paying for digital goods, we are offering these benefits as a thank you for your kind donation. Donations are non-refundable and do not give you immunity from any server rules.{% endblocktrans %}</small></p>
+    <p class="no-padding-bottom"><small class="grey-text text-darken-1">{% blocktrans %}* By donating to Azelphur Servers you are not paying for digital goods, we are offering these benefits as a thank you for your kind donation. Donations are non-refundable and do not give you immunity from any server rules.{% endblocktrans %}</small></p>
 
     {% if not steam and user.is_authenticated %}
         <div id="modal-steam" class="modal">
             <div class="modal-content">
                 <h4>{% trans 'Link your account with Steam' %}</h4>
-                <p>{% blocktrans %}Our donation system is fully automated, so in order for you to receive your premium benefits, we need know to know your which Steam account to give them too. Luckily, you can simply associate your your Steam account by signing in with Steam using the button below.{% endblocktrans %}</p>
-                <p class="center-align"><a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}"><img src="{% static 'img/social/steam-signup.png' %}" alt=""></a></p>
+                <p>{% blocktrans %}Our donation system is fully automated, so in order for you to receive your premium benefits, we need know to know which Steam account to give them too. Luckily, you can simply associate your your Steam account by signing in with Steam using the button below.{% endblocktrans %}</p>
+                <p class="center-align mar-top pad-top"><a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}"><img src="{% static 'img/social/steam-signup.png' %}" alt=""></a></p>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close btn-flat">{% trans 'Cancel' %}</a>
+                <button class="modal-action modal-close btn-flat">{% trans 'Cancel' %}</button>
             </div>
         </div>
     {% elif user.is_anonymous %}
         <div id="modal-steam" class="modal">
             <div class="modal-content">
                 <h4>{% trans 'Log In Required' %}</h4>
-                <p>{% blocktrans %}Our donation system is fully automated, so in order for you to receive your premium benefits, we need know to know your which Steam account to give them too. Please log in or create an account to continue. For ease, you can also choose to sign in through Steam.{% endblocktrans %}</p>
-                <p class="center-align">
-                    <a class="btn" href="{% url 'login' %}?next={{ request.path }}">{% trans 'Log In' %}</a>
+                <p>{% blocktrans %}Our donation system is fully automated, so in order for you to receive your premium benefits, we need know to know which Steam account to give them too. Please log in or create an account to continue. For ease, you can also choose to sign in through Steam.{% endblocktrans %}</p>
+                <p class="center-align mar-top pad-top">
+                    <a class="btn" href="{% url 'login' %}?next={{ request.path }}">{% trans 'Log In' %}</a>&nbsp;&nbsp;&nbsp;
                     <a class="btn" href="{% url 'signup' %}?next={{ request.path }}">{% trans 'Register' %}</a>
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close btn-flat">{% trans 'Cancel' %}</a>
+                <button class="modal-action modal-close btn-flat">{% trans 'Cancel' %}</button>
             </div>
         </div>
     {% endif %}
