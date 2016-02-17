@@ -35,6 +35,9 @@ a.link-color-normal {
     color: #fb8d31;
     margin-bottom: 7px;
 }
+.btn-flat:focus {
+    background-color: inherit !important;
+}
 .btn {
     background-color: #fb8523 !important;
     margin-bottom: 7px;
@@ -420,7 +423,7 @@ img.avatar-messages {
     background: #fb8523;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
     height: 54px;
-    z-index: 1005;
+    z-index: 900;
 }
 #nav-main .container {
     position: relative;
@@ -839,7 +842,7 @@ ul.pagination li.active {
     margin: -3px 0px 25px 0px;
     padding: 0px;
     font-size: 24px;
-    line-height: 30px;
+    line-height: 1;
 }
 #content-main.forum .forum-head-title {
     margin: -3px 0px 10px 0px;
@@ -850,11 +853,12 @@ ul.pagination li.active {
     display: block;
     font-size: 13px;
     color: #858585;
-    margin-top: -5px;
+    margin-top: 5px;
+    line-height: 1;
 }
 
 #content-main.forum .forum-head-actions {
-    margin-top: -7px;
+    margin-top: 0px;
     float: right;
     display: inline-block;
 }
