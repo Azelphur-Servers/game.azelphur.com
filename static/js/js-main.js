@@ -98,6 +98,9 @@ $(document).ready(function(){
     // Init material select's
     $('select').material_select();
 
+    $('.forum.forum-posts .forum-post-container .forum-post-body img').addClass('responsive-img materialboxed');
+    $('.materialboxed').materialbox();
+
 
     // Server Updater
     var serverUpdateInterval = 15000;
