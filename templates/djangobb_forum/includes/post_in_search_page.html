@@ -7,7 +7,11 @@
         <div class="col s12 m3 l2 forum-user">
             <dl>
                 {% if post.user.forum_profile.avatar and post.user.forum_profile.show_avatar %}
-                    <dt class="forum-user-avatar"><img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" /></dt>
+                    <dt class="forum-user-avatar">
+                        <a href="{% url 'djangobb:forum_profile' post.user.username %}">
+                            <img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" />
+                        </a>
+                    </dt>
                 {% else %}
                     {% if forum_settings.GRAVATAR_SUPPORT and post.user.forum_profile.show_avatar %}
                         <dt class="forum-user-avatar">
@@ -51,7 +55,7 @@
         <div class="col s12 m9 l10 forum-post-container">
             <div class="forum-post-date"><i class="fa fa-fw fa-clock-o"></i>&nbsp;<time datetime="{{ post.created|date:'c' }}">{% forum_time post.created %}</time></div>
             <div class="forum-post-body restyle-lists">
-                {{ post.body_html|safe }}
+                {{ post.body_html|truncatewords_html:120|safe }}
             </div>
             {% if post.updated %}
                 <div class="forum-post-edited">{% trans "Edited by" %} {{ post.updated_by.username }} - <span class="capitalize">{% forum_time post.updated %}</span></div>
