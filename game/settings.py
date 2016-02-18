@@ -240,6 +240,7 @@ INSTALLED_APPS = (
     "nocaptcha_recaptcha",
     "faq",
     "django_messages",
+    "social_auth_filter",
 )
 
 # List of processors used by RequestContext to populate the context.
