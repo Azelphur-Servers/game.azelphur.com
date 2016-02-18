@@ -85,7 +85,11 @@
                 <div class="col s12 m3 l2 forum-user">
                 	<dl>
 						{% if post.user.forum_profile.avatar and post.user.forum_profile.show_avatar %}
-							<dt class="forum-user-avatar"><img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" /></dt>
+							<dt class="forum-user-avatar">
+                                <a href="{% url 'djangobb:forum_profile' post.user.username %}">
+                                    <img src="{{ post.user.forum_profile.avatar.url }}" alt="User Avatar" />
+                                </a>
+                            </dt>
 						{% else %}
 							{% if forum_settings.GRAVATAR_SUPPORT and post.user.forum_profile.show_avatar %}
 								<dt class="forum-user-avatar">

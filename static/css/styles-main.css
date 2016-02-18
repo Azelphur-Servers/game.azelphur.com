@@ -97,6 +97,10 @@ i.fa.fa-va {
     padding-right: 1rem !important;
 }
 
+.va-middle {
+    vertical-align: middle;
+}
+
 .restyle-lists ul,
 ul.restyle-list,
 .article-body ul {
@@ -237,7 +241,7 @@ ul.description-list dl > dd {
     margin-bottom: 0px !important;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
     .container {
         width: 90%;
     }
@@ -965,6 +969,19 @@ ul.pagination li.active {
     text-transform: capitalize;
 }
 
+#content-main.forum ul.forum-list > li > dl > dd.forum-latest a.avatar,
+#content-main.forum ul.forum-header > li > dl > dd.forum-latest a.avatar {
+    display: inline-block;
+    float: left;
+    padding-top: 5px;
+    margin-right: 8px;
+}
+#content-main.forum ul.forum-list > li > dl > dd.forum-latest a.avatar img,
+#content-main.forum ul.forum-header > li > dl > dd.forum-latest a.avatar img {
+    max-width: 27px;
+    max-height: 27px;
+}
+
 #content-main.forum ul.forum-list > li > dl.topic-sticky > dt::before {
     content: 'Pinned';
     background: #7BA60D;
@@ -1636,6 +1653,10 @@ dl.styled-dl > dd.full-width {
     margin-right: 15px;
 }
 #footer-main #footer-social a.social-steam {
+    background-color: #171a21 !important;
+    color: #fff;
+}
+#footer-main #footer-social a.social-github {
     background-color: #000 !important;
     color: #fff;
 }

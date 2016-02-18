@@ -98,7 +98,13 @@ $(document).ready(function(){
     // Init material select's
     $('select').material_select();
 
-    $('.forum.forum-posts .forum-post-container .forum-post-body img').addClass('responsive-img materialboxed');
+    $('.forum.forum-posts .forum-post-container .forum-post-body img').each(function(){
+        $(this).addClass('responsive-img');
+        if(!$(this).closest('a').length) {
+            $(this).addClass('materialboxed');
+        }
+    });
+
     $('.materialboxed').materialbox();
 
 

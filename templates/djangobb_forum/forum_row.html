@@ -2,11 +2,7 @@
 {% load cache %}
 {% load i18n %}
 
-{% if forum.last_post.topic %}
-	<li>
-{% else %}
-	<li>
-{% endif %}
+<li>
     <dl class="forum-icon{% if forum|forum_unreads:user %} topic-new{% endif %}"{% if forum.forum_logo %} style="background-image:url('{{ forum.forum_logo.url }}') !important;"{% endif %}>
         <dt class="forum-title">
             {% link forum %}<br />
@@ -17,6 +13,17 @@
         <dd class="forum-latest">
         {% if forum.updated %}
             {% if forum.last_post.topic %}
+                {% if forum.last_post.user.forum_profile.avatar and forum.last_post.user.forum_profile.show_avatar %}
+                    <a href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}" class="avatar">
+                        <img src="{{  forum.last_post.user.forum_profile.avatar.url }}" alt="User Avatar" />
+                    </a>
+                {% else %}
+                    {% if forum_settings.GRAVATAR_SUPPORT and forum.last_post.user.forum_profile.show_avatar %}
+                        <a href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}" class="avatar">
+                            <img src="{% gravatar forum.last_post.user.email %}" alt="User Avatar" />
+                        </a>
+                    {% endif %}
+                {% endif %}
                 <a href="{{ forum.last_post.get_absolute_url }}"><time datetime="{{ forum.last_post.created|date:'c' }}">{% forum_time forum.last_post.created %}</time></a><br />
                 {% trans "by" %} <a class="link-color-normal" href="{% url 'djangobb:forum_profile' forum.last_post.user.username %}">{{ forum.last_post.user.username|safe }}</a>
             {% endif %}
