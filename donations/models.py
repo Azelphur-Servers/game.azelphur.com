@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
 from social.apps.django_app.default.models import UserSocialAuth
+from djangobb_forum.models import Profile
 from game_info.models import Server
 from valve.source.rcon import RCON
 from datetime import timedelta
@@ -37,6 +38,9 @@ def add_premium(sender, **kwargs):
             return
         group = Group.objects.get(name=settings.PREMIUM_GROUP_NAME)
         social_user.user.groups.add(group)
+        profile = Profile.objects.get(user=social_user.user)
+        profile.status = "Premium"
+        profile.save()
         for x in settings.DONATION_AMOUNTS:
             if x[0] == ipn_obj.mc_gross:
                 end_time = timezone.now() + timedelta(days=x[1])
