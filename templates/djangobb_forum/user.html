@@ -3,14 +3,14 @@
 {% load i18n %}
 
 {% block body_id %}forum profile{% endblock %}
-{% block meta_title %}{{ profile|truncatechars:12 }} | {% trans 'Users' %}{% endblock %}
+{% block meta_title %}{{ profile|truncatechars:12 }} | {% trans 'User' %}{% endblock %}
 
 {% block content %}
     <div class="forum-head pad-bottom">
-		{% if profile.forum_profile.avatar %}
+		{% if profile.forum_profile.avatar and profile.forum_profile.show_avatar %}
 			<img src="{{ profile.forum_profile.avatar.url }}" alt="User Avatar" class="left pad-right" />
 		{% else %}
-			{% if forum_settings.GRAVATAR_SUPPORT %}
+			{% if forum_settings.GRAVATAR_SUPPORT and profile.forum_profile.show_avatar %}
 				<img src="{% gravatar profile.email %}" alt="User Avatar" class="left pad-right" />
 			{% endif %}
 		{% endif %}

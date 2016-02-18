@@ -3,7 +3,7 @@
 
 {% spaceless %}
     {% if page.has_other_pages %}
-        <ul class="pagination">
+        <ul class="pagination {{ text_align|default:'center-align' }}">
             <li {% if not page.has_previous %} class="disabled"{% endif %}>
                 <a href="{% if page.has_previous %}?{% url_replace request 'page' page.previous_page_number %}{% else %}#{% endif %}">
                     <i class="fa fa-fw fa-chevron-left"></i>

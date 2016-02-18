@@ -62,6 +62,10 @@ i.fa.fa-sm {
     font-size: 0.8rem;
 }
 
+i.fa.fa-va {
+    vertical-align: middle;
+}
+
 /* Generic Helpers */
 .clearfix {
     clear: both;
@@ -94,19 +98,22 @@ i.fa.fa-sm {
 }
 
 .restyle-lists ul,
-ul.restyle-list {
+ul.restyle-list,
+.article-body ul {
     margin: 0.7rem 0px 0.7rem 0rem;
     list-style: none;
 }
 .restyle-lists ul > li,
-ul.restyle-list > li {
+ul.restyle-list > li,
+.article-body ul > li {
     list-style-type: none;
     position: relative;
     margin-left: 0px;
     padding-left: 15px;
 }
 .restyle-lists ul > li:before,
-ul.restyle-list > li:before {
+ul.restyle-list > li:before,
+.article-body ul > li:before {
     content: '»';
     position: absolute;
     left: 0;
@@ -708,6 +715,11 @@ nav li > a > i.fa-search {
     border-bottom: 0px;
 }
 
+.comment .comment {
+    margin-left: 1.5rem;
+    border-top: 1px solid #eeeeee !important;
+}
+
 #comments .comment .comment-image {
     float: left;
     margin-top: 5px;
@@ -788,7 +800,7 @@ nav li > a > i.fa-search {
 
 /* Pagination */
 ul.pagination {
-    text-align: center;
+    margin-bottom: 23px;
 }
 ul.pagination li .fa {
     font-size: 1rem;

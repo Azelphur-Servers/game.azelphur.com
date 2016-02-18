@@ -12,11 +12,15 @@
         <h3>{% trans "Message Detail" %}</h3>
         <h5>{{ message.subject }}</h5>
         <div class="messages-user-detail">
-            {% if message.sender.forum_profile.avatar %}
-                <img src="{{ message.sender.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-messages" />
+            {% if message.sender.forum_profile.avatar and message.sender.forum_profile.show_avatar %}
+                <a href="{% url 'djangobb:forum_profile' message.sender %}" class="forum-username">
+                    <img src="{{ message.sender.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-messages" />
+                </a>
             {% else %}
-                {% if forum_settings.GRAVATAR_SUPPORT %}
-                    <img src="{% gravatar message.sender.email %}" alt="User Avatar" class="left avatar-messages" />
+                {% if forum_settings.GRAVATAR_SUPPORT and message.sender.forum_profile.show_avatar %}
+                    <a href="{% url 'djangobb:forum_profile' message.sender %}" class="forum-username">
+                        <img src="{% gravatar message.sender.email %}" alt="User Avatar" class="left avatar-messages" />
+                    </a>
                 {% endif %}
             {% endif %}
             <a href="{% url 'djangobb:forum_profile' message.sender %}" class="forum-username">{{ message.sender }}</a><br />

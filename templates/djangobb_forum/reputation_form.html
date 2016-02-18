@@ -9,10 +9,10 @@
 	<div class="content-container">
 		<h3>{% trans "Submit user reputation" %}</h3>
 	    <div class="messages-user-detail mar-bottom">
-	        {% if form.to_user.forum_profile.avatar %}
+	        {% if form.to_user.forum_profile.avatar and form.to_user.forum_profile.show_avatar %}
 	            <img src="{{ form.to_user.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-messages" />
 	        {% else %}
-	            {% if forum_settings.GRAVATAR_SUPPORT %}
+	            {% if forum_settings.GRAVATAR_SUPPORT and form.to_user.forum_profile.show_avatar %}
 	                <img src="{% gravatar form.to_user.email %}" alt="User Avatar" class="left avatar-messages" />
 	            {% endif %}
 	        {% endif %}

@@ -28,10 +28,10 @@
             {% for message in message_list %}
                 <div class="row">
                     <div class="col s12 m3">
-                        {% if message.recipient.forum_profile.avatar %}
+                        {% if message.recipient.forum_profile.avatar and message.recipient.forum_profile.show_avatar %}
                             <a href="{% url 'djangobb:forum_profile' message.sender %}"><img src="{{ message.recipient.forum_profile.avatar.url }}" alt="User Avatar" class="left avatar-small" /></a>
                         {% else %}
-                            {% if forum_settings.GRAVATAR_SUPPORT %}
+                            {% if forum_settings.GRAVATAR_SUPPORT and message.recipient.forum_profile.show_avatar %}
                                 <a href="{% url 'djangobb:forum_profile' message.sender %}"><img src="{% gravatar message.recipient.email %}" alt="User Avatar" class="left avatar-small" /></a>
                             {% endif %}
                         {% endif %}
