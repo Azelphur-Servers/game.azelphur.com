@@ -62,6 +62,10 @@ i.fa.fa-sm {
     font-size: 0.8rem;
 }
 
+i.fa.fa-va {
+    vertical-align: middle;
+}
+
 /* Generic Helpers */
 .clearfix {
     clear: both;
@@ -706,6 +710,11 @@ nav li > a > i.fa-search {
 #comments .comment:last-child {
     padding-bottom: 0px;
     border-bottom: 0px;
+}
+
+.comment .comment {
+    margin-left: 1.5rem;
+    border-top: 1px solid #eeeeee !important;
 }
 
 #comments .comment .comment-image {

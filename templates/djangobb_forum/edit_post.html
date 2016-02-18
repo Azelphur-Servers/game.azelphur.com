@@ -31,7 +31,7 @@
 			<div class="input-field">
 				{{ form.body }}
 			</div>
-	        <input type="submit" class="btn waves-effect waves-lighten" value="{% trans "Submit" %}" />&nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default:"javascript:history.go(-1);" }}">{% trans "Go back" %}</a>
+	        <input type="submit" class="btn" value="{% trans "Submit" %}" />&nbsp;&nbsp;<a class="btn-flat" href="{{ back_url|default:"javascript:history.go(-1);" }}">{% trans "Go back" %}</a>
 		</form>
 	</div>
 {% endblock %}
