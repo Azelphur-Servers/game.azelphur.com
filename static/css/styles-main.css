@@ -98,19 +98,22 @@ i.fa.fa-va {
 }
 
 .restyle-lists ul,
-ul.restyle-list {
+ul.restyle-list,
+.article-body ul {
     margin: 0.7rem 0px 0.7rem 0rem;
     list-style: none;
 }
 .restyle-lists ul > li,
-ul.restyle-list > li {
+ul.restyle-list > li,
+.article-body ul > li {
     list-style-type: none;
     position: relative;
     margin-left: 0px;
     padding-left: 15px;
 }
 .restyle-lists ul > li:before,
-ul.restyle-list > li:before {
+ul.restyle-list > li:before,
+.article-body ul > li:before {
     content: '»';
     position: absolute;
     left: 0;
