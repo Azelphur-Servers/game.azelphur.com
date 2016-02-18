@@ -340,7 +340,7 @@ DONATION_AMOUNTS = (
 # Target donation amount for sidebar
 MONTHLY_DONATION_AMOUNT = 180
 
-PREMIUM_GROUP_NAME = "SM_PREMIUM"
+PREMIUM_GROUP_NAME = "Premium"
 
 ACCOUNTS_PROFILE_FORM_EXCLUDE_FIELDS = ("first_name", "last_name")
 
