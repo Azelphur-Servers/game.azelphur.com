@@ -99,9 +99,11 @@ $(document).ready(function(){
     $('select').material_select();
 
     $('.forum.forum-posts .forum-post-container .forum-post-body img').each(function(){
-        $(this).addClass('responsive-img');
-        if(!$(this).closest('a').length) {
-            $(this).addClass('materialboxed');
+        if($(this).attr('src').search('djangobb_forum/img/smilies') < 0) {
+            $(this).addClass('responsive-img');
+            if(!$(this).closest('a').length) {
+                $(this).addClass('materialboxed');
+            }
         }
     });
 
