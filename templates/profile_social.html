@@ -1,43 +1,41 @@
 {% extends 'djangobb_forum/base.html' %}
-{% load forum_extras static %}
+{% load forum_extras static social_auth_filter %}
 {% load i18n %}
 
-{% block body_id %}profile{% endblock %}
+{% block body_id %}profile profile-social{% endblock %}
 {% block meta_title %}{{ user.username|safe|truncatechars:20 }} | {% trans 'User' %}{% endblock %}
 
 {% block content %}
 	{% include 'djangobb_forum/profile/profile_menu.html' with active_menu='social' profile=user.username %}
 	<div class="content-container">
 		<h3>{% trans "Social Auths" %}</h3>
+        <p class="mar-bottom">{% trans "Once you have associated your account with a website, will be able to use that site to log into your account here." %}</p>
 		<h4>Active associations</h4>
         {% for backend in backends.associated %}
-            {% with 'img/social/'|add:backend.provider|add:'.png' as image_url %}
-                <div class="row">
-                	<div class="col s12">
-                		<img class="left pad-right" src="{% static image_url %}">
-                        <form action="{% url 'social:disconnect' backend.provider %}?next={{ request.path }}" method="post">
-                            <p>{% trans 'You have signed in with' %} <span class="capitalize strong">{{ backend.provider }}</span>. 
-                                {% csrf_token %}
-                                <button class="btn-flat" type="submit">{% trans 'Un-link' %} {{ backend.provider }}</button>
-                            </p>
-                        </form>
-                	</div>
-                </div>
-            {% endwith %}
+            <div class="row">
+            	<div class="col s12">
+                    <form action="{% url 'social:disconnect' backend.provider %}?next={{ request.path }}" method="post">
+                        <p>
+                            <i class="fa fa-va fa-fw fa-{{ backend.provider|social_display_name|lower }} fa-2x left"></i>
+                            {% trans 'You have signed in with' %} <span class="capitalize strong">{{ backend.provider|social_display_name }}</span>.&nbsp; 
+                            {% csrf_token %}
+                            <button class="btn-flat btn-sm" type="submit">{% trans 'Un-link' %} {{ backend.provider|social_display_name }}</button>
+                        </p>
+                    </form>
+            	</div>
+            </div>
         {% empty %}
         	<p>{% trans 'You have not yet associated your account with any social networks.' %}</p>
         {% endfor %}
         {% if backends.not_associated|length > 0 %}
-        	<h4>{% trans 'Link your account with' %}</h4>
+        	<h4 class="mar-bottom">{% trans 'Link your account with:' %}</h4>
 	        {% for backend in backends.not_associated %}
-	            {% with 'img/social/'|add:backend|add:'.png' as image_url %}
-	                <div class="row">
-	                	<div class="col s12">
-	                		<img class="left pad-right" src="{% static image_url %}">
-	                		<p><a href="{% url 'social:begin' backend %}?next={{ request.path }}" class="capitalize">{% trans 'Sign in with' %} {{ backend }}</a></p>
-	                	</div>
-	                </div>
-	            {% endwith %}
+                <div class="row">
+                	<div class="col s12">
+                        <i class="fa fa-va fa-fw fa-{{ backend|social_display_name|lower }} fa-2x left"></i>
+                        <a href="{% url 'social:begin' backend %}?next={{ request.path }}" class="btn-flat btn-sm">{{ backend|social_display_name }}</a>
+                	</div>
+                </div>
 	        {% endfor %}
         {% endif %}
 	</div>

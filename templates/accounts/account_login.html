@@ -1,5 +1,5 @@
 {% extends "accounts/account_form.html" %}
-{% load i18n static mezzanine_tags %}
+{% load i18n static mezzanine_tags social_auth_filter %}
 
 {% block breadcrumb_menu %}{% endblock %}
 {% block body_id %}account signup{% endblock %}
@@ -33,9 +33,10 @@
                 <div class="content-container">
                     <h4>{% trans 'Or, log in with' %}</h4>
                     {% for backend in backends.backends %}
-                        {% with 'img/social/'|add:backend|add:'-signup.png' as image_url %}
-                            <a class="pad-right" href="{% url 'social:begin' backend %}" data-tooltip="{% trans 'Log in with' %} {{ backend }}"><img src="{% static image_url %}"></a>
-                        {% endwith %}
+                        <a href="{% url 'social:begin' backend %}" class="btn btn-auth btn-auth-{{ backend|social_display_name|lower }}">
+                            <i class="fa fa-{{ backend|social_display_name|lower }}"></i>
+                            {{ backend|social_display_name }}
+                        </a> 
                     {% endfor %}
                 </div>
             </div>

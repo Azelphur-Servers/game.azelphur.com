@@ -1299,6 +1299,63 @@ ul.pagination li.active {
     }
 }
 
+/* Login buttons */
+.btn.btn-auth {
+    display: block;
+    padding: 0px !important;
+    text-transform: capitalize;
+    height: 30px !important;
+    line-height: 30px !important;
+    margin-bottom: 11px;
+}
+.btn.btn-auth > i {
+    float: left;
+    width: 40px;
+    text-align: center;
+    vertical-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn.btn-auth.btn-auth-reddit {
+    background-color: #ff4500 !important;
+}
+.btn.btn-auth.btn-auth-github {
+    background-color: #333333 !important;
+}
+.btn.btn-auth.btn-auth-google {
+    background-color: #dc4e41 !important;
+}
+.btn.btn-auth.btn-auth-steam {
+    background-color: #171a21 !important;
+}
+.btn.btn-auth.btn-auth-facebook {
+    background-color: #3b5998 !important;
+}
+.btn.btn-auth.btn-auth-twitter {
+    background-color: #55acee !important;
+}
+
+.profile-social .fa.fa-reddit {
+    color: #ff4500;
+}
+.profile-social .fa.fa-github {
+    color: #333333;
+}
+.profile-social .fa.fa-google {
+    color: #dc4e41;
+}
+.profile-social .fa.fa-steam {
+    color: #171a21;
+}
+.profile-social .fa.fa-facebook {
+    color: #3b5998;
+}
+.profile-social .fa.fa-twitter {
+    color: #55acee;
+}
+
+
+
 /* Markup editor */
 .markItUp {
     width: auto !important;
