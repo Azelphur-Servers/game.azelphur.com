@@ -1,11 +1,40 @@
-{% extends "pages/page.html" %}
+{% extends "base-actual.html" %}
+{% load i18n %}
+
+{% block meta_title %}{% trans 'Live Chat' %}{% endblock %}
 
 {% load mezzanine_tags i18n %}
 
-{% block main %}
-<div id="mibbit-chat-widget" class="fullscreen-widget">
-<button class="btn-floating btn-close black"><i class="fa fa-fw fa-times"></i></button>
-<iframe src="https://widget.mibbit.com/?settings=4d7edc8b3a37affbfb73887f7e837acf&amp;server=irc.azelphur.com%3A%2B6697&amp;channel=%23AzelphurIRC_test{% if request.user.is_authenticated %}&amp;nick={{ request.user|slugify }}{% endif %}"></iframe>
-<button class="btn btn-fullscreen right"><i class="fa fa-fw fa-arrows-alt fa-sm"></i>&nbsp;Fullscreen</button>
+{% block main_content %}
+<div class="content-container">
+    <h3>{% trans 'Live Chat' %}</h3>
+    <div id="mibbit-chat-widget" class="fullscreen-widget">
+        <button class="btn-floating btn-close black"><i class="fa fa-fw fa-times"></i></button>
+        <iframe src="https://widget.mibbit.com/?settings=4d7edc8b3a37affbfb73887f7e837acf&amp;server=irc.azelphur.com%3A%2B6697&amp;channel=%23AzelphurIRC_test{% if request.user.is_authenticated %}&amp;nick={{ request.user|slugify }}{% endif %}"></iframe>
+        <button class="btn btn-fullscreen right"><i class="fa fa-fw fa-arrows-alt fa-sm"></i>&nbsp;{% trans 'Fullscreen' %}</button>
+    </div>
+</div>
+<div class="content-container">
+    <h3>{% trans 'IRC/Mumble Servers' %}</h3>
+    <div class="row no-mar-bottom">
+        <div class="col s12 m12 l6">
+            <h5>{% trans 'IRC (Internet Relay Chat)' %}</h5>
+            <dl class="styled-dl">
+                <dt><strong>{% trans 'Server' %}</strong></dt>
+                <dd><a href="irc://irc.azelphur.com/azelphur" data-tooltip="{% trans 'Connect using your IRC client' %}">irc.azelphur.com</a></dd>
+                <dt><strong>{% trans 'Channels' %}</strong></dt>
+                <dd>#azelphur, #2fort, #fortwars, #fun, #surf, #trade</dd>
+            </dl>
+        </div>
+        <div class="col s12 m6">
+            <h5>{% trans 'Mumble (Voice chat)' %}</h5>
+            <dl class="styled-dl">
+                <dt><strong>{% trans 'Server' %}</strong></dt>
+                <dd><a href="mumble://mumble.azelphur.com" data-tooltip="{% trans 'Connect using your Mumble client' %}">mumble.azelphur.com</a></dd>
+                <dt><strong>{% trans 'Channels' %}</strong></dt>
+                <dd>General chat, Team Fortress 2 : Fortwars, Fun, Surf</dd>
+            </dl>
+        </div>
+    </div>
 </div>
 {% endblock %}
