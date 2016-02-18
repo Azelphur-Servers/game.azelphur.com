@@ -98,6 +98,7 @@ $(document).ready(function(){
     // Init material select's
     $('select').material_select();
 
+    // Forum images
     $('.forum.forum-posts .forum-post-container .forum-post-body img').each(function(){
         if($(this).attr('src').search('djangobb_forum/img/smilies') < 0) {
             $(this).addClass('responsive-img');
@@ -109,6 +110,14 @@ $(document).ready(function(){
 
     $('.materialboxed').materialbox();
 
+    // Forum links
+    $('.forum.forum-posts .forum-post-container .forum-post-body a, .forum.forum-posts .forum-post-container .forum-post-signature a').each(function(){
+        var href = $(this).attr('href');
+        var host = document.location.hostname;
+        if(href.search(host) < 0 || href.search(host) > 12) {
+            $(this).attr('target', '_blank').attr('rel', 'nofollow').addClass('external-link');
+        }
+    });
 
     // Server Updater
     var serverUpdateInterval = 15000;

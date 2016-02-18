@@ -57,6 +57,25 @@ nav a:hover {
     color: #fff;
 }
 
+a.external-link:after {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-feature-settings: normal;
+    font-language-override: normal;
+    font-kerning: auto;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-size: 0.6rem;
+    content: '\f08e';
+    color: #858585;
+    margin-left: 3px;
+}
+
 /* Font Awesome */
 i.fa.fa-sm {
     font-size: 0.8rem;
@@ -1211,24 +1230,6 @@ ul.pagination li.active {
     margin-top: 15px;
     max-height: 160px;
     overflow: auto;
-}
-#content-main.forum.forum-posts .forum-post-container > .forum-post-signature a:after {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    font-size-adjust: none;
-    font-stretch: normal;
-    font-feature-settings: normal;
-    font-language-override: normal;
-    font-kerning: auto;
-    font-synthesis: weight style;
-    font-variant: normal;
-    font-size: 0.6rem;
-    content: '\f08e';
-    color: #858585;
-    margin-left: 3px;
 }
 
 /* Forum - Moderate */
