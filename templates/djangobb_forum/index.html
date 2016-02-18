@@ -46,9 +46,9 @@
 			<div class="col s12 m6 l4">
 				<dl>
 					<dt><h6>{% trans "Board statistics" %}</h6></dt>
-					<dd>{% trans "Total number of registered users:" %} {{ users }}</dd>
-					<dd>{% trans "Total number of topics:" %} {{ topics }}</dd>
-					<dd>{% trans "Total number of posts:" %} {{ posts }}</dd>
+					<dd>{% trans "Total number of registered users:" %} <a href="{% url 'djangobb:forum_users' %}">{{ users }}</a></dd>
+					<dd>{% trans "Total number of topics:" %} <strong>{{ topics }}</strong></dd>
+					<dd>{% trans "Total number of posts:" %} <strong>{{ posts }}</strong></dd>
 				</dl>
 			</div>
 			<div class="col s12 m6 l4">

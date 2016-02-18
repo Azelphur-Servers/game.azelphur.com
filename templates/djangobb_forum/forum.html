@@ -50,6 +50,17 @@
                         <dd class="forum-topics">{{ topic.reply_count }}<span class="hide-on-large-only">&nbsp;{% trans 'Replies' %}</span></dd>
                         <dd class="forum-posts">{{ topic.views }}<span class="hide-on-large-only">&nbsp;{% trans 'Views' %}</span></dd>
                         <dd class="forum-latest">
+                            {% if topic.last_post.user.forum_profile.avatar and  topic.last_post.user.forum_profile.show_avatar %}
+                                <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}" class="avatar">
+                                    <img src="{{  topic.last_post.user.forum_profile.avatar.url }}" alt="User Avatar" />
+                                </a>
+                            {% else %}
+                                {% if forum_settings.GRAVATAR_SUPPORT and  topic.last_post.user.forum_profile.show_avatar %}
+                                    <a href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}" class="avatar">
+                                        <img src="{% gravatar  topic.last_post.user.email %}" alt="User Avatar" />
+                                    </a>
+                                {% endif %}
+                            {% endif %}
                             <a href="{{ topic.last_post.get_absolute_url }}"><time datetime="{{ topic.updated|date:'c' }}">{% forum_time topic.updated %}</time></a><br />
                             {% trans "by" %} <a class="link-color-normal" href="{% url 'djangobb:forum_profile' topic.last_post.user.username %}">{{ topic.last_post.user.username }}</a></span>
                         </dd>
