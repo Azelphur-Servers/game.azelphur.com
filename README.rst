@@ -2,7 +2,7 @@
 Game.Azelphur.com
 =====
 
-This is the (soon to be) source code to game.azelphur.com, we're powered by Python and Django along with Mezzanine and DjangoBB for the forums. Feel free to fix bugs or make improvements, or use this code for your own projects :)
+This is the source code to game.azelphur.com, we're powered by Python and Django along with Mezzanine and DjangoBB for the forums. Feel free to fix bugs or make improvements, or use this code for your own projects :)
 
 Quick start
 -----------
