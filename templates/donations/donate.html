@@ -62,7 +62,7 @@
             <div class="modal-content">
                 <h4>{% trans 'Link your account with Steam' %}</h4>
                 <p>{% blocktrans %}Our donation system is fully automated, so in order for you to receive your premium benefits, we need know to know which Steam account to give them too. Luckily, you can simply associate your your Steam account by signing in with Steam using the button below.{% endblocktrans %}</p>
-                <p class="center-align mar-top pad-top"><a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}"><img src="{% static 'img/social/steam-signup.png' %}" alt=""></a></p>
+                <p class="center-align mar-top pad-top"><a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}" class="btn btn-auth btn-auth-steam"><i class="fa fa-steam"></i>steam</a></p>
             </div>
             <div class="modal-footer">
                 <button class="modal-action modal-close btn-flat">{% trans 'Cancel' %}</button>
