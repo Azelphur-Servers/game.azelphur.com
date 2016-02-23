@@ -1,0 +1,47 @@
+{% extends "ingame/tf2/base.html" %}
+
+{% block base_content %}
+    <h2>Radio</h2>
+    <h4>Listen to radio stations while in-game.</h4>
+
+    {% if r %}
+        <div id="radio-wrapper">
+                <div id="radio-button-play" onclick="RadioPlay();"></div>
+                <div id="radio-button-stop" onclick="RadioStop();"></div>
+                <input id="radio-slider-vol" type="range" min="0" max="10" value="6" onchange="RadioVolume(this.value);" onmousemove="RadioVolume(this.value);" />
+                <div id="radio-status"></div>
+            </div>
+        <div id="radio-station">Current Station: <span class="station">{{ radioStations|get_item:r|get_item:"name" }}</span></div>
+            <script type="text/javascript">
+                var Radio = new Audio();
+                Radio.setAttribute("src", "http://{{ radioStations|get_item:r|get_item:"url" }}/;");
+                Radio.volume = 0.6;
+
+                function RadioPlay() {
+                    Radio.load();
+                    Radio.play();
+                }
+                function RadioStop() {
+                    Radio.pause();
+                }
+                function RadioVolume(Level) {
+                    Radio.volume = parseFloat(Level / 10);
+                    return true;
+                }
+                
+                window.onload = function() {
+                    RadioPlay();
+                };
+            </script>
+        <h4 class="text-center">More Stations:</h4>
+    {% else %}
+        <h4 class="text-center">Choose a Station:</h4>
+    {% endif %}
+
+    <div class="radio-list">
+    {% for id, data in radioStations.items %}
+        <a href="/radio/ingame/tf2/?r={{ id }}">{{ data.name }}</a>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

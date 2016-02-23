@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>Azelphur Gaming MOTD</title>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/ingame/tf2/style.css' %}" />
+    </head>
+    <body>
+        <header id="top-header">
+            <h4 class="welcome">Welcome To</h4>
+            <h1>Azelphur Servers <small class="subtext">Game.Azelphur.com</small></h1>
+        </header>
+        <nav id="top-nav">
+            <ul>
+                <li{% if request.path == '/rules/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/rules/ingame/tf2/">Rules</a></li>
+                <li{% if request.path == '/news/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/news/ingame/tf2/">News</a></li>
+                <li{% if request.path == '/donate/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/donate/ingame/tf2/">Donate</a></li>
+                <li{% if request.path == '/staff/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/staff/ingame/tf2/">Staff Team</a></li>
+                <li{% if request.path == '/servers/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/servers/ingame/tf2/">Servers</a></li>
+                <li{% if request.path == '/radio/ingame/tf2/' %} class="active"{% endif %}><a href="https://game.azelphur.com/radio/ingame/tf2/">Radio</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </nav>
+        <div id="page">
+            {% block base_content %}{% endblock %}
+        </div>
+
+        <div id="ad">
+            <script type="text/javascript"><!--
+            google_ad_client = "pub-5682947058257789";
+            /* TF2 MOTD */
+            google_ad_slot = "3301869168";
+            google_ad_width = 468;
+            google_ad_height = 60;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </div>
+    </body>
+</html>

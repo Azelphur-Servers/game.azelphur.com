@@ -1,0 +1,28 @@
+{% extends "ingame/tf2/base.html" %}
+{% load forum_extras %}
+
+{% block base_content %}
+    <h2>Our Staff/Admin Team</h2>
+    <div id="staff-list">
+        {% for staff in staff %}
+        <div class="staff">
+            {% if staff.user.forum_profile.avatar and staff.user.forum_profile.show_avatar %}
+                <img src="{{ staff.user.forum_profile.avatar.url }}" alt="" />
+            {% else %}
+                {% if forum_settings.GRAVATAR_SUPPORT %}
+                    <img src="{% gravatar staff.user.email %}" alt="" />
+                {% endif %}
+            {% endif %}
+            <div class="name">
+                {% if staff.steamID != '' %}
+                    <a href="http://steamcommunity.com/profiles/{{ staff.steamID }}">
+                {% endif %}
+                {{ staff.user.username }}
+                {% if staff.steamID != '' %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

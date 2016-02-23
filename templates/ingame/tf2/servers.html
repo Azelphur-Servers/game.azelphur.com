@@ -1,0 +1,14 @@
+{% extends "ingame/tf2/base.html" %}
+
+{% block base_content %}
+    <h2>Our Game Servers</h2>
+    <p>To connect to one of our other servers either open console and type: <span class="orange">connect &lt;server address&gt;</span> E.G. <span class="orange">connect surf.tf2.azelphur.com</span><br />Or, open your server browser and add the server to your favorites.</p>
+        
+    <ul id="server-list">
+    {% for server in game_info %}
+        <li>
+            <span class="orange">{{ server.title|default:'Unknown' }}</span> @ {{ server.host }} -  <small>{{ server.info.map|default:'Unknown' }} ({{ server.info.player_count|default:'0' }} / {{ server.info.max_players|default:'0' }})</small>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

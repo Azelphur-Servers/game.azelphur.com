@@ -242,6 +242,7 @@ INSTALLED_APPS = (
     "django_messages",
     "social_auth_filter",
     "djangobb_to_irc",
+    'django_azelphurmotd',
 )
 
 # List of processors used by RequestContext to populate the context.

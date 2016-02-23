@@ -1,0 +1,329 @@
+@charset "UTF-8";
+
+/* Fonts */
+@font-face {
+  font-family: 'TF2';
+  font-style: normal;
+  font-weight: 400;
+  src: local('TF2'), url('../../../font/ingame/tf2/tf2.ttf') format('ttf'), url('../../../font/ingame/tf2/tf2.woff') format('woff');;
+}
+
+/* HTML5 Fix */
+main, header, aside, nav, footer, section {
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #F59C28;
+    text-decoration: none;
+}
+
+/* Helpers */
+.text-center {
+    text-align: center;
+}
+
+.white {
+    color: #fff;
+}
+.orange {
+    color: #F59C28;
+}
+.orange2 {
+    color: #B25216;
+}
+
+.font-default {
+    font-family: Arial, Verdana, Tahoma;
+}
+
+.clearfix {
+    clear: both;
+}
+
+/* Main Styles */
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #504c52;
+    background-image: url('../../../img/ingame/tf2/blackboard.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family: Arial, Verdana, Tahoma;
+    font-weight: normal;
+    font-size: 14px;
+    color: #fff;
+    text-align: left;
+    vertical-align: baseline;
+    text-rendering: geometricPrecision;
+}
+
+/* Header */
+#top-header h4 {
+    color: #fff;
+    font-family: 'TF2';
+    margin: 0px;
+    margin-top: 10px;
+    padding: 0px;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+#top-header h1 {
+    color: #F59C28;
+    font-family: 'TF2';
+    margin: 5px 0px 0px 10px;
+    padding: 0px;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+#top-header h1 .subtext {
+    color: #fff;
+    font-family: 'TF2';
+    padding-left: 4px;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+/* Nav */
+#top-nav {
+    margin-top: 10px;
+    border-bottom: 1px solid #fff;
+}
+#top-nav ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+#top-nav ul li {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    float: left;
+    width: 16.66%;
+}
+#top-nav ul li a {
+    display: block;
+    color: #F59C28;
+    font-family: 'TF2';
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.5s ease;
+    padding: 8px 0px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+#top-nav ul li.active a,
+#top-nav ul li a:hover {
+    background: #fff;
+}
+
+/* Pages */
+#page {
+    margin: 20px 20px 0px 20px;
+}
+/* Pages */
+#page {
+    margin: 20px 20px 0px 20px;
+}
+
+#page h2 {
+    color: #F59C28;
+    padding: 0px;
+    margin: 10px 0px;
+    font-family: 'TF2';
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+#page h4 {
+    color: #fff;
+    padding: 0px;
+    margin: 10px 0px;
+    font-family: 'TF2';
+    font-size: 1.2rem;
+}
+
+/* Rules */
+.rules-list {
+    font-size: 1rem;
+}
+.rules-list li {
+    padding-bottom: 2px;
+}
+.rules-list .rule {
+    color: #F59C28;
+    font-weight: 700;
+}
+/* Radio */
+#radio-wrapper {
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 130px;
+    width: 350px;
+    position: relative;
+    background: url('../../../img/ingame/tf2/radiobg.png') no-repeat;
+}
+#radio-button-play {
+    position: absolute;
+    top: 49px;
+    left: 99px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+}
+#radio-button-play:hover {
+    background: url('../../../img/ingame/tf2/radioplay.png') no-repeat;
+}
+#radio-button-stop {
+    position: absolute;
+    top: 49px;
+    left: 205px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+}
+#radio-button-stop:hover {
+    background: url('../../../img/ingame/tf2/radiostop.png') no-repeat;
+}
+#radio-slider-vol {
+    position: absolute;
+    top: 85px;
+    left: 114px;
+    width: 165px;
+    cursor: pointer;
+}
+#radio-station {
+    text-align: center;
+    font-family: 'TF2';
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+#radio-station .station {
+    color: #F59C28;
+}
+
+.radio-list {
+    margin-top: 5px;
+    text-align: center;
+}
+.radio-list a {
+    display: inline-block;
+    color: #F59C28;
+    font-family: 'TF2';
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 15px 8px 0px;
+}
+.radio-list a:after {
+    content: "|";
+    color: #fff;
+    padding-left: 15px;
+}
+.radio-list a:last-child:after {
+    content: "";
+}
+
+/* Staff List */
+#staff-list {
+    text-align: center;
+}
+#staff-list .staff {
+    display: inline-block;
+    background: #848389;
+    border: 1px solid #B25216;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 8px 8px;
+}
+#staff-list .staff img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border: 0px;
+    margin: 0px auto;
+}
+#staff-list .staff .name {
+    margin-top: 11px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #F59C28;
+    font-family: 'TF2';
+}
+#staff-list .staff a {
+    text-decoration: none;
+}
+
+/* Server List */
+#server-list {
+    font-size: 1.3rem;
+    font-weight: 700;
+    list-style-image: url('../../../img/ingame/tf2/tf2.png');
+}
+#server-list li {
+    padding: 4px 0px;
+}
+
+/* Donate */
+.donate-buttons .btn {
+    background: transparent linear-gradient(to bottom, #FC9D4E 0%, #FB8422 100%) repeat scroll 0% 0% !important;
+    width: 180px;
+    height: 100px;
+    border: 2px solid #D6D6D6;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: bold;
+    color: #F2F3FC;
+    text-shadow: 0px 0px 0px transparent, 0px 1px 0px #1B1B1B;
+    cursor: pointer;
+}
+.donate-buttons .btn:hover {
+    background: transparent linear-gradient(to bottom, #FB8422 0%, #FC9D4E 100%) repeat scroll 0% 0% !important;
+}
+
+/* News */
+.article {
+    margin-bottom: 50px;
+}
+.article .head {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+}
+.article .head .title {
+    font-size: 1.6rem;
+    color: #F59C28;
+    font-weight: 700;
+    font-family: 'TF2' !important;
+}
+.article h1,
+.article h2,
+.article h2,
+.article h4 {
+    font-family: Arial, Verdana, Tahoma !important;
+    color: #fff !important;
+}
+
+/* Ad */
+#ad {
+    position: fixed;
+    margin:0;
+    bottom:0;
+    right:0;
+}
