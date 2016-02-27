@@ -13,15 +13,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         donations = PremiumDonation.objects.filter(
             end_time__lte=timezone.now()
-        )
-        if not donations:
-            return
-        group = Group.objects.get(name=settings.PREMIUM_GROUP_NAME)
-        for donation in donations:
-            donation.user.groups.remove(group)
-            profile = Profile.objects.get(user=donation.user)
-            profile.status = "Member"
-            profile.save()
-
-        donations.delete()
+        ).delete()
         reload_admins()
