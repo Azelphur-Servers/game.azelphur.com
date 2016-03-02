@@ -282,20 +282,30 @@ body {
 }
 
 /* Donate */
+.donate-buttons form {
+    display: inline-block;
+}
 .donate-buttons .btn {
     background: transparent linear-gradient(to bottom, #FC9D4E 0%, #FB8422 100%) repeat scroll 0% 0% !important;
     width: 180px;
-    height: 100px;
     border: 2px solid #D6D6D6;
     border-radius: 10px;
     display: inline-block;
     font-weight: bold;
-    color: #F2F3FC;
+    color: #fff;
     text-shadow: 0px 0px 0px transparent, 0px 1px 0px #1B1B1B;
+    text-align: center;
+    padding: 15px;
+    line-height: 2rem;
     cursor: pointer;
 }
 .donate-buttons .btn:hover {
     background: transparent linear-gradient(to bottom, #FB8422 0%, #FC9D4E 100%) repeat scroll 0% 0% !important;
+}
+
+.donate-buttons .btn.disabled {
+    background: #E3A068 !important;
+    cursor: default;
 }
 
 /* News */
