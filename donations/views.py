@@ -48,8 +48,8 @@ class DonateView(FormView):
             "item_name": "Donation",
             "invoice": steam,
             "notify_url": "https://" + domain + reverse('paypal-ipn'),
-            "return_url": "https://www.example.com/your-return-location/",
-            "cancel_return": "https://www.example.com/your-cancel-location/",
+            "return_url": "https://game.azelphur.com/",
+            "cancel_return": "https://game.azelphur.com/donate",
             "custom": steam,  # Custom command to correlate to some function later (optional)
         }
 
