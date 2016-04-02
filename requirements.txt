@@ -1,23 +1,23 @@
-Django==1.9.4
+Django==1.9.5
 Mezzanine==4.1.0
-Pillow==3.1.1
+Pillow==3.2.0
 Pygments==2.1.3
 argparse==1.4.0
 beautifulsoup4==4.4.1
 bleach==1.4.2
 chardet==2.3.0
-django-contrib-comments==1.6.2
+django-contrib-comments==1.7.0
 django-game-info==0.1.3
 django-haystack==2.4.1
 django-pagination-py3==1.1.1
-djangorestframework==3.3.2
+djangorestframework==3.3.3
 filebrowser-safe==0.4.3
 future==0.15.2
 grappelli-safe==0.4.2
 html5lib==0.9999999
 oauthlib==1.0.3
 postmarkup==1.2.2
-pytz==2015.7
+pytz==2016.3
 requests==2.9.1
 requests-oauthlib==0.6.1
 six==1.10.0
@@ -26,7 +26,7 @@ wsgiref==0.1.2
 -e git://github.com/slav0nic/DjangoBB.git#egg=djangobb_forum
 python-valve==0.1.1
 python-social-auth==0.2.14
-django-paypal==0.3
-django-nocaptcha-recaptcha==0.0.18
+django-paypal==0.3.2
+django-nocaptcha-recaptcha==0.0.19
 -e git://github.com/Azelphur/django-messages.git#egg=django_messages
-Markdown==2.6.5
+Markdown==2.6.6
