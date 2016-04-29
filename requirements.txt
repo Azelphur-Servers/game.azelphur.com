@@ -25,7 +25,7 @@ tzlocal==1.2.2
 wsgiref==0.1.2
 -e git://github.com/slav0nic/DjangoBB.git#egg=djangobb_forum
 python-valve==0.1.1
-python-social-auth==0.2.18
+python-social-auth==0.2.19
 django-paypal==0.3.2
 django-nocaptcha-recaptcha==0.0.19
 -e git://github.com/Azelphur/django-messages.git#egg=django_messages
