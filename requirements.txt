@@ -19,7 +19,7 @@ oauthlib==1.1.2
 postmarkup==1.2.2
 pytz==2016.4
 requests==2.10.0
-requests-oauthlib==0.6.1
+requests-oauthlib==0.6.2
 six==1.10.0
 tzlocal==1.2.2
 wsgiref==0.1.2
