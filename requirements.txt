@@ -14,7 +14,7 @@ djangorestframework==3.4.0
 filebrowser-safe==0.4.3
 future==0.15.2
 grappelli-safe==0.4.2
-html5lib==0.99999999
+html5lib==0.999999999
 oauthlib==1.1.2
 postmarkup==1.2.2
 pytz==2016.6.1
