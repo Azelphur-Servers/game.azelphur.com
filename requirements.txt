@@ -15,7 +15,7 @@ filebrowser-safe==0.4.5
 future==0.15.2
 grappelli-safe==0.4.4
 html5lib==0.999999999
-oauthlib==1.1.2
+oauthlib==2.0.0
 postmarkup==1.2.2
 pytz==2016.6.1
 requests==2.11.1
