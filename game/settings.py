@@ -200,13 +200,6 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
-# Put strings here, like "/home/html/django_templates"
-# or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
-
-
 ################
 # APPLICATIONS #
 ################
@@ -245,26 +238,38 @@ INSTALLED_APPS = (
     'django_azelphurmotd',
 )
 
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.static",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.core.context_processors.tz",
-    "mezzanine.conf.context_processors.settings",
-    "mezzanine.pages.context_processors.page",
-    "social.apps.django_app.context_processors.backends",
-    "social.apps.django_app.context_processors.login_redirect",
-    "donations.processors.donations",
-    "game_info.processors.servers",
-    "djangobb_forum.context_processors.forum_settings",
-)
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(PROJECT_ROOT, "templates")
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.static",
+                "django.template.context_processors.media",
+                "django.template.context_processors.request",
+                "django.template.context_processors.tz",
+                "mezzanine.conf.context_processors.settings",
+                "mezzanine.pages.context_processors.page",
+                "social.apps.django_app.context_processors.backends",
+                "social.apps.django_app.context_processors.login_redirect",
+                "donations.processors.donations",
+                "game_info.processors.servers",
+                "djangobb_forum.context_processors.forum_settings",
+            ],
+            "builtins": [
+                "mezzanine.template.loader_tags",
+            ],
+        },
+    },
+]
+    
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the

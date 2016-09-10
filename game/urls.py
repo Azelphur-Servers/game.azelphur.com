@@ -1,16 +1,17 @@
 from __future__ import unicode_literals
 
 from django.views.generic.base import TemplateView
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 
 from mezzanine.core.views import direct_to_template
+from mezzanine.blog.views import blog_post_list
 from mezzanine.conf import settings
 
 from django.contrib.auth.views import password_change
-
+from django_azelphurmotd.views import radio, staff
 
 admin.autodiscover()
 
@@ -18,10 +19,10 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = i18n_patterns("",
+urlpatterns = i18n_patterns(
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
-    ("^admin/", include(admin.site.urls)),
+    url("^admin/", include(admin.site.urls)),
     url(r'^game_info/', include('game_info.urls')),
     url(r'^donate/', include('donations.urls')),
     url(r'^forum/user/(?P<username>.*)/social/$', login_required(TemplateView.as_view(template_name='profile_social.html'))),
@@ -36,21 +37,21 @@ urlpatterns = i18n_patterns("",
         name='account_change_password'
     ),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    ## Temp Ingame Pages
+    # Temp Ingame Pages
     url(r'^rules/ingame/tf2/$', TemplateView.as_view(template_name='ingame/tf2/rules.html')),
-    url(r'^radio/ingame/tf2/$', 'django_azelphurmotd.views.radio'),
+    url(r'^radio/ingame/tf2/$', radio),
     url(r'^servers/ingame/tf2/$', TemplateView.as_view(template_name='ingame/tf2/servers.html')),
-    url(r'^staff/ingame/tf2/$', 'django_azelphurmotd.views.staff'),
+    url(r'^staff/ingame/tf2/$', staff),
     url(r'^news/ingame/tf2/$', TemplateView.as_view(template_name='ingame/tf2/news.html')),
     url(r'^howtosurf/ingame/tf2/$', TemplateView.as_view(template_name='ingame/tf2/howtosurf.html')),
 )
 
 if settings.USE_MODELTRANSLATION:
-    urlpatterns += patterns('',
-        url('^i18n/$', 'django.views.i18n.set_language', name='set_language'),
-    )
+    urlpatterns += [
+        url('^i18n/$', set_language, name='set_language'),
+    ]
 
-urlpatterns += patterns('',
+urlpatterns += [
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
 
@@ -75,8 +76,9 @@ urlpatterns += patterns('',
     # doesn't apply here, since we can't have a template called
     # "/.html" - so for this case, the template "pages/index.html"
     # should be used if you want to customize the homepage's template.
+    # NOTE: Don't forget to import the view function too!
 
-    # url("^$", "mezzanine.pages.views.page", {"slug": "/"}, name="home"),
+    # url("^$", mezzanine.pages.views.page, {"slug": "/"}, name="home"),
 
     # HOMEPAGE FOR A BLOG-ONLY SITE
     # -----------------------------
@@ -85,8 +87,9 @@ urlpatterns += patterns('',
     # pattern, you'll also need to set BLOG_SLUG = "" in your
     # ``settings.py`` module, and delete the blog page object from the
     # page tree in the admin if it was installed.
+    # NOTE: Don't forget to import the view function too!
 
-    url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
+    url("^$", blog_post_list, name="home"),
 
     # MEZZANINE'S URLS
     # ----------------
@@ -99,7 +102,7 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    ("^", include("mezzanine.urls")),
+    url("^", include("mezzanine.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
@@ -117,7 +120,8 @@ urlpatterns += patterns('',
 
     # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
 
-)
+]
+
 
 # Adds ``STATIC_URL`` to the context of error pages, so that error
 # pages can use JS, CSS and images.
