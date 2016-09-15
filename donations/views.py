@@ -16,13 +16,16 @@ class DonateView(FormView):
     def get_context_data(self, **kwargs):
         context = super(DonateView, self).get_context_data(**kwargs)
         context['steam'] = self._get_steam()
-        try:
-            context['donation'] = PremiumDonation.objects.get(user=self.request.user)
-            if context['donation'].end_time > timezone.now():
-                context['donation_ended'] = False
-            else:
-                context['donation_ended'] = True
-        except PremiumDonation.DoesNotExist:
+        if self.request.user.is_authenticated():
+            try:
+                context['donation'] = PremiumDonation.objects.get(user=self.request.user)
+                if context['donation'].end_time > timezone.now():
+                    context['donation_ended'] = False
+                else:
+                    context['donation_ended'] = True
+            except PremiumDonation.DoesNotExist:
+                context['donation'] = None
+        else:
             context['donation'] = None
         return context
 
