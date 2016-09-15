@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sites.shortcuts import get_current_site
+from django.utils import timezone
 from .forms import DonateForm
+from .models import PremiumDonation
 
 
 class DonateView(FormView):
@@ -11,16 +13,17 @@ class DonateView(FormView):
     form_class = DonateForm
     success_url = '/thanks/'
 
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return super(ContactView, self).form_valid(form)
-
-
     def get_context_data(self, **kwargs):
         context = super(DonateView, self).get_context_data(**kwargs)
         context['steam'] = self._get_steam()
+        try:
+            context['donation'] = PremiumDonation.objects.get(user=self.request.user)
+            if context['donation'].end_time > timezone.now():
+                context['donation_ended'] = False
+            else:
+                context['donation_ended'] = True
+        except PremiumDonation.DoesNotExist:
+            context['donation'] = None
         return context
 
     def _get_steam(self):
@@ -31,8 +34,7 @@ class DonateView(FormView):
             except ObjectDoesNotExist:
                 pass
 
-        return ""
-
+        return None
 
     def get_initial(self):
         """
