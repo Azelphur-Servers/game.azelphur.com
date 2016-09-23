@@ -376,6 +376,8 @@ DJANGOBB_USER_TO_USER_EMAIL = False
 NORECAPTCHA_SITE_KEY = ""
 NORECAPTCHA_SECRET_KEY = ""
 
+DJANGOBB_ENABLE_POLLS = False
+
 ##################
 # LOCAL SETTINGS #
 ##################
