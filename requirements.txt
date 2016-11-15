@@ -16,7 +16,7 @@ grappelli-safe==0.4.5
 oauthlib==2.0.0
 postmarkup==1.2.2
 pytz==2016.7
-requests==2.11.1
+requests==2.12.0
 requests-oauthlib==0.7.0
 six==1.10.0
 tzlocal==1.3
