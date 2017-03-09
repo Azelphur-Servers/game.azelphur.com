@@ -9,7 +9,7 @@ django-contrib-comments==1.8.0
 django-game-info==0.1.3
 django-haystack==2.6.0
 django-pagination-py3==1.1.2
-djangorestframework==3.6.0
+djangorestframework==3.6.1
 filebrowser-safe==0.4.6
 future==0.16.0
 grappelli-safe==0.4.5
