@@ -1,5 +1,5 @@
 Django==1.10.6
-Mezzanine==4.2.2
+Mezzanine==4.2.3
 Pillow==4.0.0
 Pygments==2.2.0
 argparse==1.4.0
