@@ -13,7 +13,7 @@ djangorestframework==3.6.2
 filebrowser-safe==0.4.7
 future==0.16.0
 grappelli-safe==0.4.6
-oauthlib==2.0.1
+oauthlib==2.0.2
 postmarkup==1.2.2
 pytz==2016.10
 requests==2.13.0
