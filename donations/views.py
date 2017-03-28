@@ -6,6 +6,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils import timezone
 from .forms import DonateForm
 from .models import PremiumDonation
+import uuid
 
 
 class DonateView(FormView):
@@ -51,7 +52,7 @@ class DonateView(FormView):
         initial = {
             "business": settings.PAYPAL_RECEIVER_EMAIL,
             "item_name": "Donation",
-            "invoice": steam,
+            "invoice": str(steam)+uuid.uuid4.hex,
             "notify_url": "https://" + domain + reverse('paypal-ipn'),
             "return_url": "https://game.azelphur.com/",
             "cancel_return": "https://game.azelphur.com/donate",
