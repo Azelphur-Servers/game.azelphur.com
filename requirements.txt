@@ -15,7 +15,7 @@ future==0.16.0
 grappelli-safe==0.4.6
 oauthlib==2.0.2
 postmarkup==1.2.2
-pytz==2016.10
+pytz==2017.2
 requests==2.13.0
 requests-oauthlib==0.8.0
 six==1.10.0
