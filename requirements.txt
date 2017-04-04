@@ -1,6 +1,6 @@
 Django==1.11
 Mezzanine==4.2.3
-Pillow==4.0.0
+Pillow==4.1.0
 Pygments==2.2.0
 argparse==1.4.0
 beautifulsoup4==4.5.3
