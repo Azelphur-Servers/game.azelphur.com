@@ -19,7 +19,7 @@ pytz==2017.2
 requests==2.13.0
 requests-oauthlib==0.8.0
 six==1.10.0
-tzlocal==1.3.2
+tzlocal==1.4
 wsgiref==0.1.2
 -e git://github.com/slav0nic/DjangoBB.git#egg=djangobb_forum
 python-valve==0.1.1
