@@ -1,4 +1,4 @@
-Django==1.11.6
+Django==1.11.7
 Mezzanine==4.2.3
 Pillow==4.3.0
 Pygments==2.2.0
