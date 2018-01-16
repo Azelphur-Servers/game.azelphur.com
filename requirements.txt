@@ -25,6 +25,6 @@ wsgiref==0.1.2
 python-valve==0.2.1
 python-social-auth==0.3.6
 -e git://github.com/spookylukey/django-paypal.git#egg=django-paypal
-django-nocaptcha-recaptcha==0.0.19
+django-nocaptcha-recaptcha==0.0.20
 -e git://github.com/Azelphur/django-messages.git#egg=django_messages
 Markdown==2.6.11
