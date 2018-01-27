@@ -28,3 +28,5 @@ python-social-auth==0.2.21
 django-nocaptcha-recaptcha==0.0.19
 -e git://github.com/Azelphur/django-messages.git#egg=django_messages
 Markdown==2.6.6
+mysqlclient==1.3.12
+bleach==1.5.0
