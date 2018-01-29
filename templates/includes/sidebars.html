@@ -7,7 +7,7 @@
                 {% if server.up %}
                     <div class="server-status online">{% trans 'Online' %}</div>
                     <div class="server-info">
-                        <div class="server-info-name"><a href="steam://connect/{{ server.host }}" rel="nofollow" data-tooltip="{% trans 'Connect to this server' %}">{{ server.title|default:'Unknown' }}</a></div>
+                        <div class="server-info-name"><a href="steam://connect/{{ server.host }}:{{ server.port }}" rel="nofollow" data-tooltip="{% trans 'Connect to this server' %}">{{ server.title|default:'Unknown' }}</a></div>
                         <div class="server-info-map">{{ server.info.map|default:'Unknown' }}</div>
                         <div class="server-info-players">{{ server.info.player_count|default:'0' }} / {{ server.info.max_players|default:'0' }}</div>
                     </div>
