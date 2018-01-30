@@ -10,7 +10,7 @@ from paypal.standard.ipn.signals import valid_ipn_received
 from social.apps.django_app.default.models import UserSocialAuth
 from djangobb_forum.models import Profile
 from game_info.models import Server
-from valve.source.rcon import RCON
+from valve.rcon import RCON
 from datetime import timedelta
 
 
