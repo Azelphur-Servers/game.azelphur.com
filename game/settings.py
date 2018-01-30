@@ -226,6 +226,7 @@ INSTALLED_APPS = (
     # "mezzanine.mobile",
     "game_info",
     "rest_framework",
+    'rest_framework.authtoken',
     "djangobb_forum",
     "social.apps.django_app.default",
     "donations",
@@ -342,6 +343,13 @@ DONATION_AMOUNTS = (
     (5, 30),
     (10, 90),
     (17, 180),
+)
+
+# Map key amounts to days of premium
+KEY_AMOUNTS = (
+    (1, 7),
+    (3, 30),
+    (5, 90)
 )
 
 # Target donation amount for sidebar
