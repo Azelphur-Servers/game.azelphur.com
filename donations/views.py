@@ -13,6 +13,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .serializers import KeyDonationSerializer
 from social.apps.django_app.default.models import UserSocialAuth
+from datetime import timedelta
 import uuid
 
 
