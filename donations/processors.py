@@ -2,6 +2,7 @@ from paypal.standard.ipn.models import PayPalIPN
 from django.conf import settings
 from django.db.models import Sum
 from decimal import Decimal
+import datetime
 from django.utils import timezone
 
 def donations(request):
