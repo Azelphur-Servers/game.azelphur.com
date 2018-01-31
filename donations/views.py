@@ -82,13 +82,28 @@ class KeyDonation(APIView):
             except ObjectDoesNotExist:
                 # Todo: do something here as something has gone wrong
                 return Response({"steamid64": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
-            for x in settings.KEY_AMOUNTS:
-                if x[0] == serializer.data["amount"]:
-                    end_time = timezone.now() + timedelta(days=x[1])
-                    PremiumDonation(
-                        user=social_user.user,
-                        end_time=end_time
-                    ).save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response({"amount": "amount does not match anything in settings.KEY_AMOUNTS"}, status=status.HTTP_400_BAD_REQUEST)
+
+            days = 7 if serializer.data["amount"] == 1 else (20 * serializer.data["amount"] - 10)
+                end_time = timezone.now() + timedelta(days)
+                PremiumDonation(
+                    user=social_user.user,
+                    end_time=end_time
+                ).save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SteamUserExists(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        serializer = KeyDonationSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                social_user = UserSocialAuth.objects.get(uid=serializer.data["steamid64"])
+            except ObjectDoesNotExist:
+                # Todo: do something here as something has gone wrong
+                return Response({"steamid64": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
