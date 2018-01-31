@@ -62,8 +62,8 @@ class DonateView(FormView):
             "item_name": "Donation",
             "invoice": str(steam)+":"+uuid.uuid4().hex,
             "notify_url": "https://" + domain + reverse('paypal-ipn'),
-            "return_url": "https://game.azelphur.com/",
-            "cancel_return": "https://game.azelphur.com/donate",
+            "return_url": "https://callister.tf/",
+            "cancel_return": "https://callister.tf/donate",
             "custom": steam,  # Custom command to correlate to some function later (optional)
         }
 

@@ -8,7 +8,7 @@
         <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
         <meta name="description" content="{% block meta_description %}{% endblock %}">
         <meta name="theme-color" content="#ef6c00">
-    
+
         <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 
         <link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/favicon/apple-touch-icon-60x60.png' %}">
@@ -74,7 +74,7 @@
                 <div id="content-main-inner" class="row">
                     <div id="content-main" class="col s12 m12 l9 push-l3 {% block body_id %}{% endblock %}">
                         {% block breadcrumb_menu %}{% endblock %}
-                        
+
                         {% block main_content %}{% endblock %}
                     </div>
                     <aside id="content-side" class="col s12 m12 l3 pull-l9">
@@ -90,7 +90,7 @@
                     <div class="col l4 s12">
                         {% if settings.SITE_TITLE %}<h5>{{ settings.SITE_TITLE }}</h5>{% endif %}
                         <p id="footer-social">
-                            <a href="https://steamcommunity.com/groups/azelphur-servers" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
+                            <a href="https://steamcommunity.com/groups/Callister" class="btn-floating social-steam"><i class="fa fa-fw fa-steam"></i></a>
                             <a href="https://github.com/Azelphur-Servers" class="btn-floating social-github"><i class="fa fa-fw fa-github"></i></a>
                             <a href="{% url "blog_post_feed" "rss" %}" class="btn-floating social-rss"><i class="fa fa-fw fa-rss"></i></a>
                         </p>
