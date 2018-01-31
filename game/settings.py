@@ -90,7 +90,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -129,11 +129,6 @@ USE_I18N = False
 
 AUTHENTICATION_BACKENDS = (
     "social.backends.steam.SteamOpenId",
-    "social.backends.twitter.TwitterOAuth",
-    "social.backends.google.GoogleOAuth2",
-    "social.backends.github.GithubOAuth2",
-    "social.backends.facebook.FacebookOAuth2",
-    "social.backends.reddit.RedditOAuth2",
     "mezzanine.core.auth_backends.MezzanineBackend",
 )
 
@@ -270,7 +265,7 @@ TEMPLATES = [
         },
     },
 ]
-    
+
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
@@ -345,15 +340,8 @@ DONATION_AMOUNTS = (
     (17, 180),
 )
 
-# Map key amounts to days of premium
-KEY_AMOUNTS = (
-    (1, 7),
-    (3, 30),
-    (5, 90)
-)
-
 # Target donation amount for sidebar
-MONTHLY_DONATION_AMOUNT = 180
+MONTHLY_DONATION_AMOUNT = 40
 
 PREMIUM_GROUP_NAME = "Premium"
 
