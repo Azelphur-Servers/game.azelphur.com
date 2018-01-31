@@ -15,7 +15,7 @@ from datetime import timedelta
 
 
 class PremiumDonation(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     end_time = models.DateTimeField()
 
     def __unicode__(self):
@@ -57,12 +57,16 @@ def add_premium(sender, **kwargs):
             return
         for x in settings.DONATION_AMOUNTS:
             if x[0] == ipn_obj.mc_gross:
-                end_time = timezone.now() + timedelta(days=x[1])
-                PremiumDonation(
-                    user=social_user.user,
-                    end_time=end_time
-                ).save()
-
+                try:
+                    p = PremiumDonation.objects.get(user=social_user.user)
+                    p.end_time += timedelta(days=x[1])
+                except PremiumDonation.DoesNotExist:
+                    end_time = timezone.now() + timedelta(days=x[1])
+                    p = PremiumDonation(
+                        user=social_user.user,
+                        end_time=end_time
+                    )
+            p.save()
 
 def reload_admins():
     servers = Server.objects.all()
