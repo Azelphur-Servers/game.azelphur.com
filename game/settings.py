@@ -129,6 +129,11 @@ USE_I18N = False
 
 AUTHENTICATION_BACKENDS = (
     "social.backends.steam.SteamOpenId",
+    "social.backends.twitter.TwitterOAuth",
+    "social.backends.google.GoogleOAuth2",
+    "social.backends.github.GithubOAuth2",
+    "social.backends.facebook.FacebookOAuth2",
+    "social.backends.reddit.RedditOAuth2",
     "mezzanine.core.auth_backends.MezzanineBackend",
 )
 
@@ -195,6 +200,10 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
+# PayPal redirect urls
+PAYPAL_CANCEL_URL = "/"
+PAYPAL_REDIRECT_URL = "/"
+
 ################
 # APPLICATIONS #
 ################
@@ -224,6 +233,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     "djangobb_forum",
     "social.apps.django_app.default",
+    "social_django",
     "donations",
     "paypal.standard.ipn",
     "nocaptcha_recaptcha",
@@ -341,7 +351,7 @@ DONATION_AMOUNTS = (
 )
 
 # Target donation amount for sidebar
-MONTHLY_DONATION_AMOUNT = 40
+MONTHLY_DONATION_AMOUNT = 180
 
 PREMIUM_GROUP_NAME = "Premium"
 
