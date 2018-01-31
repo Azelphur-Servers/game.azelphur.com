@@ -90,7 +90,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -200,6 +200,10 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
+# PayPal redirect urls
+PAYPAL_CANCEL_URL = "/"
+PAYPAL_REDIRECT_URL = "/"
+
 ################
 # APPLICATIONS #
 ################
@@ -229,6 +233,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     "djangobb_forum",
     "social.apps.django_app.default",
+    "social_django",
     "donations",
     "paypal.standard.ipn",
     "nocaptcha_recaptcha",
@@ -270,7 +275,7 @@ TEMPLATES = [
         },
     },
 ]
-    
+
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
@@ -343,13 +348,6 @@ DONATION_AMOUNTS = (
     (5, 30),
     (10, 90),
     (17, 180),
-)
-
-# Map key amounts to days of premium
-KEY_AMOUNTS = (
-    (1, 7),
-    (3, 30),
-    (5, 90)
 )
 
 # Target donation amount for sidebar

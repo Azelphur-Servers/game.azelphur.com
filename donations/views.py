@@ -27,7 +27,7 @@ class DonateView(FormView):
         context['steam'] = self._get_steam()
         if self.request.user.is_authenticated():
             try:
-                context['donation'] = PremiumDonation.objects.get(user=self.request.user)
+                context['donation'] = PremiumDonation.objects.filter(user=self.request.user).last()
                 if context['donation'].end_time > timezone.now():
                     context['donation_ended'] = False
                 else:
@@ -54,7 +54,7 @@ class DonateView(FormView):
         """
 
         steam = self._get_steam()
-            
+
         domain = get_current_site(self.request).domain
 
         initial = {
@@ -62,8 +62,8 @@ class DonateView(FormView):
             "item_name": "Donation",
             "invoice": str(steam)+":"+uuid.uuid4().hex,
             "notify_url": "https://" + domain + reverse('paypal-ipn'),
-            "return_url": "https://game.azelphur.com/",
-            "cancel_return": "https://game.azelphur.com/donate",
+            "return_url": settings.PAYPAL_REDIRECT_URL,
+            "cancel_return": settings.PAYPAL_CANCEL_URL,
             "custom": steam,  # Custom command to correlate to some function later (optional)
         }
 
@@ -74,6 +74,17 @@ class KeyDonation(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    def get(self, request, format=None):
+        serializer = KeyDonationSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                social_user = UserSocialAuth.objects.get(uid=serializer.data["steamid64"])
+            except ObjectDoesNotExist:
+                # Todo: do something here as something has gone wrong
+                return Response({"steamid64": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def post(self, request, format=None):
         serializer = KeyDonationSerializer(data=request.data)
         if serializer.is_valid():
@@ -82,13 +93,17 @@ class KeyDonation(APIView):
             except ObjectDoesNotExist:
                 # Todo: do something here as something has gone wrong
                 return Response({"steamid64": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
-            for x in settings.KEY_AMOUNTS:
-                if x[0] == serializer.data["amount"]:
-                    end_time = timezone.now() + timedelta(days=x[1])
-                    PremiumDonation(
-                        user=social_user.user,
-                        end_time=end_time
-                    ).save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response({"amount": "amount does not match anything in settings.KEY_AMOUNTS"}, status=status.HTTP_400_BAD_REQUEST)
+
+            days = 7 if serializer.data["amount"] == 1 else (20 * serializer.data["amount"] - 10)
+            try:
+                p = PremiumDonation.objects.get(user=social_user.user)
+                p.end_time += timedelta(days=days)
+            except PremiumDonation.DoesNotExist:
+                end_time = timezone.now() + timedelta(days)
+                p = PremiumDonation(
+                    user=social_user.user,
+                    end_time=end_time
+                )
+            p.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

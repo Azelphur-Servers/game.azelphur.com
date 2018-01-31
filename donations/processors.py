@@ -3,9 +3,10 @@ from django.conf import settings
 from django.db.models import Sum
 from decimal import Decimal
 import datetime
+from django.utils import timezone
 
 def donations(request):
-    now = datetime.datetime.now()
+    now = timezone.now()
     amount = PayPalIPN.objects.filter(
         payment_status="Completed",
         created_at__gt=datetime.date(now.year, now.month, 1)
