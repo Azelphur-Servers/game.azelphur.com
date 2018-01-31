@@ -27,7 +27,7 @@ class DonateView(FormView):
         context['steam'] = self._get_steam()
         if self.request.user.is_authenticated():
             try:
-                context['donation'] = PremiumDonation.objects.get(user=self.request.user)
+                context['donation'] = PremiumDonation.objects.filter(user=self.request.user).last()
                 if context['donation'].end_time > timezone.now():
                     context['donation_ended'] = False
                 else:
@@ -54,7 +54,7 @@ class DonateView(FormView):
         """
 
         steam = self._get_steam()
-            
+
         domain = get_current_site(self.request).domain
 
         initial = {

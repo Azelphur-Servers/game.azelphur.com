@@ -21,6 +21,9 @@ class PremiumDonation(models.Model):
     def __unicode__(self):
         return "%s expires at %s" % (self.user, self.end_time)
 
+    class Meta:
+        get_latest_by = "end_time"
+
 
 @receiver(post_delete, sender=PremiumDonation)
 def premium_post_delete(sender, instance, **kwargs):
