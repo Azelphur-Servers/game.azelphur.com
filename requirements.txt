@@ -18,7 +18,7 @@ filebrowser-safe==0.4.7
 future==0.16.0
 grappelli-safe==0.4.7
 html5lib==1.0.1
-idna==2.6
+idna==2.7
 Markdown==2.6.11
 Mezzanine==4.2.3
 monotonic==1.5
