@@ -35,7 +35,7 @@ pytz==2018.6
 requests==2.20.0
 requests-oauthlib==1.0.0
 six==1.11.0
-social-auth-app-django==2.1.0
+social-auth-app-django==3.0.0
 social-auth-core==2.0.0
 tzlocal==1.5.1
 urllib3==1.24
