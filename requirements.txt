@@ -1,4 +1,4 @@
-beautifulsoup4==4.7.0
+beautifulsoup4==4.7.1
 bleach==3.0.2
 certifi==2018.11.29
 chardet==3.0.4
