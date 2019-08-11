@@ -22,7 +22,7 @@ idna==2.8
 Markdown==3.1.1
 Mezzanine==4.3.1
 monotonic==1.5
-mysqlclient==1.4.3
+mysqlclient==1.4.4
 oauthlib==3.1.0
 Pillow==6.1.0
 postmarkup==1.2.2
