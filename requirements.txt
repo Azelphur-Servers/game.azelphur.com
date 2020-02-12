@@ -19,7 +19,7 @@ future==0.18.2
 grappelli-safe==0.5.2
 html5lib==1.0.1
 idna==2.8
-Markdown==3.2
+Markdown==3.2.1
 Mezzanine==4.3.1
 monotonic==1.5
 mysqlclient==1.4.6
