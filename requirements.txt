@@ -26,7 +26,7 @@ mysqlclient==1.4.6
 oauthlib==3.1.0
 Pillow==7.0.0
 postmarkup==1.2.2
-Pygments==2.5.2
+Pygments==2.6.0
 PyJWT==1.7.1
 python-social-auth==0.3.6
 python-valve==0.2.1
