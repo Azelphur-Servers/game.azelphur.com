@@ -9,7 +9,7 @@ django-game-info==0.1.3
 django-haystack==2.8.1
 -e git://github.com/Azelphur/django-messages.git@e5e2444ce2414f316fa91c6e700a20a5eb243e2c#egg=django_messages
 django-nocaptcha-recaptcha==0.0.20
-django-pagination-py3==1.1.2
+django-pagination-py3==1.2.0
 -e git://github.com/spookylukey/django-paypal.git@47c8b0f0cd9d1ceeb76d6edeb36f6f0c9122f6ba#egg=django_paypal
 -e git://github.com/slav0nic/DjangoBB.git@f1cbf2fe28dc1f749236dd1decb4ee5acb120978#egg=djangobb_forum
 djangorestframework==3.11.1
