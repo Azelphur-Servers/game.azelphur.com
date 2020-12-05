@@ -1,6 +1,6 @@
 beautifulsoup4==4.9.3
 bleach==3.2.1
-certifi==2020.11.8
+certifi==2020.12.5
 chardet==3.0.4
 defusedxml==0.6.0
 Django==3.1.4
