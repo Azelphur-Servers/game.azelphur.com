@@ -1,7 +1,7 @@
 beautifulsoup4==4.9.3
 bleach==3.2.1
 certifi==2020.12.5
-chardet==3.0.4
+chardet==4.0.0
 defusedxml==0.6.0
 Django==3.1.4
 django-contrib-comments==1.9.2
