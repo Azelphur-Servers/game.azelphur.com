@@ -4,7 +4,7 @@ certifi==2020.12.5
 chardet==4.0.0
 defusedxml==0.6.0
 Django==3.1.7
-django-contrib-comments==2.0.0
+django-contrib-comments==2.1.0
 django-game-info==0.1.3
 django-haystack==3.0
 -e git://github.com/Azelphur/django-messages.git@e5e2444ce2414f316fa91c6e700a20a5eb243e2c#egg=django_messages
