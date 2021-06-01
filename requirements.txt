@@ -23,7 +23,7 @@ Markdown==3.3.4
 Mezzanine==4.3.1
 monotonic==1.6
 mysqlclient==2.0.3
-oauthlib==3.1.0
+oauthlib==3.1.1
 Pillow==8.2.0
 postmarkup==1.2.2
 Pygments==2.9.0
